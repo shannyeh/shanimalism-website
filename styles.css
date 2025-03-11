@@ -30,20 +30,28 @@ body {
     font-weight: bold;
 }
 
-/* Vertical menu styles */
-.vertical-menu {
+/* Left sidebar container */
+.left-sidebar {
     position: fixed;
     top: 110px; /* Position below the logo */
     left: 30px;
+    width: 200px; /* Width of the text area */
     z-index: 100;
+}
+
+/* Vertical menu styles */
+.vertical-menu {
+    width: 100%;
 }
 
 .vertical-menu ul {
     list-style-type: none;
+    width: 100%;
 }
 
 .vertical-menu li {
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .vertical-menu a {
@@ -56,6 +64,7 @@ body {
     letter-spacing: 1px;
     position: relative;
     padding-bottom: 2px;
+    display: inline-block;
 }
 
 .vertical-menu a:hover {
