@@ -52,10 +52,28 @@ body {
     font-size: 14px;
     text-decoration: none;
     color: #000;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 2px;
 }
 
 .vertical-menu a:hover {
-    color: #666;
+    color: #000;
+    font-weight: 400; /* Bold on hover */
+}
+
+.vertical-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    transition: width 0.3s ease;
+}
+
+.vertical-menu a:hover::after {
+    width: 100%;
 }
