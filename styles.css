@@ -107,6 +107,7 @@ body {
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Hide scrollbar for Firefox */
     -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+    background-color: #f5f5f5; /* Light gray background as placeholder */
 }
 
 .slides-wrapper::-webkit-scrollbar {
@@ -121,12 +122,20 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    will-change: transform; /* Optimize for animations */
+    contain: content; /* Improve rendering performance */
 }
 
 #slide1 img, .full-slide-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.photo-slide img {
+    backface-visibility: hidden; /* Prevent flickering during transitions */
+    transform: translateZ(0); /* Force hardware acceleration */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Custom positioning for each vertical photo to preserve important content */
@@ -171,4 +180,9 @@ body {
     width: 10px;
     height: 10px;
     background-color: white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
