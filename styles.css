@@ -54,6 +54,7 @@ body {
 /* Vertical menu styles */
 .vertical-menu {
     width: 100%;
+    margin-top: 50px; /* 增加上方邊距，使菜單整體往下移 */
 }
 
 .vertical-menu ul {
