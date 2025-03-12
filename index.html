@@ -9,64 +9,146 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <style>
+        #landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .centered-logo {
+            text-align: center;
+        }
+        
+        #enter-site-logo {
+            cursor: pointer;
+            width: 100px; /* 將 logo 從 150px 調小到 100px */
+            height: auto;
+            transition: transform 0.3s ease; /* 添加過渡效果 */
+        }
+        
+        #enter-site-logo:hover {
+            transform: scale(1.1); /* 懸停時放大效果 */
+        }
+        
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+    </style>
 </head>
 <body>
-    <!-- Logo area -->
-    <div class="logo-container">
-        <div class="logo">
-            <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo">
+    <!-- Landing page with centered logo -->
+    <div id="landing-page">
+        <div class="centered-logo">
+            <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo" id="enter-site-logo">
         </div>
     </div>
-    
-    <!-- Vertical menu in sidebar -->
-    <div class="left-sidebar">
-        <nav class="vertical-menu">
-            <ul>
-                <li><a href="#whats-new">What's new</a></li>
-                <li><a href="#bio">Bio</a></li>
-                <li><a href="#branding">Branding</a></li>
-                <li><a href="#photography">Photography</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
 
-    <!-- Homepage photo container -->
-    <div class="homepage-container">
-        <div class="slides-wrapper">
-            <!-- Slide 1: NYC the highline river -->
-            <div class="photo-slide" id="slide1">
-                <img src="image/NYC the highline river.jpg" alt="NYC the highline river" loading="eager" fetchpriority="high">
-            </div>
-            
-            <!-- Slide 2: Scenery 1 -->
-            <div class="photo-slide" id="slide2">
-                <img src="image/Scenery/63510022.jpg" alt="Scenery 1" class="full-slide-image" loading="lazy">
-            </div>
-            
-            <!-- Slide 3: Scenery 2 -->
-            <div class="photo-slide" id="slide3">
-                <img src="image/Scenery/63510030.jpg" alt="Scenery 2" class="full-slide-image" loading="lazy">
-            </div>
-            
-            <!-- Slide 4: Scenery 3 -->
-            <div class="photo-slide" id="slide4">
-                <img src="image/Scenery/63510035.jpg" alt="Scenery 3" class="full-slide-image" loading="lazy">
+    <!-- Main content (initially hidden) -->
+    <div id="main-content" style="display: none;">
+        <!-- Logo area -->
+        <div class="logo-container">
+            <div class="logo">
+                <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo">
             </div>
         </div>
         
-        <!-- Navigation dots -->
-        <div class="nav-dots">
-            <span class="dot active" data-index="0"></span>
-            <span class="dot" data-index="1"></span>
-            <span class="dot" data-index="2"></span>
-            <span class="dot" data-index="3"></span>
+        <!-- Vertical menu in sidebar -->
+        <div class="left-sidebar">
+            <nav class="vertical-menu">
+                <ul>
+                    <li><a href="#whats-new">What's new</a></li>
+                    <li><a href="#bio">Bio</a></li>
+                    <li><a href="#branding">Branding</a></li>
+                    <li><a href="#photography">Photography</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Homepage photo container -->
+        <div class="homepage-container">
+            <div class="slides-wrapper">
+                <!-- Slide 1: NYC the highline river -->
+                <div class="photo-slide" id="slide1">
+                    <img src="image/NYC the highline river.jpg" alt="NYC the highline river" loading="eager" fetchpriority="high">
+                </div>
+                
+                <!-- Slide 2: Scenery 1 -->
+                <div class="photo-slide" id="slide2">
+                    <img src="image/Scenery/63510022.jpg" alt="Scenery 1" class="full-slide-image" loading="lazy">
+                </div>
+                
+                <!-- Slide 3: Scenery 2 -->
+                <div class="photo-slide" id="slide3">
+                    <img src="image/Scenery/63510030.jpg" alt="Scenery 2" class="full-slide-image" loading="lazy">
+                </div>
+                
+                <!-- Slide 4: Scenery 3 -->
+                <div class="photo-slide" id="slide4">
+                    <img src="image/Scenery/63510035.jpg" alt="Scenery 3" class="full-slide-image" loading="lazy">
+                </div>
+            </div>
+            
+            <!-- Navigation dots -->
+            <div class="nav-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+            </div>
         </div>
     </div>
 
     <script>
-        // Preload images
+        // Handle landing page interaction
         document.addEventListener('DOMContentLoaded', function() {
+            const landingPage = document.getElementById('landing-page');
+            const mainContent = document.getElementById('main-content');
+            const enterSiteLogo = document.getElementById('enter-site-logo');
+            
+            // Check if user has visited before
+            const hasVisited = sessionStorage.getItem('hasVisited');
+            
+            if (hasVisited) {
+                // Skip landing page if user has visited in this session
+                landingPage.style.display = 'none';
+                mainContent.style.display = 'block';
+            } else {
+                // Show landing page with animation
+                landingPage.style.opacity = '1';
+                
+                // Add click event to logo
+                enterSiteLogo.addEventListener('click', function() {
+                    // Fade out landing page
+                    landingPage.style.opacity = '0';
+                    
+                    // After animation completes, show main content
+                    setTimeout(function() {
+                        landingPage.style.display = 'none';
+                        mainContent.style.display = 'block';
+                        
+                        // Fade in main content
+                        setTimeout(function() {
+                            mainContent.style.opacity = '1';
+                        }, 50);
+                        
+                        // Set session storage to remember user has visited
+                        sessionStorage.setItem('hasVisited', 'true');
+                    }, 500); // Match this with the CSS transition time
+                });
+            }
+            
+            // Preload images
             const imagesToPreload = [
                 'image/NYC the highline river.jpg',
                 'image/Scenery/63510022.jpg',
