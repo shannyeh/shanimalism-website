@@ -321,6 +321,9 @@ body {
     position: relative;
     z-index: 2;
     animation: fadeInRotate 1s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #enter-site-logo {
@@ -332,6 +335,18 @@ body {
 
 #enter-site-logo:hover {
     transform: scale(1.1);
+}
+
+.click-hint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 200;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    color: #000;
+    text-align: center;
 }
 
 /* 動畫關鍵幀 */

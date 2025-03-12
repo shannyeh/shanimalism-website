@@ -31,6 +31,7 @@
             <div id="stage3" class="animation-stage">
                 <div class="centered-logo">
                     <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo" id="enter-site-logo">
+                    <div id="click-here" class="click-hint">click here</div>
                 </div>
             </div>
         </div>
@@ -99,6 +100,7 @@
             const stage1 = document.getElementById('stage1');
             const stage2 = document.getElementById('stage2');
             const stage3 = document.getElementById('stage3');
+            const clickHint = document.getElementById('click-here');
             
             stage1.style.opacity = '1';
             stage2.style.opacity = '0';
@@ -128,6 +130,11 @@
                         document.getElementById('main-content').style.display = 'block';
                     }, 500);
                 });
+                
+                // 3秒後顯示 "click here" 提示
+                setTimeout(function() {
+                    clickHint.style.opacity = '1';
+                }, 3000);
             }, 8000); // 8秒後啟用點擊功能
         });
         
