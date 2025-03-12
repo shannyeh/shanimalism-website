@@ -53,6 +53,13 @@
             </div>
         </div>
         
+        <!-- 漢堡菜單按鈕 (僅在手機版顯示) -->
+        <div class="hamburger-menu">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        
         <!-- Vertical menu in sidebar -->
         <div class="left-sidebar">
             <nav class="vertical-menu">
@@ -142,6 +149,25 @@
                     clickHint.style.opacity = '1';
                 }, 1500);
             }, 6000); // 6秒後
+            
+            // 漢堡菜單功能
+            const hamburger = document.querySelector('.hamburger-menu');
+            const sidebar = document.querySelector('.left-sidebar');
+            const menuItems = document.querySelectorAll('.vertical-menu a');
+            
+            // 點擊漢堡菜單切換側邊欄顯示
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('change');
+                sidebar.classList.toggle('open');
+            });
+            
+            // 點擊菜單項後關閉側邊欄
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    hamburger.classList.remove('change');
+                    sidebar.classList.remove('open');
+                });
+            });
         });
         
         // 照片輪播邏輯

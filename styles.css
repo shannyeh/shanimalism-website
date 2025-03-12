@@ -203,8 +203,46 @@ body {
     z-index: 10;
 }
 
+/* 漢堡菜單樣式 */
+.hamburger-menu {
+    display: none; /* 默認隱藏 */
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 40;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 2px;
+    background-color: #000;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* 漢堡菜單打開時的樣式 */
+.change .bar1 {
+    transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: rotate(45deg) translate(-6px, -6px);
+}
+
 /* 手機版樣式 */
 @media (max-width: 768px) {
+    /* 顯示漢堡菜單 */
+    .hamburger-menu {
+        display: block;
+    }
+    
     /* 導航點調整 */
     .nav-dots {
         z-index: 30; /* 確保導航點在最前面 */
@@ -225,27 +263,37 @@ body {
     /* 左側欄調整 */
     .left-sidebar {
         width: 100%; /* 全寬 */
-        height: auto; /* 自適應高度 */
+        height: 100vh; /* 全高 */
         padding: 80px 15px 15px; /* 縮小內邊距 */
-        background-color: rgba(255, 255, 255, 0.8); /* 增加背景不透明度 */
+        background-color: rgba(255, 255, 255, 0.95); /* 增加背景不透明度 */
+        transform: translateX(-100%); /* 初始隱藏 */
+        transition: transform 0.3s ease-in-out;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 35;
+    }
+    
+    /* 左側欄打開時的樣式 */
+    .left-sidebar.open {
+        transform: translateX(0); /* 顯示 */
     }
     
     /* 菜單調整 */
     .vertical-menu ul {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
+        flex-direction: column; /* 改為垂直排列 */
+        align-items: center;
+        gap: 20px;
     }
     
     .vertical-menu li {
-        margin-bottom: 4px;
+        margin-bottom: 0;
     }
     
     .vertical-menu a {
-        font-size: 14px; /* 縮小字體 */
-        padding-bottom: 1px;
+        font-size: 18px; /* 增大字體 */
+        padding-bottom: 2px;
     }
     
     /* Logo 調整 */
