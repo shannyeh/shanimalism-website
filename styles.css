@@ -203,6 +203,105 @@ body {
     z-index: 10;
 }
 
+/* 手機版樣式 */
+@media (max-width: 768px) {
+    /* 導航點調整 */
+    .nav-dots {
+        z-index: 30; /* 確保導航點在最前面 */
+        bottom: 50px; /* 調整底部位置 */
+        gap: 10px; /* 縮小間距 */
+    }
+    
+    .dot {
+        width: 5px; /* 縮小導航點 */
+        height: 5px;
+    }
+    
+    .dot.active {
+        width: 8px; /* 縮小活動導航點 */
+        height: 8px;
+    }
+    
+    /* 左側欄調整 */
+    .left-sidebar {
+        width: 100%; /* 全寬 */
+        height: auto; /* 自適應高度 */
+        padding: 80px 15px 15px; /* 縮小內邊距 */
+        background-color: rgba(255, 255, 255, 0.8); /* 增加背景不透明度 */
+    }
+    
+    /* 菜單調整 */
+    .vertical-menu ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .vertical-menu li {
+        margin-bottom: 4px;
+    }
+    
+    .vertical-menu a {
+        font-size: 14px; /* 縮小字體 */
+        padding-bottom: 1px;
+    }
+    
+    /* Logo 調整 */
+    .logo-container {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .logo {
+        width: 40px; /* 縮小 logo 容器 */
+        height: 40px;
+    }
+    
+    .logo img {
+        width: 40px; /* 縮小 logo 圖片 */
+    }
+    
+    /* 主內容區域調整 */
+    .homepage-container {
+        margin-left: 0; /* 移除左側邊距 */
+        width: 100%; /* 全寬 */
+        height: 100vh;
+    }
+    
+    .slides-wrapper {
+        width: 100%;
+    }
+    
+    /* 登陸頁面調整 */
+    #text-animation-container {
+        padding: 0 20px; /* 添加側邊距 */
+    }
+    
+    .shan-text, .minimalism-text {
+        font-size: 20px; /* 縮小文字 */
+    }
+    
+    .plus-text {
+        font-size: 16px; /* 縮小加號 */
+        margin: 0 8px;
+    }
+    
+    .shanimalism-text {
+        font-size: 20px; /* 縮小文字 */
+    }
+    
+    #enter-site-logo {
+        width: 80px; /* 縮小登陸頁面 logo */
+    }
+    
+    .click-hint {
+        font-size: 12px; /* 縮小提示文字 */
+        margin-top: 12px;
+    }
+}
+
 .dot {
     width: 6px;
     height: 6px;
