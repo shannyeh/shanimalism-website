@@ -13,8 +13,26 @@
 <body>
     <!-- 登陸頁面 -->
     <div id="landing-page">
-        <div class="centered-logo">
-            <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo" id="enter-site-logo">
+        <!-- 文字動效容器 -->
+        <div id="text-animation-container">
+            <!-- 第一階段：shan + minimalism -->
+            <div id="stage1" class="animation-stage">
+                <span class="shan-text">shan</span>
+                <span class="plus-text">+</span>
+                <span class="minimalism-text">minimalism</span>
+            </div>
+            
+            <!-- 第二階段：shanimalism -->
+            <div id="stage2" class="animation-stage">
+                <span class="shanimalism-text">shanimalism</span>
+            </div>
+            
+            <!-- 第三階段：logo -->
+            <div id="stage3" class="animation-stage">
+                <div class="centered-logo">
+                    <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo" id="enter-site-logo">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -75,15 +93,42 @@
     </div>
 
     <script>
-        // 簡化的登陸頁面邏輯
-        document.getElementById('enter-site-logo').addEventListener('click', function() {
-            document.getElementById('landing-page').style.opacity = '0';
-            document.getElementById('landing-page').style.transition = 'opacity 0.5s';
+        // 動效和登陸頁面邏輯
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化：只顯示第一階段
+            const stage1 = document.getElementById('stage1');
+            const stage2 = document.getElementById('stage2');
+            const stage3 = document.getElementById('stage3');
+            
+            stage1.style.opacity = '1';
+            stage2.style.opacity = '0';
+            stage3.style.opacity = '0';
+            
+            // 動效時間軸
+            setTimeout(function() {
+                // 第一階段淡出，第二階段淡入
+                stage1.style.opacity = '0';
+                stage2.style.opacity = '1';
+            }, 3000); // 3秒後
             
             setTimeout(function() {
-                document.getElementById('landing-page').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            }, 500);
+                // 第二階段淡出，第三階段淡入
+                stage2.style.opacity = '0';
+                stage3.style.opacity = '1';
+            }, 6000); // 6秒後
+            
+            // 動效完成後，logo 可點擊進入主頁面
+            setTimeout(function() {
+                document.getElementById('enter-site-logo').addEventListener('click', function() {
+                    document.getElementById('landing-page').style.opacity = '0';
+                    document.getElementById('landing-page').style.transition = 'opacity 0.5s';
+                    
+                    setTimeout(function() {
+                        document.getElementById('landing-page').style.display = 'none';
+                        document.getElementById('main-content').style.display = 'block';
+                    }, 500);
+                });
+            }, 8000); // 8秒後啟用點擊功能
         });
         
         // 照片輪播邏輯
