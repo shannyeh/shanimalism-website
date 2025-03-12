@@ -108,10 +108,22 @@
             const stage2 = document.getElementById('stage2');
             const stage3 = document.getElementById('stage3');
             const clickHint = document.getElementById('click-here');
+            const enterSiteLogo = document.getElementById('enter-site-logo');
             
             stage1.style.opacity = '1';
             stage2.style.opacity = '0';
             stage3.style.opacity = '0';
+            
+            // 立即添加點擊事件，讓用戶可以隨時點擊 logo 進入主內容
+            enterSiteLogo.addEventListener('click', function() {
+                document.getElementById('landing-page').style.opacity = '0';
+                document.getElementById('landing-page').style.transition = 'opacity 0.5s';
+                
+                setTimeout(function() {
+                    document.getElementById('landing-page').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 500);
+            });
             
             // 動效時間軸
             setTimeout(function() {
@@ -124,25 +136,12 @@
                 // 第二階段淡出，第三階段淡入
                 stage2.style.opacity = '0';
                 stage3.style.opacity = '1';
-            }, 6000); // 6秒後
-            
-            // 動效完成後，logo 可點擊進入主頁面
-            setTimeout(function() {
-                document.getElementById('enter-site-logo').addEventListener('click', function() {
-                    document.getElementById('landing-page').style.opacity = '0';
-                    document.getElementById('landing-page').style.transition = 'opacity 0.5s';
-                    
-                    setTimeout(function() {
-                        document.getElementById('landing-page').style.display = 'none';
-                        document.getElementById('main-content').style.display = 'block';
-                    }, 500);
-                });
                 
                 // 1.5秒後顯示 "click here" 提示
                 setTimeout(function() {
                     clickHint.style.opacity = '1';
                 }, 1500);
-            }, 8000); // 8秒後啟用點擊功能
+            }, 6000); // 6秒後
         });
         
         // 照片輪播邏輯
