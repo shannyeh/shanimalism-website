@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Test</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        #landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('image/NYC the highline river.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        #landing-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+        }
+        
+        .centered-logo {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        #enter-site-logo {
+            cursor: pointer;
+            width: 100px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        #enter-site-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        #main-content {
+            padding: 20px;
+            text-align: center;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        h1 {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing page with centered logo -->
+    <div id="landing-page">
+        <div class="centered-logo">
+            <img src="image/logos/shanimalism logo-a.png" alt="Shanimalism Logo" id="enter-site-logo">
+        </div>
+    </div>
+
+    <!-- Main content (initially hidden) -->
+    <div id="main-content">
+        <h1>測試成功！</h1>
+        <p>登陸頁面功能正常工作。</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const landingPage = document.getElementById('landing-page');
+            const mainContent = document.getElementById('main-content');
+            const enterSiteLogo = document.getElementById('enter-site-logo');
+            
+            // 添加點擊事件
+            enterSiteLogo.addEventListener('click', function() {
+                // 淡出登陸頁面
+                landingPage.style.opacity = '0';
+                
+                // 動畫完成後，顯示主內容
+                setTimeout(function() {
+                    landingPage.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    
+                    // 淡入主內容
+                    setTimeout(function() {
+                        mainContent.style.opacity = '1';
+                    }, 50);
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
