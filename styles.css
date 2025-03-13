@@ -234,7 +234,7 @@ body.whats-new-page {
     width: 30px;
     height: 25px;
     cursor: var(--cursor-pointer);
-    z-index: 20;
+    z-index: 40; /* 提高 z-index，確保在側邊欄之上 */
 }
 
 /* 在 What's New 頁面的手機版本顯示漢堡菜單 */
