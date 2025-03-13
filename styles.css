@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* 自定義鼠標樣式變量 */
+    --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, auto;
+    --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+    --cursor-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
 body {
     font-family: sans-serif;
     overflow: hidden; /* Prevent vertical scrolling */
@@ -12,7 +19,7 @@ body {
     padding: 0;
     height: 100vh;
     position: relative;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, auto;
+    cursor: var(--cursor-default);
 }
 
 /* Logo styles */
@@ -81,13 +88,13 @@ body {
     padding-bottom: 2px;
     display: inline-block;
     font-weight: 300;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-pointer);
 }
 
 .vertical-menu a:hover {
     color: #000;
     font-weight: 400; /* Bold on hover */
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-hover);
 }
 
 /* 添加 ">" 符號的效果 */
@@ -211,7 +218,7 @@ body {
     right: 15px;
     width: 30px;
     height: 24px;
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     z-index: 40;
 }
 
@@ -469,7 +476,7 @@ body {
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.5);
     transition: all 0.3s ease;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-pointer);
 }
 
 .dot.active {
@@ -479,7 +486,7 @@ body {
 }
 
 .dot:hover {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-hover);
 }
 
 /* 登陸頁面樣式 */
@@ -591,12 +598,12 @@ body {
     width: 100px;
     height: auto;
     transition: transform 0.3s;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-pointer);
 }
 
 #enter-site-logo:hover {
     transform: scale(1.1);
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-hover);
 }
 
 .click-hint {
@@ -653,24 +660,24 @@ body {
 
 /* 全局樣式 */
 a, button, .logo, #enter-site-logo, .dot, .vertical-menu li a {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-pointer);
 }
 
 a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertical-menu li a:hover {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: var(--cursor-hover);
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, auto;
+        cursor: var(--cursor-default);
     }
 
     a, button, .logo, #enter-site-logo, .dot, .vertical-menu li a {
-        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+        cursor: var(--cursor-pointer);
     }
 
     a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertical-menu li a:hover {
-        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+        cursor: var(--cursor-hover);
     }
 }
 
