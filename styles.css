@@ -506,6 +506,165 @@ body.whats-new-page {
     border-bottom: 1px solid #000;
 }
 
+/* Bio 頁面樣式 */
+body.bio-page {
+    overflow-y: auto;
+    height: auto;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.bio-container {
+    margin-left: 200px; /* 與左側欄寬度相同 */
+    padding: 80px 40px 30px;
+    width: calc(100% - 200px);
+    max-width: 1200px;
+    margin: 0 auto 0 200px;
+}
+
+.bio-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.bio-header h1 {
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.bio-header h2 {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.bio-section {
+    margin-bottom: 50px;
+}
+
+.bio-section h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.bio-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.experience-item, .education-item, .tool-item, .projects-category {
+    margin-bottom: 25px;
+}
+
+.experience-header, .education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.experience-header h4, .education-item h4, .projects-category h4, .tool-item h4 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.experience-item h5 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.date {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.clients {
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.experience-grid, .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.skills-list {
+    list-style: none;
+}
+
+.skills-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.skills-list li strong {
+    font-weight: 400;
+}
+
+.contact-section {
+    margin-top: 60px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-label {
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.copyright {
+    margin-top: 60px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+/* 手機版 Bio 頁面樣式 */
+@media (max-width: 768px) {
+    .bio-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 80px 20px 30px;
+    }
+    
+    .bio-header h1 {
+        font-size: 36px;
+    }
+    
+    .bio-header h2 {
+        font-size: 16px;
+    }
+    
+    .experience-grid, .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .experience-header {
+        flex-direction: column;
+    }
+    
+    .date {
+        margin-bottom: 5px;
+    }
+}
+
 /* 博客頁面樣式 */
 .content-container {
     margin-left: 200px; /* 與左側欄寬度相同 */
