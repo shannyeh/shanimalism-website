@@ -728,30 +728,29 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
 /* 博客頁面樣式 */
 .content-container {
     margin-left: 200px; /* 與左側欄寬度相同 */
-    padding: 100px 50px 50px;
-    height: 100vh;
-    overflow-y: auto; /* 允許垂直滾動 */
-    position: relative;
+    padding: 80px 40px 30px;
+    width: calc(100% - 200px);
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 .blog-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding-bottom: 60px; /* 為版權信息留出空間 */
+    padding-bottom: 60px;
 }
 
 .page-title {
-    font-family: 'IBM Plex Mono', monospace;
     font-size: 28px;
-    font-weight: 300;
     margin-bottom: 40px;
+    font-weight: 300;
     color: #000;
+    text-align: center;
 }
 
 .blog-post {
     margin-bottom: 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .blog-post:last-child {
@@ -759,22 +758,39 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
 }
 
 .post-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 22px;
-    font-weight: 300;
+    font-size: 24px;
     margin-bottom: 10px;
+    font-weight: 300;
     color: #000;
 }
 
 .post-meta {
-    font-family: 'IBM Plex Mono', monospace;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
     margin-bottom: 20px;
 }
 
+/* 網頁版博客內容布局：照片在左，文字在右 */
+.post-content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.post-image {
+    flex: 0 0 45%;
+    max-width: 45%;
+}
+
+.post-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .post-content {
-    font-family: 'IBM Plex Mono', monospace;
+    flex: 0 0 50%;
+    max-width: 50%;
     font-size: 16px;
     line-height: 1.6;
     color: rgba(0, 0, 0, 0.8);
@@ -786,13 +802,6 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
 
 .post-content p:last-child {
     margin-bottom: 0;
-}
-
-/* 活動菜單項樣式 */
-.vertical-menu a.active {
-    color: #000;
-    font-weight: 400;
-    border-bottom: 1px solid #000;
 }
 
 /* 手機版樣式 */
@@ -917,49 +926,46 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
     }
     
     .blog-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding-bottom: 60px;
+        max-width: 100%;
     }
     
     .page-title {
         font-size: 24px;
         margin-bottom: 30px;
-        font-weight: 300;
-        color: #000;
+        text-align: center;
     }
     
     .post-title {
         font-size: 20px;
-        margin-bottom: 10px;
-        font-weight: 300;
-        color: #000;
+        text-align: center;
     }
     
     .post-meta {
-        font-size: 14px;
-        color: rgba(0, 0, 0, 0.6);
-        margin-bottom: 20px;
-    }
-    
-    .post-content {
-        font-size: 16px;
-        line-height: 1.6;
-        color: rgba(0, 0, 0, 0.8);
-    }
-    
-    .post-content p {
+        text-align: center;
         margin-bottom: 15px;
     }
     
-    .post-content p:last-child {
-        margin-bottom: 0;
+    /* 手機版博客內容布局：標題在上，照片在中間，文字在下 */
+    .post-content-wrapper {
+        flex-direction: column;
+        gap: 20px;
     }
     
-    /* 版權信息調整 */
-    .copyright {
-        font-size: 10px;
-        bottom: 10px;
-        right: 10px;
+    .post-image {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 0 auto;
     }
+    
+    .post-content {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* 活動菜單項樣式 */
+.vertical-menu a.active {
+    color: #000;
+    font-weight: 400;
+    border-bottom: 1px solid #000;
 }
