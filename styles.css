@@ -224,33 +224,105 @@ body {
 .hamburger-menu {
     display: none; /* 默認隱藏 */
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 30px;
+    right: 30px;
     width: 30px;
-    height: 24px;
+    height: 25px;
     cursor: var(--cursor-pointer);
-    z-index: 40;
+    z-index: 20;
 }
 
-.bar1, .bar2, .bar3 {
+/* 在 What's New 頁面的手機版本顯示漢堡菜單 */
+.whats-new-page .hamburger-menu {
+    display: none; /* 默認隱藏，只在手機版顯示 */
+}
+
+.hamburger-menu:hover {
+    cursor: var(--cursor-hover);
+}
+
+.hamburger-menu .bar1, .hamburger-menu .bar2, .hamburger-menu .bar3 {
     width: 30px;
-    height: 2px;
+    height: 3px;
     background-color: #000;
-    margin: 6px 0;
+    margin: 5px 0;
     transition: 0.4s;
 }
 
 /* 漢堡菜單打開時的樣式 */
-.change .bar1 {
-    transform: rotate(-45deg) translate(-6px, 6px);
+.hamburger-menu.change .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
 }
 
-.change .bar2 {
+.hamburger-menu.change .bar2 {
     opacity: 0;
 }
 
-.change .bar3 {
-    transform: rotate(45deg) translate(-6px, -6px);
+.hamburger-menu.change .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* 側邊頁籤樣式 */
+.side-tab {
+    display: none; /* 默認隱藏 */
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 80px;
+    background-color: transparent; /* 移除背景色 */
+    border-radius: 0;
+    box-shadow: none; /* 移除陰影 */
+    cursor: var(--cursor-pointer);
+    z-index: 20;
+    transition: all 0.3s ease;
+}
+
+/* 在 What's New 頁面的非手機版本顯示側邊頁籤 */
+.whats-new-page .side-tab {
+    display: flex; /* 在 What's New 頁面顯示側邊頁籤 */
+    justify-content: center;
+    align-items: center;
+}
+
+.side-tab:hover {
+    background-color: transparent; /* 移除懸停背景色 */
+    cursor: var(--cursor-hover);
+}
+
+/* 極簡幾何圖形設計 */
+.geometric-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.geometric-icon .triangle {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 16px solid #000;
+    transform: rotate(180deg); /* 讓三角形指向右側 */
+    transition: all 0.3s ease;
+}
+
+/* 側邊頁籤懸停效果 */
+.side-tab:hover .triangle {
+    transform: rotate(180deg) translateX(3px); /* 懸停時三角形微微移動 */
+}
+
+/* 側邊頁籤激活時的樣式 */
+.side-tab.active {
+    left: 200px; /* 與側邊欄寬度相同 */
+}
+
+.side-tab.active .triangle {
+    transform: rotate(0deg); /* 激活時三角形轉向左側 */
 }
 
 /* 手機版樣式 */
@@ -366,6 +438,54 @@ body {
         margin-top: 12px;
     }
     
+    /* 博客頁面調整 */
+    .content-container {
+        margin-left: 0;
+        padding: 80px 20px 30px;
+        width: 100%;
+        font-family: 'IBM Plex Mono', monospace;
+    }
+    
+    .blog-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 60px;
+    }
+    
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        color: #000;
+    }
+    
+    .post-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-weight: 300;
+        color: #000;
+    }
+    
+    .post-meta {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+    }
+    
+    .post-content {
+        font-size: 16px;
+        line-height: 1.6;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .post-content p {
+        margin-bottom: 15px;
+    }
+    
+    .post-content p:last-child {
+        margin-bottom: 0;
+    }
+    
     /* 版權信息調整 */
     .copyright {
         font-size: 10px;
@@ -373,110 +493,13 @@ body {
         right: 10px;
     }
     
-    /* 導航點調整 */
-    .nav-dots {
-        z-index: 30; /* 確保導航點在最前面 */
-        bottom: 50px; /* 調整底部位置 */
-        gap: 10px; /* 縮小間距 */
+    /* 在手機版 What's New 頁面顯示漢堡菜單，隱藏側邊頁籤 */
+    .whats-new-page .hamburger-menu {
+        display: block;
     }
     
-    .dot {
-        width: 5px; /* 縮小導航點 */
-        height: 5px;
-    }
-    
-    .dot.active {
-        width: 8px; /* 縮小活動導航點 */
-        height: 8px;
-    }
-    
-    /* 左側欄調整 */
-    .left-sidebar {
-        width: 100%; /* 全寬 */
-        height: 100vh; /* 全高 */
-        padding: 80px 15px 15px; /* 縮小內邊距 */
-        background-color: rgba(255, 255, 255, 0.95); /* 增加背景不透明度 */
-        transform: translateX(-100%); /* 初始隱藏 */
-        transition: transform 0.3s ease-in-out;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 35;
-    }
-    
-    /* 左側欄打開時的樣式 */
-    .left-sidebar.open {
-        transform: translateX(0); /* 顯示 */
-    }
-    
-    /* 菜單調整 */
-    .vertical-menu ul {
-        display: flex;
-        flex-direction: column; /* 改為垂直排列 */
-        align-items: center;
-        gap: 20px;
-    }
-    
-    .vertical-menu li {
-        margin-bottom: 0;
-    }
-    
-    .vertical-menu a {
-        font-size: 18px; /* 增大字體 */
-        padding-bottom: 2px;
-    }
-    
-    /* Logo 調整 */
-    .logo-container {
-        top: 15px;
-        left: 15px;
-    }
-    
-    .logo {
-        width: 40px; /* 縮小 logo 容器 */
-        height: 40px;
-    }
-    
-    .logo img {
-        width: 40px; /* 縮小 logo 圖片 */
-    }
-    
-    /* 主內容區域調整 */
-    .homepage-container {
-        margin-left: 0; /* 移除左側邊距 */
-        width: 100%; /* 全寬 */
-        height: 100vh;
-    }
-    
-    .slides-wrapper {
-        width: 100%;
-    }
-    
-    /* 登陸頁面調整 */
-    #text-animation-container {
-        padding: 0 20px; /* 添加側邊距 */
-    }
-    
-    .shan-text, .minimalism-text {
-        font-size: 20px; /* 縮小文字 */
-    }
-    
-    .plus-text {
-        font-size: 16px; /* 縮小加號 */
-        margin: 0 8px;
-    }
-    
-    .shanimalism-text {
-        font-size: 20px; /* 縮小文字 */
-    }
-    
-    #enter-site-logo {
-        width: 80px; /* 縮小登陸頁面 logo */
-    }
-    
-    .click-hint {
-        font-size: 12px; /* 縮小提示文字 */
-        margin-top: 12px;
+    .whats-new-page .side-tab {
+        display: none;
     }
 }
 
