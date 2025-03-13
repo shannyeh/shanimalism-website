@@ -348,6 +348,119 @@ body {
         font-size: 12px; /* 縮小提示文字 */
         margin-top: 12px;
     }
+    
+    /* 版權信息調整 */
+    .copyright {
+        font-size: 10px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    /* 導航點調整 */
+    .nav-dots {
+        z-index: 30; /* 確保導航點在最前面 */
+        bottom: 50px; /* 調整底部位置 */
+        gap: 10px; /* 縮小間距 */
+    }
+    
+    .dot {
+        width: 5px; /* 縮小導航點 */
+        height: 5px;
+    }
+    
+    .dot.active {
+        width: 8px; /* 縮小活動導航點 */
+        height: 8px;
+    }
+    
+    /* 左側欄調整 */
+    .left-sidebar {
+        width: 100%; /* 全寬 */
+        height: 100vh; /* 全高 */
+        padding: 80px 15px 15px; /* 縮小內邊距 */
+        background-color: rgba(255, 255, 255, 0.95); /* 增加背景不透明度 */
+        transform: translateX(-100%); /* 初始隱藏 */
+        transition: transform 0.3s ease-in-out;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 35;
+    }
+    
+    /* 左側欄打開時的樣式 */
+    .left-sidebar.open {
+        transform: translateX(0); /* 顯示 */
+    }
+    
+    /* 菜單調整 */
+    .vertical-menu ul {
+        display: flex;
+        flex-direction: column; /* 改為垂直排列 */
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .vertical-menu li {
+        margin-bottom: 0;
+    }
+    
+    .vertical-menu a {
+        font-size: 18px; /* 增大字體 */
+        padding-bottom: 2px;
+    }
+    
+    /* Logo 調整 */
+    .logo-container {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .logo {
+        width: 40px; /* 縮小 logo 容器 */
+        height: 40px;
+    }
+    
+    .logo img {
+        width: 40px; /* 縮小 logo 圖片 */
+    }
+    
+    /* 主內容區域調整 */
+    .homepage-container {
+        margin-left: 0; /* 移除左側邊距 */
+        width: 100%; /* 全寬 */
+        height: 100vh;
+    }
+    
+    .slides-wrapper {
+        width: 100%;
+    }
+    
+    /* 登陸頁面調整 */
+    #text-animation-container {
+        padding: 0 20px; /* 添加側邊距 */
+    }
+    
+    .shan-text, .minimalism-text {
+        font-size: 20px; /* 縮小文字 */
+    }
+    
+    .plus-text {
+        font-size: 16px; /* 縮小加號 */
+        margin: 0 8px;
+    }
+    
+    .shanimalism-text {
+        font-size: 20px; /* 縮小文字 */
+    }
+    
+    #enter-site-logo {
+        width: 80px; /* 縮小登陸頁面 logo */
+    }
+    
+    .click-hint {
+        font-size: 12px; /* 縮小提示文字 */
+        margin-top: 12px;
+    }
 }
 
 .dot {
@@ -572,18 +685,81 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
     z-index: 10;
 }
 
+/* 博客頁面樣式 */
+.content-container {
+    margin-left: 200px; /* 與左側欄寬度相同 */
+    padding: 100px 50px 50px;
+    height: 100vh;
+    overflow-y: auto; /* 允許垂直滾動 */
+    position: relative;
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 60px; /* 為版權信息留出空間 */
+}
+
+.page-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+.blog-post {
+    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 40px;
+}
+
+.blog-post:last-child {
+    border-bottom: none;
+}
+
+.post-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.post-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+.post-content {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.post-content p {
+    margin-bottom: 15px;
+}
+
+.post-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* 活動菜單項樣式 */
+.vertical-menu a.active {
+    color: #000;
+    font-weight: 400;
+    border-bottom: 1px solid #000;
+}
+
 /* 手機版樣式 */
 @media (max-width: 768px) {
     /* 顯示漢堡菜單 */
     .hamburger-menu {
         display: block;
-    }
-    
-    /* 版權信息調整 */
-    .copyright {
-        font-size: 10px;
-        bottom: 10px;
-        right: 10px;
     }
     
     /* 導航點調整 */
@@ -690,5 +866,60 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
     .click-hint {
         font-size: 12px; /* 縮小提示文字 */
         margin-top: 12px;
+    }
+    
+    /* 博客頁面調整 */
+    .content-container {
+        margin-left: 0;
+        padding: 80px 20px 30px;
+        width: 100%;
+        font-family: 'IBM Plex Mono', monospace;
+    }
+    
+    .blog-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 60px;
+    }
+    
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        color: #000;
+    }
+    
+    .post-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-weight: 300;
+        color: #000;
+    }
+    
+    .post-meta {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+    }
+    
+    .post-content {
+        font-size: 16px;
+        line-height: 1.6;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .post-content p {
+        margin-bottom: 15px;
+    }
+    
+    .post-content p:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* 版權信息調整 */
+    .copyright {
+        font-size: 10px;
+        bottom: 10px;
+        right: 10px;
     }
 }
