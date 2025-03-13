@@ -43,7 +43,7 @@
         }
     </style>
 </head>
-<body class="bio-page">
+<body class="bio-page whats-new-page">
     <!-- Logo area -->
     <div class="logo-container">
         <div class="logo">
@@ -58,6 +58,13 @@
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
+    </div>
+    
+    <!-- 網頁版側邊頁籤 (僅在非手機版顯示) -->
+    <div class="side-tab">
+        <div class="geometric-icon">
+            <div class="triangle"></div>
+        </div>
     </div>
     
     <!-- Vertical menu in sidebar -->
@@ -301,6 +308,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 漢堡菜單功能
             const hamburger = document.querySelector('.hamburger-menu');
+            const sideTab = document.querySelector('.side-tab');
             const sidebar = document.querySelector('.left-sidebar');
             const menuItems = document.querySelectorAll('.vertical-menu a');
             
@@ -310,10 +318,17 @@
                 sidebar.classList.toggle('open');
             });
             
+            // 點擊側邊頁籤切換側邊欄顯示（網頁版）
+            sideTab.addEventListener('click', function() {
+                this.classList.toggle('active');
+                sidebar.classList.toggle('open');
+            });
+            
             // 點擊菜單項後關閉側邊欄
             menuItems.forEach(item => {
                 item.addEventListener('click', function() {
                     hamburger.classList.remove('change');
+                    sideTab.classList.remove('active');
                     sidebar.classList.remove('open');
                 });
             });
