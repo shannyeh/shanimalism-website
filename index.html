@@ -16,6 +16,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <script>
+        // 在頁面渲染前立即執行
+        (function() {
+            // 檢查 URL 是否包含 #main-content
+            if (window.location.hash === '#main-content') {
+                // 創建一個樣式標籤
+                var style = document.createElement('style');
+                style.innerHTML = `
+                    #landing-page { display: none !important; }
+                    #main-content { display: block !important; }
+                `;
+                // 添加到頭部
+                document.head.appendChild(style);
+            }
+        })();
+    </script>
 </head>
 <body>
     <!-- 登陸頁面 -->
@@ -117,6 +133,18 @@
     <script>
         // 動效和登陸頁面邏輯
         document.addEventListener('DOMContentLoaded', function() {
+            // 檢查 URL 是否包含 #main-content
+            if (window.location.hash === '#main-content') {
+                // 直接顯示主內容，隱藏登陸頁面
+                document.getElementById('landing-page').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                
+                // 確保漢堡菜單功能正常工作
+                initializeMenuFunctions();
+                
+                return; // 跳過後續的動畫代碼
+            }
+            
             // 初始化：只顯示第一階段
             const stage1 = document.getElementById('stage1');
             const stage2 = document.getElementById('stage2');
@@ -157,6 +185,12 @@
                 }, 1500);
             }, 6000); // 6秒後
             
+            // 初始化菜單功能
+            initializeMenuFunctions();
+        });
+        
+        // 菜單功能初始化
+        function initializeMenuFunctions() {
             // 漢堡菜單功能
             const hamburger = document.querySelector('.hamburger-menu');
             const sidebar = document.querySelector('.left-sidebar');
@@ -175,7 +209,7 @@
                     sidebar.classList.remove('open');
                 });
             });
-        });
+        }
         
         // 照片輪播邏輯
         document.addEventListener('DOMContentLoaded', function() {
