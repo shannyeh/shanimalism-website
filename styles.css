@@ -141,7 +141,7 @@ button {
 /* Hamburger Menu */
 .hamburger {
     width: 24px;
-    height: 16px;
+    height: 14px;
     position: relative;
     cursor: var(--cursor-pointer);
     display: flex;
@@ -156,18 +156,26 @@ button {
     width: 100%;
     background-color: var(--primary-color);
     transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger.active {
+    justify-content: center;
+}
+
+.hamburger.active span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -0.5px;
 }
 
 .hamburger.active span:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+    transform: rotate(-45deg);
 }
 
 /* Theme Toggle Button */
