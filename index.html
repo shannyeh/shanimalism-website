@@ -18,7 +18,6 @@
                 <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
             </a>
         </div>
-        
         <nav class="navigation">
             <ul>
                 <li><a href="#services">Services</a></li>
@@ -27,205 +26,143 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        
-        <button class="theme-toggle" aria-label="切換主題">
+        <button class="theme-toggle" aria-label="Toggle dark mode">
             <i class="fas fa-moon dark-icon"></i>
             <i class="fas fa-sun light-icon"></i>
         </button>
     </header>
-    
+
     <main class="main-content">
         <section class="hero">
-            <h1 class="hero-title">BareBreathe</h1>
-            <p class="hero-tagline">Where minimalism meets technology</p>
+            <h1 class="hero-title">Bare Breathe</h1>
+            <p class="hero-tagline">A minimalist approach to digital experiences, focusing on what truly matters.</p>
+            
             <div class="featured-image">
-                <img src="image/IMG_4615 2.jpg" alt="Featured Image" class="centered-image">
+                <img src="image/IMG_4615 2.jpg" alt="Featured Project" class="centered-image">
             </div>
+            
             <div class="scroll-indicator">
                 <span>Scroll</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
         </section>
-        
-        <section id="services" class="services-section">
+
+        <section id="services" class="services">
             <div class="section-header">
                 <span class="section-number">01</span>
                 <h2>Services</h2>
             </div>
+            
             <div class="services-grid">
                 <div class="service-item">
-                    <span class="service-icon"><i class="fas fa-code"></i></span>
+                    <i class="fas fa-code service-icon"></i>
                     <h3>Web Development</h3>
-                    <p>Clean, efficient code with a focus on performance and user experience.</p>
+                    <p>Clean, efficient, and scalable code that brings your digital vision to life.</p>
                 </div>
+                
                 <div class="service-item">
-                    <span class="service-icon"><i class="fas fa-paint-brush"></i></span>
-                    <h3>Design</h3>
-                    <p>Minimalist aesthetics that communicate your brand's essence.</p>
+                    <i class="fas fa-paint-brush service-icon"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>Intuitive interfaces that prioritize user experience without sacrificing aesthetics.</p>
                 </div>
+                
                 <div class="service-item">
-                    <span class="service-icon"><i class="fas fa-camera"></i></span>
-                    <h3>Photography</h3>
-                    <p>Capturing moments with clarity and purpose.</p>
+                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <h3>Mobile Development</h3>
+                    <p>Native and cross-platform solutions that perform seamlessly across devices.</p>
                 </div>
             </div>
         </section>
-        
-        <section id="projects" class="projects-section">
+
+        <section id="projects" class="projects">
             <div class="section-header">
                 <span class="section-number">02</span>
                 <h2>Projects</h2>
             </div>
+            
             <div class="projects-grid">
-                <article class="project-item">
+                <div class="project-item">
                     <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="Project 1">
+                        <img src="image/Scenery/63510022.jpg" alt="Project 1">
                     </div>
                     <div class="project-info">
-                        <h3>Project Name</h3>
-                        <p>Brief description of the project and its purpose.</p>
+                        <h3>Minimalist Portfolio</h3>
+                        <p>A clean, typography-focused portfolio for a photographer.</p>
                         <a href="#" class="project-link">View Project</a>
                     </div>
-                </article>
-                <article class="project-item">
+                </div>
+                
+                <div class="project-item">
                     <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="Project 2">
+                        <img src="image/Scenery/63510030.jpg" alt="Project 2">
                     </div>
                     <div class="project-info">
-                        <h3>Project Name</h3>
-                        <p>Brief description of the project and its purpose.</p>
+                        <h3>E-commerce Concept</h3>
+                        <p>A simplified shopping experience focusing on product presentation.</p>
                         <a href="#" class="project-link">View Project</a>
                     </div>
-                </article>
+                </div>
             </div>
         </section>
-        
-        <section id="about" class="about-section">
+
+        <section id="about" class="about">
             <div class="section-header">
                 <span class="section-number">03</span>
                 <h2>About</h2>
             </div>
+            
             <div class="about-content">
-                <p class="about-text">BareBreathe is a creative studio focused on minimalist design with a technological edge. We believe in the power of simplicity and the beauty of negative space.</p>
-                <p class="about-text">Our approach combines traditional design principles with cutting-edge technology to create experiences that are both timeless and innovative.</p>
+                <p class="about-text">
+                    Bare Breathe is a digital studio founded on the principle that less is more. We strip away the unnecessary to focus on what truly matters: effective communication, intuitive user experiences, and clean aesthetics.
+                </p>
+                <p class="about-text">
+                    Our approach combines minimalist design philosophy with cutting-edge technology to create digital experiences that resonate with users and achieve business goals.
+                </p>
             </div>
         </section>
-        
-        <section id="contact" class="contact-section">
+
+        <section id="contact" class="contact">
             <div class="section-header">
                 <span class="section-number">04</span>
                 <h2>Contact</h2>
             </div>
+            
             <div class="contact-content">
-                <p class="contact-text">Interested in working together? Let's connect.</p>
+                <p class="contact-text">
+                    Interested in working together? Let's discuss your project.
+                </p>
                 <a href="mailto:hello@barebreathe.com" class="contact-link">hello@barebreathe.com</a>
             </div>
         </section>
     </main>
-    
+
     <footer class="site-footer">
         <div class="ambient-controls">
             <div class="ambient-sound">
-                <span>Ambient Sound</span>
-                <button class="sound-toggle">Play</button>
+                <span>Ambient Sound:</span>
+                <button class="sound-toggle" id="toggleAmbient">Off</button>
+            </div>
+            <div class="music-player">
+                <div class="music-info">
+                    <div class="track-art"></div>
+                    <div class="track-details">
+                        <div class="track-name">Ambient Flow</div>
+                        <div class="artist-name">Bare Breathe</div>
+                    </div>
+                </div>
+                <div class="player-controls">
+                    <button id="prevTrack" class="control-button"><i class="fas fa-step-backward"></i></button>
+                    <button id="playPause" class="control-button play-button"><i class="fas fa-play"></i></button>
+                    <button id="nextTrack" class="control-button"><i class="fas fa-step-forward"></i></button>
+                </div>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 BareBreathe. All rights reserved.</p>
+            &copy; 2025 Bare Breathe. All rights reserved.
         </div>
     </footer>
 
-    <!-- 音樂播放器 -->
-    <div class="music-player">
-        <div class="player-header">
-            <button class="toggle-player" aria-label="收起播放器">
-                <i class="fas fa-chevron-down"></i>
-            </button>
-        </div>
-        
-        <div class="album-info">
-            <img src="image/music-covers/default-cover.jpg" alt="專輯封面" class="album-cover">
-            <div class="track-info">
-                <div class="track-title">加載中...</div>
-                <div class="track-artist">Barebreathe Studio</div>
-            </div>
-        </div>
-        
-        <div class="progress-container">
-            <div class="progress"></div>
-        </div>
-        
-        <div class="time-info">
-            <div class="current-time">0:00</div>
-            <div class="duration">0:00</div>
-        </div>
-        
-        <div class="controls">
-            <div class="control-buttons">
-                <button class="control-btn prev-btn" aria-label="上一首">
-                    <i class="fas fa-step-backward"></i>
-                </button>
-                <button class="control-btn play-pause-btn" aria-label="播放">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="control-btn next-btn" aria-label="下一首">
-                    <i class="fas fa-step-forward"></i>
-                </button>
-            </div>
-            
-            <div class="volume-control">
-                <i class="fas fa-volume-up volume-icon"></i>
-                <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sound toggle functionality
-            const soundToggle = document.querySelector('.sound-toggle');
-            let audio = new Audio('sounds/ambient.mp3');
-            audio.loop = true;
-            
-            soundToggle.addEventListener('click', function() {
-                if (audio.paused) {
-                    audio.play();
-                    this.textContent = 'Pause';
-                } else {
-                    audio.pause();
-                    this.textContent = 'Play';
-                }
-            });
-            
-            // 播放器收起/展開功能
-            const togglePlayer = document.querySelector('.toggle-player');
-            const musicPlayer = document.querySelector('.music-player');
-            
-            togglePlayer.addEventListener('click', function() {
-                musicPlayer.classList.toggle('collapsed');
-                
-                if (musicPlayer.classList.contains('collapsed')) {
-                    this.innerHTML = '<i class="fas fa-chevron-up"></i>';
-                    this.setAttribute('aria-label', '展開播放器');
-                } else {
-                    this.innerHTML = '<i class="fas fa-chevron-down"></i>';
-                    this.setAttribute('aria-label', '收起播放器');
-                }
-            });
-            
-            // 滾動動畫
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (scrollIndicator) {
-                scrollIndicator.addEventListener('click', function() {
-                    window.scrollTo({
-                        top: window.innerHeight,
-                        behavior: 'smooth'
-                    });
-                });
-            }
-        });
-    </script>
-    <script src="js/musicPlayer.js"></script>
     <script src="js/theme-switcher.js"></script>
+    <script src="js/musicPlayer.js"></script>
 </body>
 </html>
