@@ -10,21 +10,59 @@
     --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, auto;
     --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23000' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
     --cursor-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+    
+    /* 色彩變量 */
+    --primary-color: #000000;
+    --secondary-color: #f5f5f5;
+    --accent-color: #e0e0e0;
+    --text-color: #333333;
+    --light-text: #666666;
+    --background-color: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23fff' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, auto;
+        --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23fff' stroke-width='1' fill='none'/%3E%3C/svg%3E") 12 12, pointer;
+        --cursor-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' stroke='%23aaa' stroke-width='1' fill='%23aaa'/%3E%3C/svg%3E") 12 12, pointer;
+        
+        --primary-color: #ffffff;
+        --secondary-color: #222222;
+        --accent-color: #333333;
+        --text-color: #f5f5f5;
+        --light-text: #cccccc;
+        --background-color: #121212;
+        --border-color: rgba(255, 255, 255, 0.1);
+    }
 }
 
 body {
-    font-family: sans-serif;
-    overflow: hidden; /* Prevent vertical scrolling */
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    position: relative;
+    color: var(--text-color);
+    background-color: var(--background-color);
     cursor: var(--cursor-default);
+    line-height: 1.6;
 }
 
-body.whats-new-page {
-    overflow: auto; /* 允許頁面滾動 */
-    height: auto;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    cursor: var(--cursor-pointer);
+}
+
+a:hover {
+    cursor: var(--cursor-hover);
 }
 
 /* Logo styles */
@@ -44,8 +82,8 @@ body.whats-new-page {
 }
 
 .logo img {
-    width: 50px; /* 設置 logo 圖片的寬度 */
-    height: auto; /* 保持圖片比例 */
+    width: 50px;
+    height: auto;
 }
 
 /* Left sidebar styles */
@@ -58,24 +96,15 @@ body.whats-new-page {
     padding: 180px 30px 30px;
     box-sizing: border-box;
     z-index: 10;
-    background-color: rgba(255, 255, 255, 0.4); /* More translucent white background */
-    backdrop-filter: blur(3px); /* Lighter blur effect */
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(3px);
     transition: transform 0.3s ease-in-out;
-}
-
-/* What's New 頁面的側邊欄樣式 */
-.whats-new-page .left-sidebar {
-    transform: translateX(-100%); /* 初始隱藏 */
-}
-
-.whats-new-page .left-sidebar.open {
-    transform: translateX(0); /* 顯示 */
 }
 
 /* Vertical menu styles */
 .vertical-menu {
     width: 100%;
-    margin-top: 30px; /* Added margin to move the menu down */
+    margin-top: 30px;
 }
 
 .vertical-menu ul {
@@ -93,10 +122,10 @@ body.whats-new-page {
 
 .vertical-menu a {
     font-family: 'IBM Plex Mono', monospace;
-    font-weight: 200; /* Thin version */
+    font-weight: 200;
     font-size: 14px;
     text-decoration: none;
-    color: #000;
+    color: var(--primary-color);
     transition: all 0.3s ease;
     letter-spacing: 1px;
     position: relative;
@@ -107,8 +136,8 @@ body.whats-new-page {
 }
 
 .vertical-menu a:hover {
-    color: #000;
-    font-weight: 400; /* Bold on hover */
+    color: var(--primary-color);
+    font-weight: 400;
     cursor: var(--cursor-hover);
 }
 
@@ -117,7 +146,7 @@ body.whats-new-page {
     content: '';
     opacity: 0;
     position: absolute;
-    right: -15px; /* 將符號放在文字右側 */
+    right: -15px;
     top: 50%;
     transform: translateY(-50%);
     transition: opacity 0.3s ease, right 0.3s ease;
@@ -128,7 +157,7 @@ body.whats-new-page {
 .vertical-menu a:hover::before {
     content: '>';
     opacity: 1;
-    right: -20px; /* 懸停時符號稍微向右移動，創造動態效果 */
+    right: -20px;
 }
 
 .vertical-menu a::after {
@@ -138,7 +167,7 @@ body.whats-new-page {
     height: 1px;
     bottom: 0;
     left: 0;
-    background-color: #000;
+    background-color: var(--primary-color);
     transition: width 0.3s ease;
 }
 
@@ -146,100 +175,16 @@ body.whats-new-page {
     width: 100%;
 }
 
-/* Homepage photo container */
-.homepage-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 5;
-}
-
-.slides-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-    background-color: #f5f5f5; /* Light gray background as placeholder */
-}
-
-.slides-wrapper::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
-}
-
-.photo-slide {
-    flex: 0 0 100%;
-    height: 100%;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    will-change: transform; /* Optimize for animations */
-    contain: content; /* Improve rendering performance */
-}
-
-#slide1 img, .full-slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.photo-slide img {
-    backface-visibility: hidden; /* Prevent flickering during transitions */
-    transform: translateZ(0); /* Force hardware acceleration */
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Custom positioning for each vertical photo to preserve important content */
-#slide2 img {
-    object-position: center 65%; /* Focus on the building, crop out sky */
-}
-
-#slide3 img {
-    object-position: center 70%; /* Show the full poster and foot reflections */
-}
-
-#slide4 img {
-    object-position: center bottom; /* Crop the top portion, keep the entire bottom portion visible */
-}
-
-/* Remove the vertical photos styles since we're not using them anymore */
-.vertical-photos {
-    display: none;
-}
-
-/* Navigation dots */
-.nav-dots {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    z-index: 10;
-}
-
 /* 漢堡菜單樣式 */
 .hamburger-menu {
-    display: none; /* 默認隱藏 */
+    display: none;
     position: fixed;
     top: 30px;
     right: 30px;
     width: 30px;
     height: 25px;
     cursor: var(--cursor-pointer);
-    z-index: 40; /* 提高 z-index，確保在側邊欄之上 */
-}
-
-/* 在 What's New 頁面的手機版本顯示漢堡菜單 */
-.whats-new-page .hamburger-menu {
-    display: none; /* 默認隱藏，只在手機版顯示 */
+    z-index: 40;
 }
 
 .hamburger-menu:hover {
@@ -249,7 +194,7 @@ body.whats-new-page {
 .hamburger-menu .bar1, .hamburger-menu .bar2, .hamburger-menu .bar3 {
     width: 30px;
     height: 3px;
-    background-color: #000;
+    background-color: var(--primary-color);
     margin: 5px 0;
     transition: 0.4s;
 }
@@ -265,505 +210,6 @@ body.whats-new-page {
 
 .hamburger-menu.change .bar3 {
     transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* 側邊頁籤樣式 */
-.side-tab {
-    display: none; /* 默認隱藏 */
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 80px;
-    background-color: transparent; /* 移除背景色 */
-    border-radius: 0;
-    box-shadow: none; /* 移除陰影 */
-    cursor: var(--cursor-pointer);
-    z-index: 20;
-    transition: all 0.3s ease;
-}
-
-/* 在 What's New 頁面的非手機版本顯示側邊頁籤 */
-.whats-new-page .side-tab {
-    display: flex; /* 在 What's New 頁面顯示側邊頁籤 */
-    justify-content: center;
-    align-items: center;
-}
-
-.side-tab:hover {
-    background-color: transparent; /* 移除懸停背景色 */
-    cursor: var(--cursor-hover);
-}
-
-/* 極簡幾何圖形設計 */
-.geometric-icon {
-    position: relative;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.geometric-icon .triangle {
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 16px solid #000;
-    transform: rotate(180deg); /* 讓三角形指向右側 */
-    transition: all 0.3s ease;
-}
-
-/* 側邊頁籤懸停效果 */
-.side-tab:hover .triangle {
-    transform: rotate(180deg) translateX(3px); /* 懸停時三角形微微移動 */
-}
-
-/* 側邊頁籤激活時的樣式 */
-.side-tab.active {
-    left: 200px; /* 與側邊欄寬度相同 */
-}
-
-.side-tab.active .triangle {
-    transform: rotate(0deg); /* 激活時三角形轉向左側 */
-}
-
-/* 手機版樣式 */
-@media (max-width: 768px) {
-    /* 顯示漢堡菜單 */
-    .hamburger-menu {
-        display: block;
-    }
-    
-    /* 導航點調整 */
-    .nav-dots {
-        z-index: 30; /* 確保導航點在最前面 */
-        bottom: 50px; /* 調整底部位置 */
-        gap: 10px; /* 縮小間距 */
-    }
-    
-    .dot {
-        width: 5px; /* 縮小導航點 */
-        height: 5px;
-    }
-    
-    .dot.active {
-        width: 8px; /* 縮小活動導航點 */
-        height: 8px;
-    }
-    
-    /* 左側欄調整 */
-    .left-sidebar {
-        width: 100%; /* 全寬 */
-        height: 100vh; /* 全高 */
-        padding: 80px 15px 15px; /* 縮小內邊距 */
-        background-color: rgba(255, 255, 255, 0.95); /* 增加背景不透明度 */
-        transform: translateX(-100%); /* 初始隱藏 */
-        transition: transform 0.3s ease-in-out;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 35;
-    }
-    
-    /* 左側欄打開時的樣式 */
-    .left-sidebar.open {
-        transform: translateX(0); /* 顯示 */
-    }
-    
-    /* 菜單調整 */
-    .vertical-menu ul {
-        display: flex;
-        flex-direction: column; /* 改為垂直排列 */
-        align-items: center;
-        gap: 20px;
-    }
-    
-    .vertical-menu li {
-        margin-bottom: 0;
-    }
-    
-    .vertical-menu a {
-        font-size: 18px; /* 增大字體 */
-        padding-bottom: 2px;
-    }
-    
-    /* Logo 調整 */
-    .logo-container {
-        top: 15px;
-        left: 15px;
-    }
-    
-    .logo {
-        width: 40px; /* 縮小 logo 容器 */
-        height: 40px;
-    }
-    
-    .logo img {
-        width: 40px; /* 縮小 logo 圖片 */
-    }
-    
-    /* 主內容區域調整 */
-    .homepage-container {
-        margin-left: 0; /* 移除左側邊距 */
-        width: 100%; /* 全寬 */
-        height: 100vh;
-    }
-    
-    .slides-wrapper {
-        width: 100%;
-    }
-    
-    /* 登陸頁面調整 */
-    #text-animation-container {
-        padding: 0 20px; /* 添加側邊距 */
-    }
-    
-    .shan-text, .minimalism-text {
-        font-size: 20px; /* 縮小文字 */
-    }
-    
-    .plus-text {
-        font-size: 16px; /* 縮小加號 */
-        margin: 0 8px;
-    }
-    
-    .barebreathe-text {
-        font-size: 20px; /* 縮小文字 */
-    }
-    
-    #enter-site-logo {
-        width: 80px; /* 縮小登陸頁面 logo */
-    }
-    
-    .click-hint {
-        font-size: 12px; /* 縮小提示文字 */
-        margin-top: 12px;
-    }
-    
-    /* 博客頁面調整 */
-    .content-container {
-        margin-left: 0;
-        padding: 80px 20px 30px;
-        width: 100%;
-        font-family: 'IBM Plex Mono', monospace;
-        overflow-y: auto; /* 允許垂直滾動 */
-    }
-    
-    .blog-container {
-        max-width: 100%;
-    }
-    
-    .page-title {
-        font-size: 24px;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    
-    .post-title {
-        font-size: 20px;
-        text-align: center;
-    }
-    
-    .post-meta {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-    
-    /* 手機版博客內容布局：標題在上，照片在中間，文字在下 */
-    .post-content-wrapper {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .post-image {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin: 0 auto;
-    }
-    
-    .post-content {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    /* 在手機版 What's New 頁面顯示漢堡菜單，隱藏側邊頁籤 */
-    .whats-new-page .hamburger-menu {
-        display: block;
-    }
-    
-    .whats-new-page .side-tab {
-        display: none;
-    }
-}
-
-/* 活動菜單項樣式 */
-.vertical-menu a.active {
-    color: #000;
-    font-weight: 400;
-    border-bottom: 1px solid #000;
-}
-
-/* Bio 頁面樣式 */
-body.bio-page {
-    overflow-y: auto;
-    height: auto;
-    font-family: 'IBM Plex Mono', monospace;
-}
-
-.bio-container {
-    margin-left: 200px; /* 與左側欄寬度相同 */
-    padding: 80px 40px 30px;
-    width: calc(100% - 200px);
-    max-width: 1200px;
-    margin: 0 auto 0 200px;
-}
-
-.bio-header {
-    margin-bottom: 40px;
-    text-align: left;
-}
-
-.bio-header h1 {
-    font-size: 48px;
-    font-weight: 400;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-}
-
-.bio-header h2 {
-    font-size: 18px;
-    font-weight: 300;
-    color: rgba(0, 0, 0, 0.7);
-}
-
-.bio-section {
-    margin-bottom: 50px;
-}
-
-.bio-section h3 {
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
-.bio-section p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-weight: 300;
-}
-
-.experience-item, .education-item, .tool-item, .projects-category {
-    margin-bottom: 25px;
-}
-
-.experience-header, .education-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 5px;
-}
-
-.experience-header h4, .education-item h4, .projects-category h4, .tool-item h4 {
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 5px;
-}
-
-.experience-item h5 {
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 10px;
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.date {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.clients {
-    font-size: 14px;
-    font-style: italic;
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.experience-grid, .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-}
-
-.skills-list {
-    list-style: none;
-}
-
-.skills-list li {
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: 300;
-}
-
-.skills-list li strong {
-    font-weight: 400;
-}
-
-.contact-section {
-    margin-top: 60px;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.contact-label {
-    font-weight: 400;
-    margin-right: 10px;
-}
-
-.copyright {
-    margin-top: 60px;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
-    text-align: center;
-    padding-bottom: 30px;
-}
-
-/* 手機版 Bio 頁面樣式 */
-@media (max-width: 768px) {
-    .bio-container {
-        margin-left: 0;
-        width: 100%;
-        padding: 80px 20px 30px;
-    }
-    
-    .bio-header h1 {
-        font-size: 36px;
-    }
-    
-    .bio-header h2 {
-        font-size: 16px;
-    }
-    
-    .experience-grid, .tools-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .experience-header {
-        flex-direction: column;
-    }
-    
-    .date {
-        margin-bottom: 5px;
-    }
-}
-
-/* 博客頁面樣式 */
-.content-container {
-    margin-left: 200px; /* 與左側欄寬度相同 */
-    padding: 80px 40px 30px;
-    width: calc(100% - 200px);
-    font-family: 'IBM Plex Mono', monospace;
-    height: 100vh;
-    overflow-y: auto; /* 允許垂直滾動 */
-    position: relative;
-}
-
-.blog-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-bottom: 60px;
-}
-
-.page-title {
-    font-size: 28px;
-    margin-bottom: 40px;
-    font-weight: 300;
-    color: #000;
-    text-align: center;
-}
-
-.blog-post {
-    margin-bottom: 60px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.blog-post:last-child {
-    border-bottom: none;
-}
-
-.post-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-weight: 300;
-    color: #000;
-}
-
-.post-meta {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 20px;
-}
-
-/* 網頁版博客內容布局：照片在左，文字在右 */
-.post-content-wrapper {
-    display: flex;
-    align-items: flex-start;
-    gap: 30px;
-}
-
-.post-image {
-    flex: 0 0 45%;
-    max-width: 45%;
-}
-
-.post-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.post-content {
-    flex: 0 0 50%;
-    max-width: 50%;
-    font-size: 16px;
-    line-height: 1.6;
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.post-content p {
-    margin-bottom: 15px;
-}
-
-.post-content p:last-child {
-    margin-bottom: 0;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
-    cursor: var(--cursor-pointer);
-}
-
-.dot.active {
-    width: 10px;
-    height: 10px;
-    background-color: white;
-}
-
-.dot:hover {
-    cursor: var(--cursor-hover);
 }
 
 /* 登陸頁面樣式 */
@@ -813,7 +259,7 @@ body.bio-page {
     transition: opacity 1s ease;
 }
 
-/* 第一階段：shan + minimalism */
+/* 第一階段：bare + breathe */
 #stage1 {
     display: flex;
     align-items: center;
@@ -891,7 +337,7 @@ body.bio-page {
     margin-top: 15px;
     opacity: 0;
     transition: opacity 0.5s ease;
-    color: #000;
+    color: var(--primary-color);
     text-align: center;
 }
 
@@ -935,38 +381,363 @@ body.bio-page {
     height: 100%;
 }
 
-/* 全局樣式 */
-a, button, .logo, #enter-site-logo, .dot, .vertical-menu li a {
-    cursor: var(--cursor-pointer);
+/* Main container styles */
+.main-container {
+    margin-left: 200px;
+    padding: 100px 40px 40px;
+    min-height: 100vh;
 }
 
-a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertical-menu li a:hover {
+/* Section styles */
+section {
+    margin-bottom: 120px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
+    bottom: -10px;
+    left: 0;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 80px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 0 20px;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--secondary-color);
+    padding: 30px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon img {
+    width: 100%;
+    height: auto;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    font-size: 16px;
+    color: var(--light-text);
+}
+
+/* Featured Project Section */
+.featured-project-section {
+    background-color: var(--secondary-color);
+    padding: 60px;
+    border-radius: 8px;
+}
+
+.featured-project-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.project-image {
+    flex: 0 0 50%;
+}
+
+.project-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-details {
+    flex: 0 0 45%;
+}
+
+.project-details h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.project-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+.project-description {
+    margin-bottom: 25px;
+}
+
+.project-link {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 8px 0;
+    position: relative;
+}
+
+.project-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.project-link:hover::after {
+    width: 100%;
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.about-text {
+    flex: 0 0 55%;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+}
+
+.about-image {
+    flex: 0 0 40%;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-link {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 8px 0;
+    position: relative;
+    margin-top: 10px;
+}
+
+.about-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.about-link:hover::after {
+    width: 100%;
+}
+
+/* Contact Section */
+.contact-container {
+    display: flex;
+    gap: 60px;
+}
+
+.contact-info {
+    flex: 0 0 40%;
+}
+
+.contact-info p {
+    margin-bottom: 25px;
+}
+
+.contact-details {
+    margin-bottom: 30px;
+}
+
+.contact-details p {
+    margin-bottom: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    position: relative;
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.social-link:hover::after {
+    width: 100%;
+}
+
+.contact-form {
+    flex: 0 0 50%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 12px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    cursor: var(--cursor-pointer);
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.submit-btn:hover {
+    background-color: var(--text-color);
     cursor: var(--cursor-hover);
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        cursor: var(--cursor-default);
-    }
-
-    a, button, .logo, #enter-site-logo, .dot, .vertical-menu li a {
-        cursor: var(--cursor-pointer);
-    }
-
-    a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertical-menu li a:hover {
-        cursor: var(--cursor-hover);
-    }
+/* Footer */
+.footer {
+    margin-top: 80px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border-color);
 }
 
-/* 版權信息樣式 */
-.copyright {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    font-family: 'IBM Plex Mono', monospace; /* 與其他字體統一 */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo img {
+    width: 40px;
+    height: auto;
+}
+
+.footer-text {
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    color: rgba(128, 128, 128, 0.7); /* 淺灰色 */
-    z-index: 10;
+    color: var(--light-text);
+}
+
+/* 全局樣式 */
+a, button, .logo, #enter-site-logo, .vertical-menu li a {
+    cursor: var(--cursor-pointer);
+}
+
+a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .vertical-menu li a:hover {
+    cursor: var(--cursor-hover);
 }
 
 /* 手機版樣式 */
@@ -976,30 +747,13 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
         display: block;
     }
     
-    /* 導航點調整 */
-    .nav-dots {
-        z-index: 30; /* 確保導航點在最前面 */
-        bottom: 50px; /* 調整底部位置 */
-        gap: 10px; /* 縮小間距 */
-    }
-    
-    .dot {
-        width: 5px; /* 縮小導航點 */
-        height: 5px;
-    }
-    
-    .dot.active {
-        width: 8px; /* 縮小活動導航點 */
-        height: 8px;
-    }
-    
     /* 左側欄調整 */
     .left-sidebar {
-        width: 100%; /* 全寬 */
-        height: 100vh; /* 全高 */
-        padding: 80px 15px 15px; /* 縮小內邊距 */
-        background-color: rgba(255, 255, 255, 0.95); /* 增加背景不透明度 */
-        transform: translateX(-100%); /* 初始隱藏 */
+        width: 100%;
+        height: 100vh;
+        padding: 80px 15px 15px;
+        background-color: rgba(255, 255, 255, 0.95);
+        transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         position: fixed;
         top: 0;
@@ -1008,14 +762,14 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
     }
     
     /* 左側欄打開時的樣式 */
-    .left-sidebar.open {
-        transform: translateX(0); /* 顯示 */
+    .left-sidebar.show {
+        transform: translateX(0);
     }
     
     /* 菜單調整 */
     .vertical-menu ul {
         display: flex;
-        flex-direction: column; /* 改為垂直排列 */
+        flex-direction: column;
         align-items: center;
         gap: 20px;
     }
@@ -1025,7 +779,7 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
     }
     
     .vertical-menu a {
-        font-size: 18px; /* 增大字體 */
+        font-size: 18px;
         padding-bottom: 2px;
     }
     
@@ -1036,104 +790,96 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
     }
     
     .logo {
-        width: 40px; /* 縮小 logo 容器 */
+        width: 40px;
         height: 40px;
     }
     
     .logo img {
-        width: 40px; /* 縮小 logo 圖片 */
+        width: 40px;
     }
     
     /* 主內容區域調整 */
-    .homepage-container {
-        margin-left: 0; /* 移除左側邊距 */
-        width: 100%; /* 全寬 */
-        height: 100vh;
-    }
-    
-    .slides-wrapper {
-        width: 100%;
+    .main-container {
+        margin-left: 0;
+        padding: 80px 20px 30px;
     }
     
     /* 登陸頁面調整 */
     #text-animation-container {
-        padding: 0 20px; /* 添加側邊距 */
+        padding: 0 20px;
     }
     
     .shan-text, .minimalism-text {
-        font-size: 20px; /* 縮小文字 */
+        font-size: 20px;
     }
     
     .plus-text {
-        font-size: 16px; /* 縮小加號 */
+        font-size: 16px;
         margin: 0 8px;
     }
     
     .barebreathe-text {
-        font-size: 20px; /* 縮小文字 */
+        font-size: 20px;
     }
     
     #enter-site-logo {
-        width: 80px; /* 縮小登陸頁面 logo */
+        width: 80px;
     }
     
     .click-hint {
-        font-size: 12px; /* 縮小提示文字 */
+        font-size: 12px;
         margin-top: 12px;
     }
     
-    /* 博客頁面調整 */
-    .content-container {
-        margin-left: 0;
-        padding: 80px 20px 30px;
-        width: 100%;
-        font-family: 'IBM Plex Mono', monospace;
-        overflow-y: auto; /* 允許垂直滾動 */
+    /* Hero Section 調整 */
+    .hero-section {
+        height: 60vh;
     }
     
-    .blog-container {
-        max-width: 100%;
+    .hero-section h1 {
+        font-size: 32px;
     }
     
-    .page-title {
-        font-size: 24px;
-        margin-bottom: 30px;
-        text-align: center;
+    .hero-tagline {
+        font-size: 16px;
     }
     
-    .post-title {
-        font-size: 20px;
-        text-align: center;
+    /* Services Section 調整 */
+    .services-grid {
+        grid-template-columns: 1fr;
     }
     
-    .post-meta {
-        text-align: center;
-        margin-bottom: 15px;
+    /* Featured Project Section 調整 */
+    .featured-project-container {
+        flex-direction: column;
     }
     
-    /* 手機版博客內容布局：標題在上，照片在中間，文字在下 */
-    .post-content-wrapper {
+    .project-image, .project-details {
+        flex: 0 0 100%;
+    }
+    
+    /* About Section 調整 */
+    .about-content {
+        flex-direction: column-reverse;
+    }
+    
+    .about-text, .about-image {
+        flex: 0 0 100%;
+    }
+    
+    /* Contact Section 調整 */
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .contact-info, .contact-form {
+        flex: 0 0 100%;
+    }
+    
+    /* Footer 調整 */
+    .footer-content {
         flex-direction: column;
         gap: 20px;
-    }
-    
-    .post-image {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin: 0 auto;
-    }
-    
-    .post-content {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    /* 在手機版 What's New 頁面顯示漢堡菜單，隱藏側邊頁籤 */
-    .whats-new-page .hamburger-menu {
-        display: block;
-    }
-    
-    .whats-new-page .side-tab {
-        display: none;
+        text-align: center;
     }
 }
