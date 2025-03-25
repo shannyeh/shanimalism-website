@@ -1,4 +1,4 @@
-// Music database
+// 音樂資料庫
 const musicLibrary = [
     {
         title: "Ambient Flow",
@@ -32,16 +32,16 @@ const musicLibrary = [
     }
 ];
 
-// Music player functionality
+// 音樂播放器功能
 console.log("Music player script loaded");
 
 class MusicPlayer {
     constructor() {
-        // Initialize audio object
+        // 初始化音頻對象
         this.audio = new Audio();
         this.audio.addEventListener('ended', () => this.playNext());
         
-        // Get DOM elements
+        // 獲取DOM元素
         this.playerElement = document.querySelector('.music-player');
         this.albumCover = document.querySelector('.album-cover');
         this.trackTitle = document.querySelector('.track-title');
@@ -56,100 +56,86 @@ class MusicPlayer {
         this.volumeSlider = document.querySelector('.volume-slider');
         this.togglePlayerBtn = document.querySelector('.toggle-player');
         
-        // Check if DOM elements exist
-        if (!this.playerElement) {
-            console.error("Music player element not found");
+        // 檢查DOM元素是否存在
+        if (!this.playerElement || !this.playPauseBtn) {
+            console.error("Music player elements not found");
             return;
         }
         
-        // Check play/pause button
-        if (!this.playPauseBtn) {
-            console.error("Play/Pause button not found");
-            return;
-        } else {
-            console.log("Play/Pause button found:", this.playPauseBtn);
-            console.log("Initial button class:", this.playPauseBtn.className);
-        }
-        
-        // Music track list
+        // 音樂曲目列表
         this.tracks = musicLibrary;
         
-        // Current track index
+        // 當前曲目索引
         this.currentTrackIndex = 0;
         
-        // Initialize event listeners
+        // 初始化事件監聽器
         this.initEventListeners();
         
-        // Load state from local storage
+        // 從本地存儲加載狀態
         this.loadState();
         
-        // Load current track
+        // 加載當前曲目
         this.loadTrack(this.currentTrackIndex);
         
-        // Observe theme changes
+        // 監聽主題變更
         this.observeThemeChanges();
     }
     
     initEventListeners() {
-        // Play/pause button click event
-        this.playPauseBtn.addEventListener('click', () => {
-            console.log("Play/pause button clicked");
-            this.togglePlay();
-        });
+        // 播放/暫停按鈕點擊事件
+        this.playPauseBtn.addEventListener('click', () => this.togglePlay());
         
-        // Previous/next button click events
+        // 上一首/下一首按鈕點擊事件
         this.prevBtn.addEventListener('click', () => this.playPrevious());
         this.nextBtn.addEventListener('click', () => this.playNext());
         
-        // Progress bar click event
+        // 進度條點擊事件
         this.progressContainer.addEventListener('click', (e) => this.setProgress(e));
         
-        // Volume slider change event
+        // 音量滑塊變更事件
         this.volumeSlider.addEventListener('input', () => this.setVolume());
         
-        // Audio time update event
+        // 音頻時間更新事件
         this.audio.addEventListener('timeupdate', () => this.updateProgress());
         
-        // Audio loaded metadata event
+        // 音頻加載完成事件
         this.audio.addEventListener('loadedmetadata', () => this.updateDuration());
         
-        // Toggle player visibility
+        // 切換播放器顯示/隱藏
         this.togglePlayerBtn.addEventListener('click', () => this.togglePlayerVisibility());
         
-        // Save state before unload
+        // 頁面卸載前保存狀態
         window.addEventListener('beforeunload', () => this.saveState());
     }
     
     loadTrack(index) {
-        // Ensure index is within valid range
+        // 確保索引在有效範圍內
         if (index < 0) index = this.tracks.length - 1;
         if (index >= this.tracks.length) index = 0;
         
-        // Update current track index
+        // 更新當前曲目索引
         this.currentTrackIndex = index;
         
-        // Get current track information
+        // 獲取當前曲目信息
         const track = this.tracks[index];
         
-        // Update audio source
+        // 更新音頻源
         this.audio.src = track.file;
         
-        // Update UI
+        // 更新UI
         this.albumCover.src = track.cover;
         this.trackTitle.textContent = track.title;
         this.trackArtist.textContent = track.artist;
         
-        // Reset progress bar
+        // 重置進度條
         this.progress.style.width = '0%';
         this.currentTimeElement.textContent = '0:00';
         
-        // Save current track to local storage
+        // 保存當前曲目到本地存儲
         localStorage.setItem('currentTrackIndex', index);
     }
     
     togglePlay() {
-        console.log("togglePlay called, audio.paused:", this.audio.paused);
-        
         if (this.audio.paused) {
             this.play();
         } else {
@@ -158,36 +144,14 @@ class MusicPlayer {
     }
     
     play() {
-        console.log("Playing audio");
-        
-        // Play audio
-        this.audio.play()
-            .then(() => {
-                console.log("Audio played successfully");
-                // Add playing class
-                this.playPauseBtn.classList.add('playing');
-                this.playerElement.classList.add('playing');
-                localStorage.setItem('isPlaying', 'true');
-            })
-            .catch(error => {
-                console.error('Play failed:', error);
-                // Reset button state on failure
-                this.playPauseBtn.classList.remove('playing');
-                this.playerElement.classList.remove('playing');
-                localStorage.setItem('isPlaying', 'false');
-            });
+        this.audio.play();
+        this.playPauseBtn.classList.add('playing');
+        localStorage.setItem('isPlaying', 'true');
     }
     
     pause() {
-        console.log("Pausing audio");
-        
-        // Pause audio
         this.audio.pause();
-        
-        // Remove playing class
         this.playPauseBtn.classList.remove('playing');
-        this.playerElement.classList.remove('playing');
-        
         localStorage.setItem('isPlaying', 'false');
     }
     
@@ -207,22 +171,13 @@ class MusicPlayer {
     
     updateProgress() {
         const { currentTime, duration } = this.audio;
-        if (isNaN(duration)) return;
-        
-        // 更新進度條
         const progressPercent = (currentTime / duration) * 100;
         this.progress.style.width = `${progressPercent}%`;
         
-        // 更新當前時間
+        // 更新當前時間顯示
         const minutes = Math.floor(currentTime / 60);
         const seconds = Math.floor(currentTime % 60).toString().padStart(2, '0');
         this.currentTimeElement.textContent = `${minutes}:${seconds}`;
-    }
-    
-    formatTime(time) {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60).toString().padStart(2, '0');
-        return `${minutes}:${seconds}`;
     }
     
     updateDuration() {
@@ -230,7 +185,9 @@ class MusicPlayer {
         if (isNaN(duration)) return;
         
         // 更新總時長顯示
-        this.durationElement.textContent = this.formatTime(duration);
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
+        this.durationElement.textContent = `${minutes}:${seconds}`;
     }
     
     setProgress(e) {
@@ -243,8 +200,8 @@ class MusicPlayer {
     
     setVolume() {
         const volume = this.volumeSlider.value;
-        this.audio.volume = volume / 100;
-        localStorage.setItem('volume', volume / 100);
+        this.audio.volume = volume;
+        localStorage.setItem('volume', volume);
     }
     
     togglePlayerVisibility() {
@@ -253,35 +210,30 @@ class MusicPlayer {
     }
     
     loadState() {
-        // Load state from local storage
-        const currentTrackIndex = localStorage.getItem('currentTrackIndex');
+        // 加載音量設置
         const volume = localStorage.getItem('volume');
-        const isPlaying = localStorage.getItem('isPlaying');
-        const collapsed = localStorage.getItem('playerCollapsed');
-        
-        // Set current track index
-        if (currentTrackIndex !== null) {
-            this.currentTrackIndex = parseInt(currentTrackIndex);
-        }
-        
-        // Set volume
         if (volume !== null) {
             this.audio.volume = parseFloat(volume);
-            this.volumeSlider.value = parseFloat(volume) * 100;
+            this.volumeSlider.value = parseFloat(volume);
+        }
+        
+        // 加載當前曲目索引
+        const trackIndex = localStorage.getItem('currentTrackIndex');
+        if (trackIndex !== null) {
+            this.currentTrackIndex = parseInt(trackIndex);
         }
         
         // 加載播放器折疊狀態
+        const collapsed = localStorage.getItem('playerCollapsed');
         if (collapsed === 'true') {
             this.playerElement.classList.add('collapsed');
         }
         
-        // Set playing state
+        // 檢查是否應該自動播放
+        const isPlaying = localStorage.getItem('isPlaying');
         if (isPlaying === 'true') {
             // 由於瀏覽器政策限制，無法自動播放，但我們可以設置UI狀態
             this.playPauseBtn.classList.add('playing');
-            this.playerElement.classList.add('playing');
-        } else {
-            this.playPauseBtn.classList.remove('playing');
         }
     }
     
@@ -293,16 +245,16 @@ class MusicPlayer {
     }
     
     observeThemeChanges() {
-        // Observe theme change events
+        // 監聽主題變更事件
         document.addEventListener('themeChanged', (e) => {
             console.log('Theme changed to:', e.detail.theme);
-            // Here you can adjust the player style based on the theme change
-            // Since we use CSS variables, most styles will adapt automatically
+            // 這裡可以根據主題變更調整播放器樣式
+            // 由於我們使用CSS變量，大部分樣式會自動適應
         });
     }
 }
 
-// Initialize music player after DOM is loaded
+// DOM 加載完成後初始化音樂播放器
 document.addEventListener('DOMContentLoaded', function() {
     new MusicPlayer();
 });

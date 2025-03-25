@@ -644,8 +644,8 @@ body::before {
 
 /* Theme Toggle Button */
 .theme-toggle {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     position: relative;
     display: flex;
     align-items: center;
@@ -653,268 +653,154 @@ body::before {
     background: none;
     border: none;
     cursor: var(--cursor-pointer);
-    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.3s ease;
     z-index: 110;
     padding: 0;
-    margin-left: 15px;
-    overflow: hidden;
 }
 
 .theme-toggle:hover {
     transform: translateY(-2px);
 }
 
-/* Sun Icon */
-.theme-toggle .sun-icon {
-    position: absolute;
-    width: 10px;
-    height: 10px;
+.theme-toggle .toggle-wrapper {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Sun/Moon Icon */
+.theme-toggle .toggle-icon {
+    position: relative;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background-color: var(--primary-color);
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    opacity: 1;
-    transform: scale(1);
-    box-shadow: 0 0 3px var(--primary-color);
+    overflow: hidden;
 }
 
-/* Sun rays */
-.theme-toggle .sun-icon::before {
+/* Moon Crescent */
+.theme-toggle .toggle-icon::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    transform: translate(-50%, -50%);
-    background-image: 
-        linear-gradient(0deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%),
-        linear-gradient(90deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%),
-        linear-gradient(45deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%),
-        linear-gradient(135deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%);
-    border-radius: 50%;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* Sun rays additional */
-.theme-toggle .sun-icon::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 18px;
-    height: 18px;
-    transform: translate(-50%, -50%) rotate(22.5deg);
-    background-image: 
-        linear-gradient(0deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%),
-        linear-gradient(90deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%),
-        linear-gradient(45deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%),
-        linear-gradient(135deg, transparent 48%, var(--primary-color) 48%, var(--primary-color) 52%, transparent 52%);
-    border-radius: 50%;
-    opacity: 0.6;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* Hover animations */
-.theme-toggle:hover .sun-icon {
-    box-shadow: 0 0 8px var(--primary-color);
-}
-
-.theme-toggle:hover .sun-icon::before,
-.theme-toggle:hover .sun-icon::after {
-    animation: sun-rotate 20s infinite linear;
-}
-
-.theme-toggle:hover .sun-icon::after {
-    animation: sun-rotate-reverse 15s infinite linear;
-}
-
-@keyframes sun-rotate {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-@keyframes sun-rotate-reverse {
-    0% {
-        transform: translate(-50%, -50%) rotate(22.5deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(382.5deg);
-    }
-}
-
-/* Stars around moon */
-.theme-toggle .star {
-    position: absolute;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.theme-toggle .star-1 {
-    width: 1px;
-    height: 1px;
-    top: 5px;
-    left: 15px;
-}
-
-.theme-toggle .star-2 {
-    width: 1px;
-    height: 1px;
-    top: 15px;
-    left: 5px;
-}
-
-.theme-toggle .star-3 {
-    width: 1px;
-    height: 1px;
-    top: 15px;
-    left: 25px;
-}
-
-.theme-toggle .star-4 {
-    width: 1px;
-    height: 1px;
-    top: 25px;
-    left: 18px;
-}
-
-.theme-toggle .star-5 {
-    width: 0.5px;
-    height: 0.5px;
-    top: 8px;
-    left: 22px;
-}
-
-.theme-toggle .star-6 {
-    width: 0.5px;
-    height: 0.5px;
-    top: 22px;
-    left: 8px;
-}
-
-.theme-toggle .star-7 {
-    width: 0.5px;
-    height: 0.5px;
-    top: 22px;
-    left: 28px;
-}
-
-.theme-toggle .star-8 {
-    width: 0.5px;
-    height: 0.5px;
-    top: 2px;
-    left: 2px;
-}
-
-.theme-toggle .star-9 {
-    width: 0.5px;
-    height: 0.5px;
-    top: 2px;
-    left: 28px;
-}
-
-.theme-toggle .star-10 {
-    width: 0.7px;
-    height: 0.7px;
-    top: 33px;
-    left: 33px;
-}
-
-.theme-toggle .star-11 {
-    width: 0.4px;
-    height: 0.4px;
-    top: 33px;
-    left: 3px;
-}
-
-.theme-toggle .star-12 {
-    width: 0.5px;
-    height: 0.5px;
-    top: 3px;
-    left: 33px;
-}
-
-.theme-toggle .star-13 {
-    width: 0.3px;
-    height: 0.3px;
-    top: 28px;
-    left: 1px;
-}
-
-.theme-toggle .star-14 {
-    width: 0.3px;
-    height: 0.3px;
-    top: 18px;
-    left: 35px;
-}
-
-.theme-toggle .star-15 {
-    width: 0.6px;
-    height: 0.6px;
-    top: 12px;
-    left: 12px;
-}
-
-/* Moon Icon */
-.theme-toggle .moon-icon {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    opacity: 0;
-    transform: scale(0);
-}
-
-/* Moon crescent */
-.theme-toggle .moon-icon::after {
-    content: '';
-    position: absolute;
-    top: -1px;
-    right: -3px;
+    top: -2px;
+    right: -2px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
     background-color: var(--background-color);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateX(0);
+}
+
+/* Sun Rays */
+.theme-toggle .sun-ray {
+    position: absolute;
+    background-color: var(--primary-color);
+    width: 1px;
+    height: 4px;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.theme-toggle .sun-ray:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(45deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(90deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(4) {
+    transform: translate(-50%, -50%) rotate(135deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(5) {
+    transform: translate(-50%, -50%) rotate(180deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(6) {
+    transform: translate(-50%, -50%) rotate(225deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(7) {
+    transform: translate(-50%, -50%) rotate(270deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(8) {
+    transform: translate(-50%, -50%) rotate(315deg) translateY(-8px);
+}
+
+/* Hide sun rays in dark mode */
+html.dark-theme .theme-toggle .sun-ray {
+    opacity: 0;
 }
 
 /* Dark theme styles */
-html.dark-theme .theme-toggle .sun-icon {
+html.dark-theme .theme-toggle .toggle-icon::after {
+    transform: translateX(-8px);
+}
+
+/* Stars around the sun/moon */
+.theme-toggle .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
     opacity: 0;
-    transform: scale(0);
+    transition: opacity 0.5s ease;
 }
 
-html.dark-theme .theme-toggle .moon-icon {
-    opacity: 1;
-    transform: scale(1);
+.theme-toggle .star:nth-child(1) {
+    top: 0;
+    left: 50%;
 }
 
+.theme-toggle .star:nth-child(2) {
+    top: 25%;
+    right: 0;
+}
+
+.theme-toggle .star:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+}
+
+.theme-toggle .star:nth-child(4) {
+    top: 25%;
+    left: 0;
+}
+
+/* Show stars in dark mode */
 html.dark-theme .theme-toggle .star {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
-/* Hover animations */
-.theme-toggle:hover .moon-icon {
-    box-shadow: 0 0 8px var(--primary-color);
+/* Animation on hover */
+.theme-toggle:hover .toggle-icon {
+    transform: scale(1.1);
 }
 
-html.dark-theme .theme-toggle:hover .star {
-    opacity: 1;
-    animation: twinkle 4s infinite alternate;
+.theme-toggle:hover .sun-ray {
+    animation: pulse 1.5s infinite alternate;
 }
 
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0.8;
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
     }
-    50% {
+    100% {
         opacity: 1;
     }
 }

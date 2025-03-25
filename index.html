@@ -86,24 +86,22 @@
                 </nav>
             </div>
             
-            <button class="theme-toggle" aria-label="Toggle dark mode" data-tooltip="Switch theme">
-                <span class="sun-icon"></span>
-                <span class="moon-icon"></span>
-                <span class="star star-1"></span>
-                <span class="star star-2"></span>
-                <span class="star star-3"></span>
-                <span class="star star-4"></span>
-                <span class="star star-5"></span>
-                <span class="star star-6"></span>
-                <span class="star star-7"></span>
-                <span class="star star-8"></span>
-                <span class="star star-9"></span>
-                <span class="star star-10"></span>
-                <span class="star star-11"></span>
-                <span class="star star-12"></span>
-                <span class="star star-13"></span>
-                <span class="star star-14"></span>
-                <span class="star star-15"></span>
+            <button class="theme-toggle" aria-label="Toggle dark mode" data-tooltip="切換主題">
+                <div class="toggle-wrapper">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="sun-ray"></div>
+                    <div class="toggle-icon"></div>
+                </div>
             </button>
         </div>
     </header>
@@ -207,7 +205,7 @@
     <footer class="site-footer">
         <div class="music-player">
             <div class="player-header">
-                <button class="toggle-player" aria-label="Collapse player">
+                <button class="toggle-player" aria-label="收起播放器">
                     <div class="toggle-icon"><span></span></div>
                 </button>
             </div>
@@ -227,9 +225,9 @@
             </div>
             <div class="controls">
                 <div class="control-buttons">
-                    <button class="control-btn prev-btn" aria-label="Previous"></button>
-                    <button class="play-pause-btn" aria-label="Play/Pause"></button>
-                    <button class="control-btn next-btn" aria-label="Next"></button>
+                    <button class="control-btn prev-btn" aria-label="上一首"></button>
+                    <button class="play-pause-btn" aria-label="播放/暫停"></button>
+                    <button class="control-btn next-btn" aria-label="下一首"></button>
                 </div>
                 <div class="volume-control">
                     <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.7">
