@@ -174,16 +174,16 @@
     align-items: center;
 }
 
-/* 重新設計的控制按鈕 - 極簡主義幾何風格 */
+/* 重新設計的控制按鈕 - 簡潔三角形設計 */
 .control-btn {
     background: none;
     border: none;
     cursor: var(--cursor-pointer);
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     position: relative;
     opacity: 0.8;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 0;
 }
 
@@ -192,40 +192,70 @@
     transform: translateY(-2px);
 }
 
-/* 前一首按鈕 */
+/* 前一首按鈕 - 雙三角形 */
+.prev-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev-btn::before,
+.prev-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 10px 6px 0;
+    border-color: transparent var(--text-color) transparent transparent;
+    transition: all 0.3s ease;
+}
+
 .prev-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
     left: 0;
-    width: 10px;
-    height: 10px;
-    border-left: 1px solid var(--text-color);
-    border-bottom: 1px solid var(--text-color);
-    transform: translateY(-50%) rotate(45deg);
-    transition: all 0.3s ease;
 }
 
-.prev-btn:hover::before {
-    border-width: 2px;
+.prev-btn::after {
+    left: 8px;
 }
 
-/* 下一首按鈕 */
-.next-btn::before {
+.prev-btn:hover::before,
+.prev-btn:hover::after {
+    border-width: 7px 12px 7px 0;
+}
+
+/* 下一首按鈕 - 雙三角形 */
+.next-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-btn::before,
+.next-btn::after {
     content: '';
     position: absolute;
-    top: 50%;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    border-right: 1px solid var(--text-color);
-    border-top: 1px solid var(--text-color);
-    transform: translateY(-50%) rotate(45deg);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent var(--text-color);
     transition: all 0.3s ease;
 }
 
-.next-btn:hover::before {
-    border-width: 2px;
+.next-btn::before {
+    right: 8px;
+}
+
+.next-btn::after {
+    right: 0;
+}
+
+.next-btn:hover::before,
+.next-btn:hover::after {
+    border-width: 7px 0 7px 12px;
 }
 
 /* 播放/暫停按鈕 */
@@ -241,7 +271,6 @@
     position: relative;
     cursor: var(--cursor-pointer);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
 }
 
 .play-pause-btn::before {
@@ -250,7 +279,7 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 8px 0 8px 12px;
+    border-width: 10px 0 10px 16px;
     border-color: transparent transparent transparent var(--text-color);
     left: 55%;
     top: 50%;
@@ -262,8 +291,8 @@
 .play-pause-btn.playing::after {
     content: '';
     position: absolute;
-    width: 3px;
-    height: 14px;
+    width: 4px;
+    height: 16px;
     background-color: var(--text-color);
     top: 50%;
     transform: translateY(-50%);
@@ -280,16 +309,15 @@
 
 .play-pause-btn:hover {
     transform: scale(1.05);
-    background-color: var(--text-color);
 }
 
 .play-pause-btn:hover::before {
-    border-color: transparent transparent transparent var(--bg-color);
+    border-color: transparent transparent transparent var(--text-color);
 }
 
 .play-pause-btn.playing:hover::before,
 .play-pause-btn.playing:hover::after {
-    background-color: var(--bg-color);
+    background-color: var(--text-color);
 }
 
 .volume-control {
@@ -298,6 +326,7 @@
     gap: 8px;
 }
 
+/* 音量圖標 */
 .volume-icon {
     position: relative;
     width: 16px;
@@ -307,23 +336,24 @@
 .volume-icon::before {
     content: '';
     position: absolute;
-    width: 6px;
-    height: 6px;
-    border-right: 1px solid var(--text-color);
-    border-bottom: 1px solid var(--text-color);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 8px;
+    border-color: transparent transparent transparent var(--text-color);
     left: 0;
     top: 50%;
-    transform: translateY(-50%) rotate(-45deg);
+    transform: translateY(-50%);
 }
 
 .volume-icon::after {
     content: '';
     position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+    width: 6px;
+    height: 6px;
     border: 1px solid var(--text-color);
-    left: 4px;
+    border-radius: 50%;
+    left: 6px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -366,7 +396,7 @@
 }
 
 .volume-slider:hover {
-    height: 4px;
+    height: 3px;
 }
 
 .volume-slider:hover::-webkit-slider-thumb {
