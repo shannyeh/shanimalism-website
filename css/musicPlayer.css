@@ -192,7 +192,7 @@
     transform: translateY(-2px);
 }
 
-/* 前一首按鈕 - 雙三角形 */
+/* 前一首按鈕 - 簡約三角形 */
 .prev-btn {
     position: relative;
     display: flex;
@@ -213,19 +213,14 @@
 }
 
 .prev-btn::before {
-    left: 0;
+    left: 2px;
 }
 
 .prev-btn::after {
-    left: 8px;
+    left: 10px;
 }
 
-.prev-btn:hover::before,
-.prev-btn:hover::after {
-    border-width: 7px 12px 7px 0;
-}
-
-/* 下一首按鈕 - 雙三角形 */
+/* 下一首按鈕 - 簡約三角形 */
 .next-btn {
     position: relative;
     display: flex;
@@ -246,24 +241,17 @@
 }
 
 .next-btn::before {
-    right: 8px;
+    right: 10px;
 }
 
 .next-btn::after {
-    right: 0;
-}
-
-.next-btn:hover::before,
-.next-btn:hover::after {
-    border-width: 7px 0 7px 12px;
+    right: 2px;
 }
 
 /* 播放/暫停按鈕 */
 .play-pause-btn {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--text-color);
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -271,6 +259,8 @@
     position: relative;
     cursor: var(--cursor-pointer);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+    border: none;
 }
 
 .play-pause-btn::before {
@@ -281,7 +271,7 @@
     border-style: solid;
     border-width: 10px 0 10px 16px;
     border-color: transparent transparent transparent var(--text-color);
-    left: 55%;
+    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     transition: all 0.3s ease;
@@ -300,24 +290,15 @@
 }
 
 .play-pause-btn.playing::before {
-    left: 45%;
+    left: 40%;
 }
 
 .play-pause-btn.playing::after {
-    right: 45%;
+    right: 40%;
 }
 
 .play-pause-btn:hover {
-    transform: scale(1.05);
-}
-
-.play-pause-btn:hover::before {
-    border-color: transparent transparent transparent var(--text-color);
-}
-
-.play-pause-btn.playing:hover::before,
-.play-pause-btn.playing:hover::after {
-    background-color: var(--text-color);
+    transform: translateY(-2px);
 }
 
 .volume-control {
