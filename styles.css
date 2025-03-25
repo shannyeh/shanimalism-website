@@ -172,15 +172,14 @@ button {
 
 /* Theme Toggle Button */
 .theme-toggle {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background: none;
     border: none;
-    color: var(--primary-color);
     cursor: var(--cursor-pointer);
     transition: transform 0.3s ease;
     z-index: 110;
@@ -191,8 +190,172 @@ button {
     transform: translateY(-2px);
 }
 
-.theme-toggle i {
-    font-size: 14px;
+.theme-toggle .toggle-wrapper {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Sun/Moon Icon */
+.theme-toggle .toggle-icon {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    overflow: hidden;
+}
+
+/* Moon Crescent */
+.theme-toggle .toggle-icon::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateX(0);
+}
+
+/* Sun Rays */
+.theme-toggle .sun-ray {
+    position: absolute;
+    background-color: var(--primary-color);
+    width: 1px;
+    height: 4px;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.theme-toggle .sun-ray:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(45deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(90deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(4) {
+    transform: translate(-50%, -50%) rotate(135deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(5) {
+    transform: translate(-50%, -50%) rotate(180deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(6) {
+    transform: translate(-50%, -50%) rotate(225deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(7) {
+    transform: translate(-50%, -50%) rotate(270deg) translateY(-8px);
+}
+
+.theme-toggle .sun-ray:nth-child(8) {
+    transform: translate(-50%, -50%) rotate(315deg) translateY(-8px);
+}
+
+/* Hide sun rays in dark mode */
+html.dark-theme .theme-toggle .sun-ray {
+    opacity: 0;
+}
+
+/* Dark theme styles */
+html.dark-theme .theme-toggle .toggle-icon::after {
+    transform: translateX(-8px);
+}
+
+/* Stars around the sun/moon */
+.theme-toggle .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.theme-toggle .star:nth-child(1) {
+    top: 0;
+    left: 50%;
+}
+
+.theme-toggle .star:nth-child(2) {
+    top: 25%;
+    right: 0;
+}
+
+.theme-toggle .star:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+}
+
+.theme-toggle .star:nth-child(4) {
+    top: 25%;
+    left: 0;
+}
+
+/* Show stars in dark mode */
+html.dark-theme .theme-toggle .star {
+    opacity: 0.7;
+}
+
+/* Animation on hover */
+.theme-toggle:hover .toggle-icon {
+    transform: scale(1.1);
+}
+
+.theme-toggle:hover .sun-ray {
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Tooltip */
+.theme-toggle::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background-color: rgba(var(--primary-color-rgb), 0.8);
+    color: var(--background-color);
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    pointer-events: none;
+}
+
+.theme-toggle:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Navigation */

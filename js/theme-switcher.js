@@ -18,15 +18,6 @@ function setTheme(theme) {
         document.documentElement.classList.remove('dark-theme');
     }
     localStorage.setItem('theme', theme);
-    
-    // 更新圖標
-    updateThemeIcon(theme);
-}
-
-// 更新主題圖標
-function updateThemeIcon(theme) {
-    const themeIcon = themeToggle.querySelector('i');
-    themeIcon.className = theme === 'dark' ? 'fas fa-adjust fa-flip-horizontal' : 'fas fa-adjust';
 }
 
 // 切換主題
