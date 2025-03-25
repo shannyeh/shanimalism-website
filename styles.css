@@ -72,10 +72,10 @@ img {
 /* 背景圖片 */
 .background-image {
     position: fixed;
-    top: -150px; /* 往上移動 150px */
+    top: -200px; /* 往上移動 200px */
     left: 0;
     width: 100%;
-    height: calc(100% + 150px); /* 增加高度以彌補上移的空間 */
+    height: calc(100% + 200px); /* 增加高度以彌補上移的空間 */
     object-fit: cover;
     z-index: -1;
 }
