@@ -5,401 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barebreathe Creative Studio</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Favicon for all browsers -->
-    <link rel="icon" type="image/png" href="image/logos/barebreathe logo-a.png">
-    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" href="image/logos/barebreathe logo-gray.png">
-    <link rel="icon" type="image/png" media="(prefers-color-scheme: light)" href="image/logos/barebreathe logo-a.png">
-    <!-- Safari specific favicon -->
-    <link rel="apple-touch-icon" href="image/logos/barebreathe logo-a.png">
-    <link rel="mask-icon" href="image/logos/barebreathe logo-a.png" color="#000000">
-    <!-- IBM Plex Mono font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500&display=swap" rel="stylesheet">
-    <!-- Add Inter font for body text -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-        // 在頁面渲染前立即執行
-        (function() {
-            // 檢查 URL 是否包含 #main-content
-            if (window.location.hash === '#main-content') {
-                // 創建一個樣式標籤
-                var style = document.createElement('style');
-                style.innerHTML = `
-                    #landing-page { display: none !important; }
-                    #main-content { display: block !important; }
-                `;
-                // 添加到頭部
-                document.head.appendChild(style);
-            }
-        })();
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 登陸頁面 -->
-    <div id="landing-page">
-        <!-- 文字動效容器 -->
-        <div id="text-animation-container">
-            <!-- 第一階段：shan + minimalism -->
-            <div id="stage1" class="animation-stage">
-                <span class="shan-text">bare</span>
-                <span class="plus-text">+</span>
-                <span class="minimalism-text">breathe</span>
-            </div>
-            
-            <!-- 第二階段：barebreathe -->
-            <div id="stage2" class="animation-stage">
-                <span class="barebreathe-text">barebreathe</span>
-            </div>
-            
-            <!-- 第三階段：logo -->
-            <div id="stage3" class="animation-stage">
-                <div class="centered-logo">
-                    <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo" id="enter-site-logo">
-                    <div id="click-here" class="click-hint">click here</div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="logo">
+            <a href="#">
+                <img src="image/logo.png" alt="Barebreathe Logo">
+            </a>
         </div>
-    </div>
-
-    <!-- 主內容（初始隱藏） -->
-    <div id="main-content">
-        <!-- Logo area -->
-        <div class="logo-container">
-            <div class="logo">
-                <a href="#main-content">
-                    <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
-                </a>
+        
+        <div class="content">
+            <h1>Barebreathe Creative Studio</h1>
+            <p class="tagline">Where minimalism meets creativity</p>
+        </div>
+        
+        <div class="ambient-controls">
+            <div class="ambient-sound">
+                <span>Ambient Sound</span>
+                <button class="sound-toggle">Play</button>
+            </div>
+            <div class="ambient-visual">
+                <span>Distant waves</span>
             </div>
         </div>
         
-        <!-- 漢堡菜單按鈕 (僅在手機版顯示) -->
-        <div class="hamburger-menu">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-        
-        <!-- Vertical menu in sidebar -->
-        <div class="left-sidebar">
-            <nav class="vertical-menu">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="whats-new.html">Journal</a></li>
-                </ul>
-            </nav>
-        </div>
-
-        <!-- Main content container -->
-        <div class="main-container">
-            <!-- Hero Section -->
-            <section id="home" class="hero-section">
-                <div class="hero-content">
-                    <h1>Barebreathe Creative Studio</h1>
-                    <p class="hero-tagline">Crafting meaningful experiences through design, technology, and creative solutions.</p>
-                </div>
-            </section>
-
-            <!-- Services Section -->
-            <section id="services" class="services-section">
-                <h2 class="section-title">Our Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/brand-icon.svg" alt="Brand Strategy & Design">
-                        </div>
-                        <h3>Brand Strategy & Design</h3>
-                        <p>Developing distinctive brand identities that resonate with your audience and reflect your values.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/photo-icon.svg" alt="Photography & Videography">
-                        </div>
-                        <h3>Photography & Videography</h3>
-                        <p>Capturing compelling visual stories that engage and inspire through professional photography and video production.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/graphic-icon.svg" alt="Graphic Design & Visual Art">
-                        </div>
-                        <h3>Graphic Design & Visual Art</h3>
-                        <p>Creating impactful visual communications through innovative graphic design and artistic expression.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/digital-icon.svg" alt="Digital & UX/UI Design">
-                        </div>
-                        <h3>Digital & UX/UI Design</h3>
-                        <p>Designing intuitive digital experiences that enhance user engagement and satisfaction.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/growth-icon.svg" alt="Personal Growth & Branding">
-                        </div>
-                        <h3>Personal Growth & Branding</h3>
-                        <p>Guiding individuals in developing authentic personal brands aligned with their growth journey.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/ai-icon.svg" alt="AI & Tech Creative Solutions">
-                        </div>
-                        <h3>AI & Tech Creative Solutions</h3>
-                        <p>Leveraging cutting-edge technology to create innovative solutions for modern challenges.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/education-icon.svg" alt="Creative Consulting & Education">
-                        </div>
-                        <h3>Creative Consulting & Education</h3>
-                        <p>Sharing expertise through consulting services and educational programs to empower creative growth.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="image/icons/merch-icon.svg" alt="Creative Merchandise">
-                        </div>
-                        <h3>Creative Merchandise</h3>
-                        <p>Designing and producing unique, high-quality merchandise that extends your brand experience.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Featured Project Section -->
-            <section id="featured-project" class="featured-project-section">
-                <h2 class="section-title">Featured Project</h2>
-                <div class="featured-project-container">
-                    <div class="project-image">
-                        <img src="image/projects/sleep-stars-app.jpg" alt="Sleep & Stars App">
-                    </div>
-                    <div class="project-details">
-                        <h3>Sleep & Stars</h3>
-                        <p class="project-category">Mobile Application</p>
-                        <p class="project-description">
-                            A mindfulness and sleep app that connects users with the cosmos, helping them find peace through guided meditations and astronomical insights.
-                        </p>
-                        <a href="#projects" class="project-link">Learn More</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- About Section -->
-            <section id="about" class="about-section">
-                <h2 class="section-title">About Barebreathe</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>
-                            Barebreathe Creative Studio is a multidisciplinary creative practice founded on the principles of minimalism, authenticity, and purposeful design. We believe in stripping away the unnecessary to reveal what truly matters.
-                        </p>
-                        <p>
-                            Our approach combines strategic thinking with creative execution, delivering solutions that are both beautiful and functional. We work closely with clients who share our values and vision for creating meaningful experiences.
-                        </p>
-                        <a href="bio.html" class="about-link">Read More</a>
-                    </div>
-                    <div class="about-image">
-                        <img src="image/studio-photo.jpg" alt="Barebreathe Creative Studio">
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contact Section -->
-            <section id="contact" class="contact-section">
-                <h2 class="section-title">Get in Touch</h2>
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <p>We'd love to hear about your project and explore how we can collaborate.</p>
-                        <div class="contact-details">
-                            <p><strong>Email:</strong> <a href="mailto:hello@barebreathe.com">hello@barebreathe.com</a></p>
-                            <p><strong>Location:</strong> New York, NY</p>
-                        </div>
-                        <div class="social-links">
-                            <a href="#" class="social-link">Instagram</a>
-                            <a href="#" class="social-link">LinkedIn</a>
-                            <a href="#" class="social-link">Behance</a>
-                        </div>
-                    </div>
-                    <div class="contact-form">
-                        <form id="contact-form">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-content">
-                    <div class="footer-logo">
-                        <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
-                    </div>
-                    <div class="footer-text">
-                        <p>&copy; 2025 Barebreathe Creative Studio. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
-        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </div>
 
     <script>
-        // 動效和登陸頁面邏輯
         document.addEventListener('DOMContentLoaded', function() {
-            // 檢查 URL 是否包含 #main-content
-            if (window.location.hash === '#main-content') {
-                document.getElementById('landing-page').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            } else {
-                // 如果沒有 hash，顯示登陸頁面並開始動畫
-                startLandingAnimation();
-            }
-
-            // 點擊 logo 進入主內容
-            document.getElementById('enter-site-logo').addEventListener('click', function() {
-                enterMainContent();
-            });
-
-            // 點擊 "click here" 文字也進入主內容
-            document.getElementById('click-here').addEventListener('click', function() {
-                enterMainContent();
-            });
-        });
-
-        function startLandingAnimation() {
-            // 獲取動畫階段元素
-            const stage1 = document.getElementById('stage1');
-            const stage2 = document.getElementById('stage2');
-            const stage3 = document.getElementById('stage3');
-            const clickHere = document.getElementById('click-here');
+            // Sound toggle functionality
+            const soundToggle = document.querySelector('.sound-toggle');
+            let audio = new Audio('sounds/ambient.mp3');
+            audio.loop = true;
             
-            // 初始隱藏所有階段
-            stage1.style.opacity = '0';
-            stage2.style.opacity = '0';
-            stage3.style.opacity = '0';
-            clickHere.style.opacity = '0';
-            
-            // 第一階段：顯示 "bare + breathe"
-            setTimeout(function() {
-                stage1.style.opacity = '1';
-                stage1.style.transition = 'opacity 1s ease-in-out';
-            }, 500);
-            
-            // 第二階段：隱藏第一階段，顯示 "barebreathe"
-            setTimeout(function() {
-                stage1.style.opacity = '0';
-                setTimeout(function() {
-                    stage2.style.opacity = '1';
-                    stage2.style.transition = 'opacity 1s ease-in-out';
-                }, 500);
-            }, 3000);
-            
-            // 第三階段：隱藏第二階段，顯示 logo
-            setTimeout(function() {
-                stage2.style.opacity = '0';
-                setTimeout(function() {
-                    stage3.style.opacity = '1';
-                    stage3.style.transition = 'opacity 1s ease-in-out';
-                    
-                    // 如果用戶在 1.5 秒內沒有點擊 logo，顯示 "click here"
-                    setTimeout(function() {
-                        clickHere.style.opacity = '1';
-                        clickHere.style.transition = 'opacity 0.5s ease-in-out';
-                    }, 1500);
-                }, 500);
-            }, 5500);
-        }
-
-        function enterMainContent() {
-            // 隱藏登陸頁面
-            document.getElementById('landing-page').style.opacity = '0';
-            document.getElementById('landing-page').style.transition = 'opacity 0.5s ease-in-out';
-            
-            // 顯示主內容
-            setTimeout(function() {
-                document.getElementById('landing-page').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                
-                // 更新 URL hash
-                window.location.hash = 'main-content';
-            }, 500);
-        }
-
-        // 菜單功能初始化
-        function initializeMenuFunctions() {
-            // 漢堡菜單點擊處理
-            const hamburger = document.querySelector('.hamburger-menu');
-            const sidebar = document.querySelector('.left-sidebar');
-            
-            if (hamburger) {
-                hamburger.addEventListener('click', function() {
-                    this.classList.toggle('change');
-                    sidebar.classList.toggle('show');
-                });
-            }
-            
-            // 點擊菜單項後關閉側邊欄（在手機模式下）
-            const menuItems = document.querySelectorAll('.vertical-menu a');
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        sidebar.classList.remove('show');
-                        if (hamburger) {
-                            hamburger.classList.remove('change');
-                        }
-                    }
-                });
-            });
-        }
-        
-        // 初始化菜單功能
-        initializeMenuFunctions();
-        
-        // 平滑滾動到錨點
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#main-content') return; // 跳過 #main-content 的處理
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+            soundToggle.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    this.textContent = 'Pause';
+                } else {
+                    audio.pause();
+                    this.textContent = 'Play';
                 }
             });
         });
-
-        // 表單提交處理
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                // 這裡可以添加表單提交邏輯，如 AJAX 請求等
-                alert('Thank you for your message! We will get back to you soon.');
-                this.reset();
-            });
-        }
     </script>
 </body>
 </html>
