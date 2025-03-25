@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barebreathe Creative Studio</title>
+    <title>BareBreathe</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/musicPlayer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,29 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- 靜態背景圖片 -->
-    <img src="image/IMG_4615 2.jpg" alt="Background Image" class="background-image">
-    
-    <div class="container">
+    <header class="site-header">
         <div class="logo">
             <a href="#">
                 <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
             </a>
-        </div>
-        
-        <div class="content">
-            <h1>Barebreathe Creative Studio</h1>
-            <p class="tagline">Where minimalism meets creativity</p>
-        </div>
-        
-        <div class="ambient-controls">
-            <div class="ambient-sound">
-                <span>Ambient Sound</span>
-                <button class="sound-toggle">Play</button>
-            </div>
-            <div class="ambient-visual">
-                <span>Distant waves</span>
-            </div>
         </div>
         
         <nav class="navigation">
@@ -46,49 +28,154 @@
             </ul>
         </nav>
         
-        <!-- 音樂播放器 -->
-        <div class="music-player">
-            <div class="player-header">
-                <div class="player-title">音樂播放器</div>
-                <button class="toggle-player" aria-label="收起播放器">
-                    <i class="fas fa-chevron-down"></i>
+        <button class="theme-toggle" aria-label="切換主題">
+            <i class="fas fa-moon dark-icon"></i>
+            <i class="fas fa-sun light-icon"></i>
+        </button>
+    </header>
+    
+    <main class="main-content">
+        <section class="hero">
+            <h1 class="hero-title">BareBreathe</h1>
+            <p class="hero-tagline">Where minimalism meets technology</p>
+            <div class="featured-image">
+                <img src="image/IMG_4615 2.jpg" alt="Featured Image" class="centered-image">
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+        
+        <section id="services" class="services-section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-code"></i></span>
+                    <h3>Web Development</h3>
+                    <p>Clean, efficient code with a focus on performance and user experience.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-paint-brush"></i></span>
+                    <h3>Design</h3>
+                    <p>Minimalist aesthetics that communicate your brand's essence.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-camera"></i></span>
+                    <h3>Photography</h3>
+                    <p>Capturing moments with clarity and purpose.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects" class="projects-section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <article class="project-item">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Project 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Project Name</h3>
+                        <p>Brief description of the project and its purpose.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                </article>
+                <article class="project-item">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Project 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>Project Name</h3>
+                        <p>Brief description of the project and its purpose.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <section id="about" class="about-section">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>About</h2>
+            </div>
+            <div class="about-content">
+                <p class="about-text">BareBreathe is a creative studio focused on minimalist design with a technological edge. We believe in the power of simplicity and the beauty of negative space.</p>
+                <p class="about-text">Our approach combines traditional design principles with cutting-edge technology to create experiences that are both timeless and innovative.</p>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-content">
+                <p class="contact-text">Interested in working together? Let's connect.</p>
+                <a href="mailto:hello@barebreathe.com" class="contact-link">hello@barebreathe.com</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="ambient-controls">
+            <div class="ambient-sound">
+                <span>Ambient Sound</span>
+                <button class="sound-toggle">Play</button>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BareBreathe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 音樂播放器 -->
+    <div class="music-player">
+        <div class="player-header">
+            <button class="toggle-player" aria-label="收起播放器">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <div class="album-info">
+            <img src="image/music-covers/default-cover.jpg" alt="專輯封面" class="album-cover">
+            <div class="track-info">
+                <div class="track-title">加載中...</div>
+                <div class="track-artist">Barebreathe Studio</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress"></div>
+        </div>
+        
+        <div class="time-info">
+            <div class="current-time">0:00</div>
+            <div class="duration">0:00</div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="control-btn prev-btn" aria-label="上一首">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-pause-btn" aria-label="播放">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="control-btn next-btn" aria-label="下一首">
+                    <i class="fas fa-step-forward"></i>
                 </button>
             </div>
             
-            <div class="album-info">
-                <img src="image/music-covers/default-cover.jpg" alt="專輯封面" class="album-cover">
-                <div class="track-info">
-                    <div class="track-title">加載中...</div>
-                    <div class="track-artist">Barebreathe Studio</div>
-                </div>
-            </div>
-            
-            <div class="progress-container">
-                <div class="progress"></div>
-            </div>
-            
-            <div class="time-info">
-                <div class="current-time">0:00</div>
-                <div class="duration">0:00</div>
-            </div>
-            
-            <div class="controls">
-                <div class="control-buttons">
-                    <button class="control-btn prev-btn" aria-label="上一首">
-                        <i class="fas fa-step-backward"></i>
-                    </button>
-                    <button class="control-btn play-pause-btn" aria-label="播放">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button class="control-btn next-btn" aria-label="下一首">
-                        <i class="fas fa-step-forward"></i>
-                    </button>
-                </div>
-                
-                <div class="volume-control">
-                    <i class="fas fa-volume-up volume-icon"></i>
-                    <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-                </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up volume-icon"></i>
+                <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
             </div>
         </div>
     </div>
@@ -125,8 +212,20 @@
                     this.setAttribute('aria-label', '收起播放器');
                 }
             });
+            
+            // 滾動動畫
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: window.innerHeight,
+                        behavior: 'smooth'
+                    });
+                });
+            }
         });
     </script>
     <script src="js/musicPlayer.js"></script>
+    <script src="js/theme-switcher.js"></script>
 </body>
 </html>
