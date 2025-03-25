@@ -23,6 +23,14 @@
             <div class="hamburger">
                 <span></span>
                 <span></span>
+                <nav class="navigation">
+                    <ul>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#services">Services</a></li>
+                    </ul>
+                </nav>
             </div>
             
             <button class="theme-toggle" aria-label="Toggle dark mode" data-tooltip="切換主題">
@@ -43,15 +51,6 @@
                 </div>
             </button>
         </div>
-        
-        <nav class="navigation">
-            <ul>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main class="main-content">
@@ -178,26 +177,6 @@
 
     <script src="js/theme-switcher.js"></script>
     <script src="js/musicPlayer.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 漢堡菜單功能
-            const hamburger = document.querySelector('.hamburger');
-            const navigation = document.querySelector('.navigation');
-            
-            hamburger.addEventListener('click', function() {
-                this.classList.toggle('active');
-                navigation.classList.toggle('active');
-            });
-            
-            // 點擊導航項目時關閉菜單
-            const navItems = document.querySelectorAll('.navigation a');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    hamburger.classList.remove('active');
-                    navigation.classList.remove('active');
-                });
-            });
-        });
-    </script>
+    <script src="js/navigation.js"></script>
 </body>
 </html>
