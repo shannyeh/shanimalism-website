@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.classList.remove('dark-theme');
         }
         localStorage.setItem('theme', theme);
+        
+        // 發送主題變更事件，讓其他組件可以響應
+        const themeChangedEvent = new CustomEvent('themeChanged', {
+            detail: { theme: theme }
+        });
+        document.dispatchEvent(themeChangedEvent);
     }
 
     // 切換主題
