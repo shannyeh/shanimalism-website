@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New - Shannon Y.</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon for all browsers -->
+    <link rel="icon" type="image/png" href="image/logos/barebreathe logo-a.png">
+    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" href="image/logos/barebreathe logo-gray.png">
+    <link rel="icon" type="image/png" media="(prefers-color-scheme: light)" href="image/logos/barebreathe logo-a.png">
+    <!-- Safari specific favicon -->
+    <link rel="apple-touch-icon" href="image/logos/barebreathe logo-a.png">
+    <link rel="mask-icon" href="image/logos/barebreathe logo-a.png" color="#000000">
+    <!-- IBM Plex Mono font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400&display=swap" rel="stylesheet">
+</head>
+<body class="whats-new-page whats-new">
+    <!-- Logo area -->
+    <div class="logo-container">
+        <div class="logo">
+            <a href="index.html#main-content">
+                <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
+            </a>
+        </div>
+    </div>
+    
+    <!-- 漢堡菜單按鈕 (僅在手機版顯示) -->
+    <div class="hamburger-menu">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+    
+    <!-- 網頁版側邊頁籤 (僅在非手機版顯示) -->
+    <div class="side-tab">
+        <div class="geometric-icon">
+            <div class="triangle"></div>
+        </div>
+    </div>
+    
+    <!-- Vertical menu in sidebar -->
+    <div class="left-sidebar">
+        <nav class="vertical-menu">
+            <ul>
+                <li><a href="whats-new.html" class="active">What's new</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="index.html#branding">Branding</a></li>
+                <li><a href="index.html#photography">Photography</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Blog content container -->
+    <div class="content-container">
+        <div class="blog-container">
+            <!-- 移除了 What's New 標題 -->
+            
+            <!-- Blog post -->
+            <article class="blog-post">
+                <h2 class="post-title">test</h2>
+                <div class="post-meta">March 13, 2025</div>
+                <div class="post-content-wrapper">
+                    <div class="post-image">
+                        <img src="/image/blog/image-1741880692516-399495775.png" alt="test" loading="lazy">
+                    </div>
+                    <div class="post-content">
+                        <p>text blog</p>
+                    </div>
+                </div>
+            </article>
+            </div><!-- End of blog-container -->
+        
+        <!-- 版權信息 -->
+        <div class="copyright">
+            &copy; SHANNON Y.S. YEH 2025. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const sideTab = document.querySelector('.side-tab');
+            const sidebar = document.querySelector('.left-sidebar');
+            const menuItems = document.querySelectorAll('.vertical-menu a');
+            
+            // 點擊漢堡菜單切換側邊欄顯示（手機版）
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('change');
+                sidebar.classList.toggle('open');
+            });
+            
+            // 點擊側邊頁籤切換側邊欄顯示（網頁版）
+            sideTab.addEventListener('click', function() {
+                this.classList.toggle('active');
+                sidebar.classList.toggle('open');
+            });
+            
+            // 點擊菜單項後關閉側邊欄
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    hamburger.classList.remove('change');
+                    sideTab.classList.remove('active');
+                    sidebar.classList.remove('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

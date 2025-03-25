@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barebreathe Admin - 分類管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 30px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 300;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            background-color: #000;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+        }
+        
+        .btn.btn-secondary {
+            background-color: #666;
+        }
+        
+        .btn.btn-secondary:hover {
+            background-color: #888;
+        }
+        
+        .add-category-form {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .category-list {
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category-name {
+            font-size: 16px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px 0;
+            color: #666;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>分類管理</h1>
+            <div class="header-actions">
+                <a href="/admin/dashboard" class="btn">返回儀表板</a>
+                <a href="/admin/logout" class="btn btn-secondary">登出</a>
+            </div>
+        </div>
+        
+        <div class="add-category-form">
+            <h2 style="margin-bottom: 15px; font-weight: 300; font-size: 18px;">新增分類</h2>
+            <form action="/admin/add-category" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="輸入分類名稱" required>
+                    <button type="submit" class="btn">新增</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="category-list">
+            <% if (categories && categories.length > 0) { %>
+                <% categories.forEach(category => { %>
+                    <div class="category-item">
+                        <div class="category-name"><%= category.name %></div>
+                        <form action="/admin/delete-category/<%= category.id %>" method="POST" onsubmit="return confirm('確定要刪除這個分類嗎？如果有文章使用此分類，這些文章將不再屬於任何分類。')">
+                            <button type="submit" class="btn btn-secondary">刪除</button>
+                        </form>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="empty-state">
+                    <p>目前還沒有任何分類</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

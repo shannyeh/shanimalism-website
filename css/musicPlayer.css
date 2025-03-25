@@ -1,0 +1,439 @@
+/* 音樂播放器樣式 */
+.music-player {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    width: 280px;
+    background-color: rgba(245, 245, 245, 0.3); 
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: bottom left;
+}
+
+.dark-theme .music-player {
+    background-color: rgba(18, 18, 18, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.music-player:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.music-player.collapsed {
+    transform: translateY(calc(100% - 60px));
+}
+
+.player-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.toggle-player {
+    background: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    padding: 4px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.toggle-player:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.toggle-icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 極簡幾何設計 */
+.toggle-icon::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-left: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    top: 0;
+    left: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 折疊狀態 */
+.collapsed .toggle-icon::before {
+    transform: rotate(-45deg) translate(-2px, -2px);
+    width: 10px;
+    height: 10px;
+}
+
+.toggle-icon::after, 
+.toggle-icon span {
+    display: none;
+}
+
+.album-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* 圓形唱片設計 */
+.album-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(var(--text-color-rgb), 0.1);
+}
+
+.dark-theme .album-cover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(var(--text-color-rgb), 0.05);
+}
+
+/* 唱片中心點 */
+.album-cover::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(var(--text-color-rgb), 0.1);
+    border: 1px solid rgba(var(--text-color-rgb), 0.3);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* 同心圓設計 */
+.album-cover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    border: 1px solid rgba(var(--text-color-rgb), 0.2);
+    z-index: 1;
+}
+
+/* 播放時旋轉動畫 */
+.music-player.playing .album-cover {
+    animation: rotateAlbum 20s linear infinite;
+}
+
+/* 播放時中心點填充 */
+.music-player.playing .album-cover::after {
+    background-color: rgba(var(--text-color-rgb), 0.3);
+}
+
+@keyframes rotateAlbum {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.album-cover:hover {
+    transform: scale(1.05);
+}
+
+.track-info {
+    flex: 1;
+}
+
+.track-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+    color: var(--text-color);
+}
+
+.track-artist {
+    font-size: 12px;
+    opacity: 0.7;
+    letter-spacing: 0.01em;
+    color: var(--text-color);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    height: 2px;
+    width: 100%;
+    margin-bottom: 8px;
+    cursor: var(--cursor-pointer);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.dark-theme .progress-container {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.progress-container:hover {
+    height: 4px;
+}
+
+.progress {
+    background-color: var(--text-color);
+    border-radius: 4px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    opacity: 0.7;
+    margin-bottom: 16px;
+    color: var(--text-color);
+    letter-spacing: 0.05em;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* 重新設計的控制按鈕 - 簡潔三角形設計 */
+.control-btn {
+    border: none;
+    background: none;
+    cursor: var(--cursor-pointer);
+    width: 24px;
+    height: 24px;
+    position: relative;
+    opacity: 0.8;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+}
+
+.control-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* 前一首按鈕 - 簡約線條 */
+.prev-btn::before,
+.prev-btn::after {
+    content: '';
+    position: absolute;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.prev-btn::before {
+    width: 1px;
+    height: 10px;
+    transform: translateX(-4px);
+}
+
+.prev-btn::after {
+    width: 6px;
+    height: 1px;
+    transform: translate(-7px, -4px) rotate(-45deg);
+    transform-origin: right center;
+}
+
+/* 下一首按鈕 - 簡約線條 */
+.next-btn::before,
+.next-btn::after {
+    content: '';
+    position: absolute;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.next-btn::before {
+    width: 1px;
+    height: 10px;
+    transform: translateX(4px);
+}
+
+.next-btn::after {
+    width: 6px;
+    height: 1px;
+    transform: translate(2px, -4px) rotate(45deg);
+    transform-origin: left center;
+}
+
+.play-pause-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--text-color);
+    background-color: transparent;
+    position: relative;
+    cursor: var(--cursor-pointer);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s ease;
+    margin: 0 15px;
+    overflow: hidden;
+}
+
+.play-pause-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 播放按鈕（默認狀態） */
+.play-pause-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 0 7px 10px;
+    border-color: transparent transparent transparent var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* 暫停按鈕（播放中狀態） */
+.play-pause-btn.playing::before {
+    width: 4px;
+    height: 14px;
+    border: none;
+    background-color: var(--text-color);
+    box-shadow: 5px 0 0 var(--text-color);
+    left: 50%;
+}
+
+/* 控制按鈕懸停效果 */
+.control-btn:hover::before,
+.control-btn:hover::after,
+.play-pause-btn:hover::before,
+.play-pause-btn:hover::after {
+    opacity: 0.9;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+}
+
+/* 極簡音量滑塊 */
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 70px;
+    height: 1px;
+    background: var(--text-color);
+    opacity: 0.5;
+    outline: none;
+    cursor: var(--cursor-pointer);
+    transition: all 0.3s ease;
+}
+
+.volume-slider:hover {
+    opacity: 0.8;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4px;
+    height: 10px;
+    background: var(--text-color);
+    cursor: var(--cursor-pointer);
+    transition: all 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 4px;
+    height: 10px;
+    background: var(--text-color);
+    cursor: var(--cursor-pointer);
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover,
+.volume-slider::-moz-range-thumb:hover {
+    transform: scaleY(1.2);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .music-player {
+        bottom: 30px;
+        left: 30px;
+        width: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .music-player {
+        bottom: 20px;
+        left: 20px;
+        width: 240px;
+        padding: 12px;
+    }
+    
+    .album-cover {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .track-title {
+        font-size: 13px;
+    }
+    
+    .track-artist {
+        font-size: 11px;
+    }
+    
+    .play-pause-btn {
+        width: 32px;
+        height: 32px;
+        margin: 0 10px;
+    }
+    
+    .control-buttons {
+        gap: 12px;
+    }
+    
+    .volume-slider {
+        width: 50px;
+    }
+}
