@@ -304,88 +304,47 @@
 .volume-control {
     display: flex;
     align-items: center;
-    gap: 8px;
 }
 
-/* 音量圖標 */
-.volume-icon {
-    position: relative;
-    width: 16px;
-    height: 16px;
-}
-
-.volume-icon::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 5px 0 5px 8px;
-    border-color: transparent transparent transparent var(--text-color);
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.volume-icon::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border: 1px solid var(--text-color);
-    border-radius: 50%;
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
+/* 極簡音量滑塊 */
 .volume-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 60px;
-    height: 2px;
-    border-radius: 2px;
-    background: rgba(0, 0, 0, 0.08);
+    width: 70px;
+    height: 1px;
+    background: var(--text-color);
+    opacity: 0.5;
     outline: none;
     cursor: var(--cursor-pointer);
     transition: all 0.3s ease;
 }
 
-.dark-theme .volume-slider {
-    background: rgba(255, 255, 255, 0.08);
+.volume-slider:hover {
+    opacity: 0.8;
 }
 
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+    width: 4px;
+    height: 10px;
     background: var(--text-color);
     cursor: var(--cursor-pointer);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .volume-slider::-moz-range-thumb {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+    width: 4px;
+    height: 10px;
     background: var(--text-color);
     cursor: var(--cursor-pointer);
     border: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
-.volume-slider:hover {
-    height: 3px;
-}
-
-.volume-slider:hover::-webkit-slider-thumb {
-    transform: scale(1.2);
-}
-
-.volume-slider:hover::-moz-range-thumb {
-    transform: scale(1.2);
+.volume-slider::-webkit-slider-thumb:hover,
+.volume-slider::-moz-range-thumb:hover {
+    transform: scaleY(1.2);
 }
 
 /* 響應式設計 */
