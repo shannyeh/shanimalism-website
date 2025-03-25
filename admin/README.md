@@ -1,6 +1,6 @@
-# Shanimalism Blog 管理後台
+# Barebreathe Blog 管理後台
 
-這是一個簡單的 blog 管理後台，專為 Shanimalism 網站設計，只有您可以登入並管理 blog 內容。
+這是一個簡單的 blog 管理後台，專為 Barebreathe 網站設計，只有您可以登入並管理 blog 內容。
 
 ## 功能
 
@@ -12,7 +12,7 @@
 ## 登入信息
 
 - 用戶名: admin
-- 密碼: shanimalism2025
+- 密碼: barebreathe2025
 
 ## 啟動後台
 

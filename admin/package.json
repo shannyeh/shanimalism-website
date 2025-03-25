@@ -1,7 +1,7 @@
 {
-  "name": "shanimalism-admin",
+  "name": "barebreathe-admin",
   "version": "1.0.0",
-  "description": "Admin backend for Shanimalism blog",
+  "description": "Admin backend for Barebreathe blog",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

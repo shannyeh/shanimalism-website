@@ -74,8 +74,13 @@ app.get('/admin/login', (req, res) => {
 app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
   
-  if (username === process.env.ADMIN_USERNAME) {
-    const match = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
+  // 硬編碼管理員憑據（在生產環境中應使用環境變量）
+  const adminUsername = 'admin';
+  // 這是 'barebreathe2025' 的哈希值
+  const adminPasswordHash = '$2b$10$.fRkZ34/CLkOswowdXy0u.bXwlBXjPmaNNv.3mnUhDksZhPqmMFUm';
+  
+  if (username === adminUsername) {
+    const match = await bcrypt.compare(password, adminPasswordHash);
     if (match) {
       req.session.isAuthenticated = true;
       return res.redirect('/admin/dashboard');
