@@ -18,6 +18,19 @@
                 <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
             </a>
         </div>
+        
+        <div class="header-controls">
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-adjust"></i>
+            </button>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
         <nav class="navigation">
             <ul>
                 <li><a href="#services">Services</a></li>
@@ -26,24 +39,12 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <button class="theme-toggle" aria-label="Toggle dark mode">
-            <i class="fas fa-moon dark-icon"></i>
-            <i class="fas fa-sun light-icon"></i>
-        </button>
     </header>
 
     <main class="main-content">
         <section class="hero">
-            <h1 class="hero-title">Bare Breathe</h1>
-            <p class="hero-tagline">A minimalist approach to digital experiences, focusing on what truly matters.</p>
-            
             <div class="featured-image">
                 <img src="image/IMG_4615 2.jpg" alt="Featured Project" class="centered-image">
-            </div>
-            
-            <div class="scroll-indicator">
-                <span>Scroll</span>
-                <i class="fas fa-chevron-down"></i>
             </div>
         </section>
 
@@ -164,5 +165,26 @@
 
     <script src="js/theme-switcher.js"></script>
     <script src="js/musicPlayer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 漢堡菜單功能
+            const hamburger = document.querySelector('.hamburger');
+            const navigation = document.querySelector('.navigation');
+            
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navigation.classList.toggle('active');
+            });
+            
+            // 點擊導航項目時關閉菜單
+            const navItems = document.querySelectorAll('.navigation a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navigation.classList.remove('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

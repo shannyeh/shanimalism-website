@@ -18,6 +18,15 @@ function setTheme(theme) {
         document.documentElement.classList.remove('dark-theme');
     }
     localStorage.setItem('theme', theme);
+    
+    // 更新圖標
+    updateThemeIcon(theme);
+}
+
+// 更新主題圖標
+function updateThemeIcon(theme) {
+    const themeIcon = themeToggle.querySelector('i');
+    themeIcon.className = theme === 'dark' ? 'fas fa-adjust fa-flip-horizontal' : 'fas fa-adjust';
 }
 
 // 切換主題
@@ -29,31 +38,22 @@ function toggleTheme() {
 }
 
 // 初始化主題
-function initializeTheme() {
-    console.log("Initializing theme");
-    const storedTheme = getStoredTheme();
+function initTheme() {
+    // 檢查本地存儲中的主題偏好
+    let theme = getStoredTheme();
     
-    if (storedTheme) {
-        console.log("Found stored theme:", storedTheme);
-        setTheme(storedTheme);
-    } else {
-        // 檢查系統偏好
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        console.log("System prefers dark mode:", prefersDark);
-        setTheme(prefersDark ? 'dark' : 'light');
+    // 如果沒有存儲的主題偏好，則使用系統偏好
+    if (!theme) {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        theme = prefersDarkMode ? 'dark' : 'light';
     }
+    
+    // 設置初始主題
+    setTheme(theme);
 }
 
-// 當DOM加載完成後初始化
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded");
-    initializeTheme();
-    
-    // 確保主題切換按鈕存在
-    if (themeToggle) {
-        console.log("Theme toggle button found, adding event listener");
-        themeToggle.addEventListener('click', toggleTheme);
-    } else {
-        console.error("Theme toggle button not found!");
-    }
-});
+// 添加事件監聽器
+themeToggle.addEventListener('click', toggleTheme);
+
+// 初始化主題
+document.addEventListener('DOMContentLoaded', initTheme);
