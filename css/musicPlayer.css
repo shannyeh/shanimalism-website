@@ -38,8 +38,11 @@
     border: none;
     cursor: var(--cursor-pointer);
     padding: 4px;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+    position: relative;
 }
 
 .toggle-player:hover {
@@ -48,38 +51,38 @@
 }
 
 .toggle-icon {
-    display: block;
+    position: absolute;
     width: 16px;
-    height: 1px;
-    background-color: var(--text-color);
-    position: relative;
-    transition: all 0.3s ease;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* 極簡幾何設計 */
 .toggle-icon::before {
     content: '';
     position: absolute;
+    width: 12px;
+    height: 12px;
+    border-left: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    top: 0;
+    left: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 折疊狀態 */
+.collapsed .toggle-icon::before {
+    transform: rotate(-45deg) translate(-2px, -2px);
     width: 10px;
-    height: 1px;
-    background-color: var(--text-color);
-    top: -5px;
-    right: 0;
-    transition: all 0.3s ease;
+    height: 10px;
 }
 
-.toggle-icon::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 1px;
-    background-color: var(--text-color);
-    bottom: -5px;
-    right: 0;
-    transition: all 0.3s ease;
-}
-
-.collapsed .toggle-icon {
-    transform: rotate(180deg);
+.toggle-icon::after, 
+.toggle-icon span {
+    display: none;
 }
 
 .album-info {
