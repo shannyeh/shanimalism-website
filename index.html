@@ -67,8 +67,13 @@
 <body>
     <header class="site-header">
         <div class="logo">
-            <a href="#">
-                <img src="image/logos/barebreathe logo-a.png" alt="Barebreathe Logo">
+            <a href="#" class="logo-link">
+                <div class="logo-animation">
+                    <div class="logo-circle circle-1"></div>
+                    <div class="logo-circle circle-2"></div>
+                    <div class="logo-circle circle-3"></div>
+                    <div class="click-hint">click here</div>
+                </div>
             </a>
         </div>
         
@@ -86,22 +91,8 @@
                 </nav>
             </div>
             
-            <button class="theme-toggle" aria-label="Toggle dark mode" data-tooltip="切換主題">
-                <div class="toggle-wrapper">
-                    <div class="star"></div>
-                    <div class="star"></div>
-                    <div class="star"></div>
-                    <div class="star"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="sun-ray"></div>
-                    <div class="toggle-icon"></div>
-                </div>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="切換主題">
+                <span class="theme-toggle-inner"></span>
             </button>
         </div>
     </header>

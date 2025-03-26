@@ -133,6 +133,165 @@ button {
     width: auto;
 }
 
+/* Logo Animation */
+.logo-animation {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.circle-1 {
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: -100px;
+    animation: logo-circle-1 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.circle-2 {
+    width: 20px;
+    height: 20px;
+    top: 30px;
+    left: -100px;
+    animation: logo-circle-2 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s forwards;
+}
+
+.circle-3 {
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    right: -100px;
+    animation: logo-circle-3 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s forwards;
+}
+
+.click-hint {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    opacity: 0;
+    font-family: var(--secondary-font);
+    letter-spacing: 1px;
+    animation: show-hint 0.5s ease-in-out 4.5s forwards;
+}
+
+@keyframes logo-circle-1 {
+    0% {
+        left: -100px;
+    }
+    50% {
+        left: 20px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+    }
+    70% {
+        left: 20px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        left: 10px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@keyframes logo-circle-2 {
+    0% {
+        left: -100px;
+    }
+    50% {
+        left: 20px;
+        top: 30px;
+        width: 20px;
+        height: 20px;
+    }
+    70% {
+        left: 20px;
+        top: 30px;
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        left: 10px;
+        top: 30px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@keyframes logo-circle-3 {
+    0% {
+        right: -100px;
+    }
+    50% {
+        right: 20px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    70% {
+        right: 20px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    100% {
+        right: 10px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50% 50% 50% 0;
+    }
+}
+
+@keyframes show-hint {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+/* Logo hover effects */
+.logo-link:hover .circle-1 {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover .circle-2 {
+    transform: scale(1.1) rotate(-5deg);
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover .circle-3 {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+/* Hide click hint on hover */
+.logo-link:hover .click-hint {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
 /* Header Controls */
 .header-controls {
     display: flex;
@@ -269,140 +428,182 @@ button {
     left: 0;
 }
 
+/* Main Content */
+.main-content {
+    padding: 120px calc(var(--spacing-unit) * 5);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-spacing);
+}
+
 /* Hero Section */
 .hero {
-    height: 100vh;
+    height: 100vh; /* 保持全屏高度 */
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 0;
-    position: relative;
-}
-
-/* Featured Image */
-.featured-image {
-    height: 60vh;
-    width: auto;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
-
-.centered-image {
-    height: 100%;
-    width: auto;
-    max-height: 60vh;
-    object-fit: contain;
-    border-radius: 2px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-.featured-image:hover .centered-image {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .site-header {
-        padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
-    }
-    
-    .featured-image {
-        height: 50vh;
-    }
-    
-    .centered-image {
-        max-height: 50vh;
-    }
-}
-
-@media (max-width: 480px) {
-    .featured-image {
-        height: 40vh;
-    }
-    
-    .centered-image {
-        max-height: 40vh;
-    }
-}
-
-/* Section Styles */
-section {
-    padding: calc(var(--spacing-unit) * 20) 0;
-    margin-bottom: var(--section-spacing);
-}
-
-.section-header {
     margin-bottom: calc(var(--spacing-unit) * 10);
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--spacing-unit) * 10); /* 增加內邊距，創造留白 */
+}
+
+.featured-image {
+    width: 70%; /* 縮小寬度，增加兩側留白 */
+    height: 70%; /* 縮小高度，增加上下留白 */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05); /* 添加微妙陰影 */
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    filter: grayscale(0.2) contrast(1.05);
+}
+
+.featured-image:hover img {
+    transform: scale(1.02);
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to top, rgba(var(--background-color-rgb), 1), rgba(var(--background-color-rgb), 0));
+    pointer-events: none;
+}
+
+/* 添加響應式調整，確保在不同設備上都能正確顯示 */
+@media screen and (max-width: 768px) {
+    .hero {
+        padding: calc(var(--spacing-unit) * 5); /* 移動設備上減少內邊距 */
+    }
+    
+    .featured-image {
+        width: 85%; /* 移動設備上稍微增加圖片寬度 */
+        height: 60%; /* 移動設備上保持較小的高度 */
+    }
+}
+
+/* 針對超高屏幕的調整 */
+@media screen and (min-height: 1200px) {
+    .hero {
+        height: 90vh; /* 在超高屏幕上稍微縮小一點 */
+    }
+}
+
+/* Section Styling */
+.section-header {
     display: flex;
     align-items: baseline;
-    gap: calc(var(--spacing-unit) * 2);
+    margin-bottom: calc(var(--spacing-unit) * 8);
+    position: relative;
 }
 
 .section-number {
     font-family: var(--font-main);
     font-size: 14px;
-    opacity: 0.5;
+    font-weight: 200;
+    margin-right: calc(var(--spacing-unit) * 2);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
 }
 
 .section-header h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(24px, 5vw, 32px);
     font-weight: 200;
+    letter-spacing: -0.03em;
+    position: relative;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background-color: var(--primary-color);
+    opacity: 0.3;
 }
 
 /* Services Section */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: calc(var(--spacing-unit) * 8);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: calc(var(--spacing-unit) * 6);
+    margin-top: calc(var(--spacing-unit) * 6);
 }
 
 .service-item {
     padding: calc(var(--spacing-unit) * 4);
-    background-color: rgba(var(--secondary-color-rgb), 0.03);
-    border-radius: 2px;
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .service-item:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(var(--primary-color-rgb), 0.05);
+}
+
+.service-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background-color: var(--primary-color);
+    transition: height 0.3s ease;
+}
+
+.service-item:hover::before {
+    height: 100%;
 }
 
 .service-icon {
     font-size: 24px;
     margin-bottom: calc(var(--spacing-unit) * 3);
-    display: inline-block;
     opacity: 0.8;
 }
 
 .service-item h3 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: calc(var(--spacing-unit) * 2);
+    font-weight: 300;
 }
 
 .service-item p {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.6;
     opacity: 0.8;
 }
 
 /* Projects Section */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: calc(var(--spacing-unit) * 10);
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: calc(var(--spacing-unit) * 8);
+    margin-top: calc(var(--spacing-unit) * 6);
 }
 
 .project-item {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing-unit) * 3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .project-image {
+    position: relative;
     overflow: hidden;
     aspect-ratio: 4/3;
 }
@@ -411,33 +612,44 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    filter: grayscale(0.4);
 }
 
 .project-item:hover .project-image img {
-    transform: scale(1.03);
+    transform: scale(1.05);
+    filter: grayscale(0);
 }
 
 .project-info {
-    padding: calc(var(--spacing-unit) * 2) 0;
+    padding: calc(var(--spacing-unit) * 3) 0;
+    transition: all 0.3s ease;
 }
 
 .project-info h3 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: calc(var(--spacing-unit) * 1);
+    font-weight: 300;
+    transition: all 0.3s ease;
 }
 
 .project-info p {
-    margin-bottom: calc(var(--spacing-unit) * 3);
+    font-size: 14px;
+    line-height: 1.6;
     opacity: 0.8;
-    font-size: 15px;
+    margin-bottom: calc(var(--spacing-unit) * 2);
 }
 
 .project-link {
-    font-family: var(--font-main);
     font-size: 14px;
-    text-transform: uppercase;
+    font-family: var(--font-main);
     letter-spacing: 0.05em;
+    position: relative;
+    display: inline-block;
+}
+
+.project-link::after {
+    height: 1px;
 }
 
 /* About Section */
@@ -449,23 +661,117 @@ section {
 .about-text {
     font-size: 18px;
     line-height: 1.8;
-    margin-bottom: calc(var(--spacing-unit) * 4);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+}
+
+.about-text:last-child {
+    margin-bottom: 0;
 }
 
 /* Contact Section */
 .contact-content {
-    max-width: 600px;
+    max-width: 800px;
 }
 
 .contact-text {
     font-size: 18px;
+    line-height: 1.8;
     margin-bottom: calc(var(--spacing-unit) * 3);
+    font-weight: 300;
 }
 
 .contact-link {
-    font-family: var(--font-main);
     font-size: 24px;
+    font-family: var(--font-main);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    position: relative;
     display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    :root {
+        --section-spacing: 150px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    :root {
+        --section-spacing: 120px;
+    }
+    
+    .site-header {
+        padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 3);
+    }
+    
+    .main-content {
+        padding: 100px calc(var(--spacing-unit) * 3);
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+    .about-text, .contact-text {
+        font-size: 16px;
+    }
+    
+    .contact-link {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-spacing: 100px;
+    }
+    
+    .hero {
+        height: 70vh;
+    }
+    
+    .services-grid, .projects-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing-unit) * 4);
+    }
+    
+    .section-header {
+        margin-bottom: calc(var(--spacing-unit) * 6);
+    }
+    
+    .section-header h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --section-spacing: 80px;
+    }
+    
+    .site-header {
+        padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+    }
+    
+    .main-content {
+        padding: 80px calc(var(--spacing-unit) * 2);
+    }
+    
+    .hero {
+        height: 60vh;
+        margin-bottom: calc(var(--spacing-unit) * 6);
+    }
+    
+    .contact-link {
+        font-size: 18px;
+    }
 }
 
 /* Footer */
@@ -644,170 +950,140 @@ body::before {
 
 /* Theme Toggle Button */
 .theme-toggle {
-    width: 30px;
-    height: 30px;
     position: relative;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+    border-radius: 50%;
+    cursor: var(--cursor-pointer);
+    padding: 0;
+    margin-left: 16px;
+    overflow: visible;
+    z-index: 110;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
-    cursor: var(--cursor-pointer);
-    transition: transform 0.3s ease;
-    z-index: 110;
-    padding: 0;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .theme-toggle:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) rotate(45deg);
 }
 
-.theme-toggle .toggle-wrapper {
+/* 主圓形 */
+.theme-toggle-inner {
     position: relative;
-    width: 22px;
-    height: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Sun/Moon Icon */
-.theme-toggle .toggle-icon {
-    position: relative;
-    width: 14px;
-    height: 14px;
+    display: block;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: var(--primary-color);
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    overflow: hidden;
 }
 
-/* Moon Crescent */
-.theme-toggle .toggle-icon::after {
+/* 太陽光芒 - 使用偽元素 */
+.theme-toggle-inner::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    box-shadow: 
+        0 -8px 0 -4.8px var(--primary-color),
+        5.66px -5.66px 0 -4.8px var(--primary-color),
+        8px 0 0 -4.8px var(--primary-color),
+        5.66px 5.66px 0 -4.8px var(--primary-color),
+        0 8px 0 -4.8px var(--primary-color),
+        -5.66px 5.66px 0 -4.8px var(--primary-color),
+        -8px 0 0 -4.8px var(--primary-color),
+        -5.66px -5.66px 0 -4.8px var(--primary-color);
+    opacity: 1;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* 月亮效果 - 使用偽元素 */
+.theme-toggle-inner::after {
     content: '';
     position: absolute;
     top: -2px;
     right: -2px;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background-color: var(--background-color);
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transform: translateX(0);
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* Sun Rays */
-.theme-toggle .sun-ray {
+/* 星星 - 使用額外偽元素 */
+.theme-toggle::after {
+    content: '';
     position: absolute;
-    background-color: var(--primary-color);
-    width: 1px;
-    height: 4px;
-    top: 50%;
-    left: 50%;
-    transform-origin: center;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.theme-toggle .sun-ray:nth-child(1) {
-    transform: translate(-50%, -50%) rotate(0deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(2) {
-    transform: translate(-50%, -50%) rotate(45deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(3) {
-    transform: translate(-50%, -50%) rotate(90deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(4) {
-    transform: translate(-50%, -50%) rotate(135deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(5) {
-    transform: translate(-50%, -50%) rotate(180deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(6) {
-    transform: translate(-50%, -50%) rotate(225deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(7) {
-    transform: translate(-50%, -50%) rotate(270deg) translateY(-8px);
-}
-
-.theme-toggle .sun-ray:nth-child(8) {
-    transform: translate(-50%, -50%) rotate(315deg) translateY(-8px);
-}
-
-/* Hide sun rays in dark mode */
-html.dark-theme .theme-toggle .sun-ray {
-    opacity: 0;
-}
-
-/* Dark theme styles */
-html.dark-theme .theme-toggle .toggle-icon::after {
-    transform: translateX(-8px);
-}
-
-/* Stars around the sun/moon */
-.theme-toggle .star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
+    width: 0.5px;
+    height: 0.5px;
     background-color: var(--primary-color);
     border-radius: 50%;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    box-shadow: 
+        8px -8px 0 0.3px var(--primary-color),
+        12px 0px 0 0.2px var(--primary-color),
+        8px 8px 0 0.4px var(--primary-color),
+        0px 12px 0 0.2px var(--primary-color),
+        -8px 8px 0 0.3px var(--primary-color),
+        -12px 0px 0 0.2px var(--primary-color),
+        -8px -8px 0 0.4px var(--primary-color),
+        0px -12px 0 0.2px var(--primary-color);
+    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.theme-toggle .star:nth-child(1) {
-    top: 0;
-    left: 50%;
+/* 暗色模式樣式 */
+html.dark-theme .theme-toggle-inner {
+    width: 16px;
+    height: 16px;
 }
 
-.theme-toggle .star:nth-child(2) {
-    top: 25%;
-    right: 0;
+html.dark-theme .theme-toggle-inner::before {
+    opacity: 0;
 }
 
-.theme-toggle .star:nth-child(3) {
-    bottom: 0;
-    left: 50%;
+html.dark-theme .theme-toggle-inner::after {
+    transform: scale(1) translateX(-6px);
 }
 
-.theme-toggle .star:nth-child(4) {
-    top: 25%;
-    left: 0;
+html.dark-theme .theme-toggle::after {
+    opacity: 0.9;
+    animation: twinkle 4s infinite alternate;
 }
 
-/* Show stars in dark mode */
-html.dark-theme .theme-toggle .star {
-    opacity: 0.7;
+/* 懸停效果 */
+.theme-toggle:hover .theme-toggle-inner::before {
+    animation: sunRayRotate 8s linear infinite;
 }
 
-/* Animation on hover */
-.theme-toggle:hover .toggle-icon {
-    transform: scale(1.1);
-}
-
-.theme-toggle:hover .sun-ray {
-    animation: pulse 1.5s infinite alternate;
-}
-
-@keyframes pulse {
+@keyframes sunRayRotate {
     0% {
-        opacity: 0.7;
+        transform: rotate(0deg);
     }
     100% {
-        opacity: 1;
+        transform: rotate(360deg);
     }
 }
 
-/* Tooltip */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* 工具提示 */
 .theme-toggle::before {
-    content: attr(data-tooltip);
+    content: attr(title);
     position: absolute;
     bottom: -25px;
     left: 50%;
@@ -822,6 +1098,7 @@ html.dark-theme .theme-toggle .star {
     visibility: hidden;
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
     pointer-events: none;
+    z-index: 120;
 }
 
 .theme-toggle:hover::before {
