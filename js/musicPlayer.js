@@ -3,32 +3,32 @@ const musicLibrary = [
     {
         title: "Ambient Flow",
         artist: "Barebreathe Studio",
-        file: "sounds/music/ambient-flow.mp3",
-        cover: "image/music-covers/ambient-flow.jpg"
+        file: "assets/sounds/music/ambient-flow.mp3",
+        cover: "assets/images/music-covers/ambient-flow.jpg"
     },
     {
         title: "Minimal Waves",
         artist: "Barebreathe Studio",
-        file: "sounds/music/minimal-waves.mp3",
-        cover: "image/music-covers/minimal-waves.jpg"
+        file: "assets/sounds/music/minimal-waves.mp3",
+        cover: "assets/images/music-covers/minimal-waves.jpg"
     },
     {
         title: "Distant Dreams",
         artist: "Barebreathe Studio",
-        file: "sounds/music/distant-dreams.mp3",
-        cover: "image/music-covers/distant-dreams.jpg"
+        file: "assets/sounds/music/distant-dreams.mp3",
+        cover: "assets/images/music-covers/distant-dreams.jpg"
     },
     {
         title: "Quiet Thoughts",
         artist: "Barebreathe Studio",
-        file: "sounds/music/quiet-thoughts.mp3",
-        cover: "image/music-covers/quiet-thoughts.jpg"
+        file: "assets/sounds/music/quiet-thoughts.mp3",
+        cover: "assets/images/music-covers/quiet-thoughts.jpg"
     },
     {
         title: "Gentle Breeze",
         artist: "Barebreathe Studio",
-        file: "sounds/music/gentle-breeze.mp3",
-        cover: "image/music-covers/gentle-breeze.jpg"
+        file: "assets/sounds/music/gentle-breeze.mp3",
+        cover: "assets/images/music-covers/gentle-breeze.jpg"
     }
 ];
 
