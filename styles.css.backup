@@ -305,7 +305,7 @@
         margin: 0 8px;
     }
     
-    .shanimalism-text {
+    .barebreathe-text {
         font-size: 20px; /* 縮小文字 */
     }
     
@@ -418,7 +418,7 @@
         margin: 0 8px;
     }
     
-    .shanimalism-text {
+    .barebreathe-text {
         font-size: 20px; /* 縮小文字 */
     }
     
@@ -529,12 +529,12 @@
     animation-delay: 0.8s;
 }
 
-/* 第二階段：shanimalism */
+/* 第二階段：barebreathe */
 #stage2 {
     opacity: 0;
 }
 
-.shanimalism-text {
+.barebreathe-text {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 300;
     font-size: 24px;
@@ -824,7 +824,7 @@ a:hover, button:hover, .logo:hover, #enter-site-logo:hover, .dot:hover, .vertica
         margin: 0 8px;
     }
     
-    .shanimalism-text {
+    .barebreathe-text {
         font-size: 20px; /* 縮小文字 */
     }
     

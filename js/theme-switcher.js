@@ -4,7 +4,7 @@ console.log("Theme switcher script loaded");
 // DOM 加載完成後執行
 document.addEventListener('DOMContentLoaded', function() {
     // 獲取主題切換按鈕
-    const themeToggle = document.querySelector('.theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle');
 
     if (!themeToggle) {
         console.error("Theme toggle button not found");
