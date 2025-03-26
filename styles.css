@@ -146,6 +146,20 @@ button {
     letter-spacing: -0.03em;
 }
 
+/* 月亮效果 */
+.theme-toggle-inner > .moon {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 3; /* 確保月亮在最上層 */
+}
+
 /* 移除舊的 logo 動畫樣式 */
 .logo-animation, .logo-circle, .circle-1, .circle-2, .circle-3, .click-hint {
     display: none;
@@ -758,6 +772,105 @@ body::before {
     animation-iteration-count: 1;
 }
 
+/* 主題切換按鈕 - 全新設計 */
+.theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg);
+}
+
+/* SVG 圖標樣式 */
+.theme-toggle-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* 日間模式樣式 */
+.theme-toggle .sun {
+    stroke: var(--text-color);
+    fill: transparent;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.theme-toggle .sun-ray {
+    stroke: var(--text-color);
+    stroke-dasharray: 10;
+    stroke-dashoffset: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.theme-toggle .moon {
+    stroke: var(--text-color);
+    fill: transparent;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* 日間模式懸停效果 */
+.theme-toggle:hover .sun {
+    stroke-dashoffset: 10;
+}
+
+.theme-toggle:hover .sun-ray {
+    stroke-dashoffset: 5;
+}
+
+/* 夜間模式樣式 */
+html.dark-theme .theme-toggle .sun {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    opacity: 0;
+}
+
+html.dark-theme .theme-toggle .sun-ray {
+    stroke-dasharray: 10;
+    stroke-dashoffset: 10;
+    opacity: 0;
+}
+
+html.dark-theme .theme-toggle .moon {
+    stroke-dashoffset: 0;
+    opacity: 1;
+}
+
+/* 夜間模式懸停效果 */
+html.dark-theme .theme-toggle:hover .moon {
+    stroke-dashoffset: 10;
+}
+
+html.dark-theme .theme-toggle:hover {
+    transform: rotate(-15deg);
+}
+
+/* 工具提示 */
+.theme-toggle::before {
+    display: none; /* 隱藏工具提示 */
+}
+
+.theme-toggle:hover::before {
+    display: none; /* 確保懸停時也不顯示 */
+}
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
     :root {
@@ -830,172 +943,4 @@ body::before {
     .featured-image {
         max-width: 100%;
     }
-}
-
-/* Music Player (Existing Styles) */
-.music-player {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-    position: relative;
-    width: 32px;
-    height: 32px;
-    background: transparent;
-    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
-    border-radius: 50%;
-    cursor: var(--cursor-pointer);
-    padding: 0;
-    margin-left: 16px;
-    overflow: visible;
-    z-index: 110;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.theme-toggle:hover {
-    transform: translateY(-3px) rotate(45deg);
-}
-
-/* 主圓形 */
-.theme-toggle-inner {
-    position: relative;
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* 太陽光芒 - 使用偽元素 */
-.theme-toggle-inner::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    box-shadow: 
-        0 -8px 0 -4.8px var(--primary-color),
-        5.66px -5.66px 0 -4.8px var(--primary-color),
-        8px 0 0 -4.8px var(--primary-color),
-        5.66px 5.66px 0 -4.8px var(--primary-color),
-        0 8px 0 -4.8px var(--primary-color),
-        -5.66px 5.66px 0 -4.8px var(--primary-color),
-        -8px 0 0 -4.8px var(--primary-color),
-        -5.66px -5.66px 0 -4.8px var(--primary-color);
-    opacity: 1;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* 月亮效果 - 使用偽元素 */
-.theme-toggle-inner::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--background-color);
-    transform: scale(0);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* 星星 - 使用額外偽元素 */
-.theme-toggle::after {
-    content: '';
-    position: absolute;
-    width: 0.5px;
-    height: 0.5px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    opacity: 0;
-    box-shadow: 
-        8px -8px 0 0.3px var(--primary-color),
-        12px 0px 0 0.2px var(--primary-color),
-        8px 8px 0 0.4px var(--primary-color),
-        0px 12px 0 0.2px var(--primary-color),
-        -8px 8px 0 0.3px var(--primary-color),
-        -12px 0px 0 0.2px var(--primary-color),
-        -8px -8px 0 0.4px var(--primary-color),
-        0px -12px 0 0.2px var(--primary-color);
-    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* 暗色模式樣式 */
-html.dark-theme .theme-toggle-inner {
-    width: 16px;
-    height: 16px;
-}
-
-html.dark-theme .theme-toggle-inner::before {
-    opacity: 0;
-}
-
-html.dark-theme .theme-toggle-inner::after {
-    transform: scale(1) translateX(-6px);
-}
-
-html.dark-theme .theme-toggle::after {
-    opacity: 0.9;
-    animation: twinkle 4s infinite alternate;
-}
-
-/* 懸停效果 */
-.theme-toggle:hover .theme-toggle-inner::before {
-    animation: sunRayRotate 8s linear infinite;
-}
-
-@keyframes sunRayRotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0.4;
-    }
-    50% {
-        opacity: 0.8;
-    }
-}
-
-/* 工具提示 */
-.theme-toggle::before {
-    content: attr(title);
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    background-color: rgba(var(--primary-color-rgb), 0.8);
-    color: var(--background-color);
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-size: 10px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    pointer-events: none;
-    z-index: 120;
-}
-
-.theme-toggle:hover::before {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
 }
