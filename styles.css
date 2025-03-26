@@ -113,14 +113,14 @@ button {
     top: 0;
     left: 0;
     width: 100%;
-    padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 5);
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 5); /* 減少上下內邊距 */
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    background-color: rgba(var(--secondary-color-rgb), 0.1);
+    background-color: transparent; /* 完全透明背景 */
+    backdrop-filter: none; /* 移除模糊效果 */
+    -webkit-backdrop-filter: none; /* 移除模糊效果 */
 }
 
 /* Logo */
@@ -128,168 +128,52 @@ button {
     position: relative;
 }
 
-.logo img {
-    height: 24px;
-    width: auto;
-}
-
-/* Logo Animation */
-.logo-animation {
-    position: relative;
-    width: 60px;
-    height: 60px;
+.logo-static {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.logo-circle {
-    position: absolute;
+    border: 1px solid var(--primary-color);
     border-radius: 50%;
-    background-color: var(--primary-color);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.circle-1 {
-    width: 20px;
-    height: 20px;
-    top: 10px;
-    left: -100px;
-    animation: logo-circle-1 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+.logo-static span {
+    font-family: var(--font-main);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--primary-color);
+    letter-spacing: -0.03em;
 }
 
-.circle-2 {
-    width: 20px;
-    height: 20px;
-    top: 30px;
-    left: -100px;
-    animation: logo-circle-2 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s forwards;
+/* 移除舊的 logo 動畫樣式 */
+.logo-animation, .logo-circle, .circle-1, .circle-2, .circle-3, .click-hint {
+    display: none;
 }
 
-.circle-3 {
-    width: 20px;
-    height: 20px;
-    top: 20px;
-    right: -100px;
-    animation: logo-circle-3 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s forwards;
-}
-
-.click-hint {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    opacity: 0;
-    font-family: var(--secondary-font);
-    letter-spacing: 1px;
-    animation: show-hint 0.5s ease-in-out 4.5s forwards;
-}
-
+/* 禁用所有 logo 相關動畫 */
 @keyframes logo-circle-1 {
-    0% {
-        left: -100px;
-    }
-    50% {
-        left: 20px;
-        top: 10px;
-        width: 20px;
-        height: 20px;
-    }
-    70% {
-        left: 20px;
-        top: 10px;
-        width: 20px;
-        height: 20px;
-    }
-    100% {
-        left: 10px;
-        top: 10px;
-        width: 20px;
-        height: 20px;
+    0%, 100% {
+        opacity: 0;
     }
 }
 
 @keyframes logo-circle-2 {
-    0% {
-        left: -100px;
-    }
-    50% {
-        left: 20px;
-        top: 30px;
-        width: 20px;
-        height: 20px;
-    }
-    70% {
-        left: 20px;
-        top: 30px;
-        width: 20px;
-        height: 20px;
-    }
-    100% {
-        left: 10px;
-        top: 30px;
-        width: 20px;
-        height: 20px;
+    0%, 100% {
+        opacity: 0;
     }
 }
 
 @keyframes logo-circle-3 {
-    0% {
-        right: -100px;
-    }
-    50% {
-        right: 20px;
-        top: 20px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-    }
-    70% {
-        right: 20px;
-        top: 20px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-    }
-    100% {
-        right: 10px;
-        top: 20px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50% 50% 50% 0;
+    0%, 100% {
+        opacity: 0;
     }
 }
 
 @keyframes show-hint {
-    0% {
+    0%, 100% {
         opacity: 0;
     }
-    100% {
-        opacity: 0.7;
-    }
-}
-
-/* Logo hover effects */
-.logo-link:hover .circle-1 {
-    transform: scale(1.1) rotate(5deg);
-    transition: transform 0.3s ease;
-}
-
-.logo-link:hover .circle-2 {
-    transform: scale(1.1) rotate(-5deg);
-    transition: transform 0.3s ease;
-}
-
-.logo-link:hover .circle-3 {
-    transform: scale(1.1) rotate(5deg);
-    transition: transform 0.3s ease;
-}
-
-/* Hide click hint on hover */
-.logo-link:hover .click-hint {
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 /* Header Controls */
@@ -439,28 +323,32 @@ button {
 
 /* Hero Section */
 .hero {
-    height: 100vh; /* 保持全屏高度 */
+    height: 100vh; /* 使用全屏高度 */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
     margin-bottom: calc(var(--spacing-unit) * 10);
     position: relative;
-    overflow: hidden;
-    padding: calc(var(--spacing-unit) * 10); /* 增加內邊距，創造留白 */
+    overflow: visible;
+    padding: 0; /* 移除內邊距 */
 }
 
 .featured-image {
-    width: 70%; /* 縮小寬度，增加兩側留白 */
-    height: 70%; /* 縮小高度，增加上下留白 */
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05); /* 添加微妙陰影 */
+    width: 60vmin; /* 保持尺寸 */
+    height: 60vmin; /* 保持尺寸 */
+    position: fixed; /* 使用固定定位，相對於視窗 */
+    top: 50%; /* 定位到視窗中心 */
+    left: 50%; /* 定位到視窗中心 */
+    transform: translate(-50%, -50%); /* 確保完全居中 */
+    overflow: visible;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+    z-index: 1; /* 確保在適當的層級 */
 }
 
 .featured-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; /* 填滿容器 */
+    height: 100%; /* 填滿容器 */
+    object-fit: cover; /* 確保圖片填滿容器 */
     transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
     filter: grayscale(0.2) contrast(1.05);
 }
@@ -482,13 +370,9 @@ button {
 
 /* 添加響應式調整，確保在不同設備上都能正確顯示 */
 @media screen and (max-width: 768px) {
-    .hero {
-        padding: calc(var(--spacing-unit) * 5); /* 移動設備上減少內邊距 */
-    }
-    
     .featured-image {
-        width: 85%; /* 移動設備上稍微增加圖片寬度 */
-        height: 60%; /* 移動設備上保持較小的高度 */
+        width: 70vmin; /* 在移動設備上保持較大尺寸 */
+        height: 70vmin; /* 在移動設備上保持較大尺寸 */
     }
 }
 
@@ -715,8 +599,20 @@ button {
         padding: 100px calc(var(--spacing-unit) * 3);
     }
     
-    .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    .hero {
+        height: 100vh;
+    }
+    
+    .services-grid, .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+        margin-bottom: calc(var(--spacing-unit) * 6);
+    }
+    
+    .section-header h2 {
+        font-size: 24px;
     }
     
     .about-text, .contact-text {
@@ -734,7 +630,7 @@ button {
     }
     
     .hero {
-        height: 70vh;
+        height: calc(100vh - 60px);
     }
     
     .services-grid, .projects-grid {
@@ -765,7 +661,7 @@ button {
     }
     
     .hero {
-        height: 60vh;
+        height: calc(100vh - 60px);
         margin-bottom: calc(var(--spacing-unit) * 6);
     }
     
@@ -883,19 +779,16 @@ body::before {
     }
     
     .site-header {
-        padding: calc(var(--spacing-unit) * 2);
-    }
-    
-    .navigation ul {
-        gap: calc(var(--spacing-unit) * 2);
+        padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
     }
     
     .main-content {
-        padding: 0 calc(var(--spacing-unit) * 3);
+        padding: 80px calc(var(--spacing-unit) * 2);
     }
     
     .hero {
-        padding: 0 calc(var(--spacing-unit) * 2);
+        height: 100vh;
+        margin-bottom: calc(var(--spacing-unit) * 6);
     }
     
     .featured-image {
