@@ -22,9 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function setTheme(theme) {
         console.log("Setting theme to:", theme);
         if (theme === 'dark') {
-            document.documentElement.classList.add('dark-theme');
+            document.body.classList.add('dark-mode');
+            document.documentElement.classList.add('dark-mode');
         } else {
-            document.documentElement.classList.remove('dark-theme');
+            document.body.classList.remove('dark-mode');
+            document.documentElement.classList.remove('dark-mode');
         }
         localStorage.setItem('theme', theme);
         
