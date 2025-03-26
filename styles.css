@@ -17,7 +17,7 @@
 }
 
 /* Dark Theme Overrides */
-html.dark-theme {
+html.dark-mode {
     --primary-color: #ffffff;
     --secondary-color: #000000;
     --accent-color: #c0c0c0;
@@ -596,7 +596,7 @@ button {
     }
     
     .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        grid-template-columns: 1fr;
     }
 }
 
@@ -772,7 +772,7 @@ body::before {
     animation-iteration-count: 1;
 }
 
-/* 主題切換按鈕 - 全新設計 */
+/* 主題切換按鈕 */
 .theme-toggle {
     position: relative;
     width: 40px;
@@ -786,89 +786,122 @@ body::before {
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
+    box-shadow: none;
+    outline: none;
+    border-radius: 50%;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
+/* 按鈕背景效果 */
+.theme-toggle:before {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0) 80%);
+    filter: blur(6px);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* 懸停時背景效果 */
+.theme-toggle:hover:before {
+    width: 36px;
+    height: 36px;
+    background: radial-gradient(circle, rgba(255,255,255,0.65) 35%, rgba(255,255,255,0) 85%);
+    filter: blur(8px);
+}
+
+/* 日間模式懸停效果 */
 .theme-toggle:hover {
     transform: rotate(15deg);
+    -webkit-box-shadow: 0 0 50px rgba(255,255,255,.5), 0 0 200px 20px rgba(0,0,0,1), 0 0 0 9000px rgba(0,0,0,.6);
+    box-shadow: 0 0 50px rgba(255,255,255,.5), 0 0 200px 20px rgba(0,0,0,1), 0 0 0 9000px rgba(0,0,0,.6);
+}
+
+/* 黑暗模式下的懸停效果 */
+.dark-mode .theme-toggle:hover {
+    transform: rotate(-15deg);
+    -webkit-box-shadow: 0 0 50px rgba(255,255,255,.5), 0 0 200px 20px rgba(255,255,255,.5), 0 0 0 9000px rgba(255,255,255,.15);
+    box-shadow: 0 0 50px rgba(255,255,255,.5), 0 0 200px 20px rgba(255,255,255,.5), 0 0 0 9000px rgba(255,255,255,.15);
+}
+
+/* 黑暗模式下的按鈕背景 */
+.dark-mode .theme-toggle:before {
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 40%, rgba(255,255,255,0) 80%);
+    filter: blur(6px);
+}
+
+/* 黑暗模式下懸停時的按鈕背景 */
+.dark-mode .theme-toggle:hover:before {
+    background: radial-gradient(circle, rgba(255,255,255,0.55) 35%, rgba(255,255,255,0) 85%);
+    filter: blur(8px);
 }
 
 /* SVG 圖標樣式 */
 .theme-toggle-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--text-color);
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s ease;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    fill: none;
 }
 
-/* 日間模式樣式 */
-.theme-toggle .sun {
+/* 路徑樣式 */
+.theme-toggle-icon path {
     stroke: var(--text-color);
-    fill: transparent;
-    stroke-dasharray: 50;
-    stroke-dashoffset: 0;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: stroke 0.3s ease;
+    fill: none;
 }
 
-.theme-toggle .sun-ray {
-    stroke: var(--text-color);
-    stroke-dasharray: 10;
-    stroke-dashoffset: 0;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+/* 日間模式下的圖標顯示 */
+.sun, .sun-ray {
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-.theme-toggle .moon {
-    stroke: var(--text-color);
-    fill: transparent;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
+.moon {
     opacity: 0;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 0.3s ease;
 }
 
-/* 日間模式懸停效果 */
-.theme-toggle:hover .sun {
-    stroke-dashoffset: 10;
-}
-
+/* 日間模式懸停時切換圖標 */
+.theme-toggle:hover .sun, 
 .theme-toggle:hover .sun-ray {
-    stroke-dashoffset: 5;
-}
-
-/* 夜間模式樣式 */
-html.dark-theme .theme-toggle .sun {
-    stroke-dasharray: 50;
-    stroke-dashoffset: 50;
     opacity: 0;
 }
 
-html.dark-theme .theme-toggle .sun-ray {
-    stroke-dasharray: 10;
-    stroke-dashoffset: 10;
-    opacity: 0;
-}
-
-html.dark-theme .theme-toggle .moon {
-    stroke-dashoffset: 0;
+.theme-toggle:hover .moon {
     opacity: 1;
 }
 
-/* 夜間模式懸停效果 */
-html.dark-theme .theme-toggle:hover .moon {
-    stroke-dashoffset: 10;
+/* 黑暗模式下的圖標顯示 */
+.dark-mode .sun, 
+.dark-mode .sun-ray {
+    opacity: 0;
 }
 
-html.dark-theme .theme-toggle:hover {
-    transform: rotate(-15deg);
+.dark-mode .moon {
+    opacity: 1;
 }
 
-/* 工具提示 */
-.theme-toggle::before {
-    display: none; /* 隱藏工具提示 */
+/* 黑暗模式下懸停時切換圖標 */
+.dark-mode .theme-toggle:hover .sun, 
+.dark-mode .theme-toggle:hover .sun-ray {
+    opacity: 1;
 }
 
-.theme-toggle:hover::before {
-    display: none; /* 確保懸停時也不顯示 */
+.dark-mode .theme-toggle:hover .moon {
+    opacity: 0;
 }
 
 /* Responsive Styles */
