@@ -328,7 +328,7 @@ button {
 
 /* Main Content */
 .main-content {
-    padding: 120px calc(var(--spacing-unit) * 5);
+    padding: 0; /* 移除內邊距，確保hero區塊可以完全填滿視窗 */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -338,21 +338,22 @@ button {
 /* Hero Section */
 .hero {
     height: 100vh; /* 使用全屏高度 */
+    width: 100vw; /* 使用全屏寬度 */
     display: flex;
     align-items: center; /* 垂直居中 */
     justify-content: center; /* 水平居中 */
-    margin-bottom: calc(var(--spacing-unit) * 10);
+    margin: 0; /* 移除外邊距 */
     position: relative;
-    overflow: visible;
+    overflow: hidden; /* 防止內容溢出 */
     padding: 0; /* 移除內邊距 */
 }
 
 .featured-image {
     width: 60vmin; /* 保持尺寸 */
     height: 60vmin; /* 保持尺寸 */
-    position: fixed; /* 使用固定定位，相對於視窗 */
-    top: 50%; /* 定位到視窗中心 */
-    left: 50%; /* 定位到視窗中心 */
+    position: absolute; /* 絕對定位 */
+    top: 50%; /* 定位到hero區塊中心 */
+    left: 50%; /* 定位到hero區塊中心 */
     transform: translate(-50%, -50%); /* 確保完全居中 */
     overflow: visible;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
@@ -587,6 +588,17 @@ button {
     letter-spacing: -0.02em;
     position: relative;
     display: inline-block;
+}
+
+/* 非Hero區塊的共同樣式 */
+.services, .projects, .about, .contact {
+    padding: 0 calc(var(--spacing-unit) * 5);
+    margin-top: var(--section-spacing);
+}
+
+/* 第一個非Hero區塊需要額外的上邊距 */
+.services {
+    margin-top: calc(var(--section-spacing) * 1.5);
 }
 
 /* Responsive Design */
