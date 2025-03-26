@@ -310,10 +310,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
 }
 
-/* 播放圖標 (三角形) - 默認顯示 */
+/* 播放圖標 (三角形) */
 .play-icon {
     width: 0;
     height: 0;
@@ -321,16 +320,14 @@
     border-width: 8px 0 8px 12px;
     border-color: transparent transparent transparent var(--text-color);
     margin-left: 2px;
-    opacity: 1;
+    display: block; /* Default state: visible */
 }
 
-/* 暫停圖標 (兩條線) - 默認隱藏 */
+/* 暫停圖標 (兩條線) */
 .pause-icon {
     width: 12px;
     height: 14px;
-    opacity: 0;
-    display: flex;
-    justify-content: space-between;
+    display: none; /* Default state: hidden */
 }
 
 .pause-icon::before,
@@ -342,13 +339,15 @@
     background-color: var(--text-color);
 }
 
-/* 播放狀態切換 */
+/* 播放狀態切換 - 使用 JavaScript 直接控制 display 屬性 */
+/* 這些類選擇器保留用於兼容性，但主要控制邏輯已移至 JavaScript */
 .play-pause-btn.playing .play-icon {
-    opacity: 0;
+    display: none;
 }
 
 .play-pause-btn.playing .pause-icon {
-    opacity: 1;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* 添加微妙的動畫效果 */
