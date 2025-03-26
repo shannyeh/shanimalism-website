@@ -83,7 +83,10 @@ class MusicPlayer {
     
     initEventListeners() {
         // 播放/暫停按鈕點擊事件
-        this.playPauseBtn.addEventListener('click', () => this.togglePlay());
+        this.playPauseBtn.addEventListener('click', () => {
+            console.log('Play/Pause button clicked');
+            this.togglePlay();
+        });
         
         // 上一首/下一首按鈕點擊事件
         this.prevBtn.addEventListener('click', () => this.playPrevious());
@@ -136,6 +139,7 @@ class MusicPlayer {
     }
     
     togglePlay() {
+        console.log('togglePlay called, audio.paused:', this.audio.paused);
         if (this.audio.paused) {
             this.play();
         } else {
@@ -144,15 +148,46 @@ class MusicPlayer {
     }
     
     play() {
-        this.audio.play();
-        this.playPauseBtn.classList.add('playing');
+        console.log('play method called');
+        
+        // 先更新 UI，再播放音頻
+        this.updatePlayPauseButton(true);
+        
+        this.audio.play()
+            .then(() => {
+                console.log('Audio playback started successfully');
+            })
+            .catch(error => {
+                console.error('Error playing audio:', error);
+                // 如果播放失敗，恢復 UI
+                this.updatePlayPauseButton(false);
+            });
+        
         localStorage.setItem('isPlaying', 'true');
     }
     
     pause() {
+        console.log('pause method called');
+        
+        // 先暫停音頻，再更新 UI
         this.audio.pause();
-        this.playPauseBtn.classList.remove('playing');
+        this.updatePlayPauseButton(false);
+        
         localStorage.setItem('isPlaying', 'false');
+    }
+    
+    // 新方法：更新播放/暫停按鈕的狀態
+    updatePlayPauseButton(isPlaying) {
+        console.log('Updating play/pause button, isPlaying:', isPlaying);
+        
+        if (isPlaying) {
+            this.playPauseBtn.classList.add('playing');
+        } else {
+            this.playPauseBtn.classList.remove('playing');
+        }
+        
+        // 驗證按鈕狀態是否正確更新
+        console.log('Button has playing class:', this.playPauseBtn.classList.contains('playing'));
     }
     
     playNext() {
