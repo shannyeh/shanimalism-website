@@ -49,9 +49,6 @@ body {
     background-color: var(--background-color);
     line-height: 1.6;
     overflow-x: hidden;
-    font-size: 16px;
-    font-weight: 300;
-    letter-spacing: 0.01em;
 }
 
 a, button, input[type="submit"], .logo, .sound-toggle, .social-link {
@@ -113,14 +110,14 @@ button {
     top: 0;
     left: 0;
     width: 100%;
-    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 5); /* 減少上下內邊距 */
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 5); 
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    background-color: transparent; /* 完全透明背景 */
-    backdrop-filter: none; /* 移除模糊效果 */
-    -webkit-backdrop-filter: none; /* 移除模糊效果 */
+    background-color: transparent; 
+    backdrop-filter: none; 
+    -webkit-backdrop-filter: none; 
 }
 
 /* Logo */
@@ -157,7 +154,7 @@ button {
     background-color: var(--background-color);
     transform: scale(0);
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    z-index: 3; /* 確保月亮在最上層 */
+    z-index: 3; 
 }
 
 /* 移除舊的 logo 動畫樣式 */
@@ -328,7 +325,7 @@ button {
 
 /* Main Content */
 .main-content {
-    padding: 0; /* 移除內邊距，確保hero區塊可以完全填滿視窗 */
+    padding: 0; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -337,33 +334,34 @@ button {
 
 /* Hero Section */
 .hero {
-    height: 100vh; /* 使用全屏高度 */
-    width: 100vw; /* 使用全屏寬度 */
+    height: 100vh; 
+    width: 100vw; 
     display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
-    margin: 0; /* 移除外邊距 */
+    align-items: center; 
+    justify-content: center; 
+    margin: 0; 
     position: relative;
-    overflow: hidden; /* 防止內容溢出 */
-    padding: 0; /* 移除內邊距 */
+    overflow: hidden; 
+    padding: 0; 
+    background-color: var(--background-color);
 }
 
 .featured-image {
-    width: 60vmin; /* 保持尺寸 */
-    height: 60vmin; /* 保持尺寸 */
-    position: absolute; /* 絕對定位 */
-    top: 50%; /* 定位到hero區塊中心 */
-    left: 50%; /* 定位到hero區塊中心 */
-    transform: translate(-50%, -50%); /* 確保完全居中 */
+    width: 60vmin; 
+    height: 60vmin; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     overflow: visible;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
-    z-index: 1; /* 確保在適當的層級 */
+    z-index: 1; 
 }
 
 .featured-image img {
-    width: 100%; /* 填滿容器 */
-    height: 100%; /* 填滿容器 */
-    object-fit: cover; /* 確保圖片填滿容器 */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
     transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
     filter: grayscale(0.2) contrast(1.05);
 }
@@ -386,15 +384,15 @@ button {
 /* 添加響應式調整，確保在不同設備上都能正確顯示 */
 @media screen and (max-width: 768px) {
     .featured-image {
-        width: 70vmin; /* 在移動設備上保持較大尺寸 */
-        height: 70vmin; /* 在移動設備上保持較大尺寸 */
+        width: 70vmin; 
+        height: 70vmin; 
     }
 }
 
 /* 針對超高屏幕的調整 */
 @media screen and (min-height: 1200px) {
     .hero {
-        height: 90vh; /* 在超高屏幕上稍微縮小一點 */
+        height: 90vh; 
     }
 }
 
