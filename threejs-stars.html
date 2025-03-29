@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js 星空背景</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.light-mode {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding-top: 20vh;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="scene-container"></div>
+    
+    <div class="content">
+        <h1>Three.js 星空背景</h1>
+        <p>使用 Three.js 庫創建的 3D 星空效果</p>
+        <button id="theme-toggle">切換日/夜間模式</button>
+    </div>
+
+    <!-- 引入 Three.js 庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            updateStarsForTheme();
+            updateBackgroundColor();
+        });
+        
+        // Three.js 變量
+        let scene, camera, renderer;
+        let stars = [];
+        let mouseX = 0, mouseY = 0;
+        let targetMouseX = 0, targetMouseY = 0;
+        let isDarkMode = true; // 默認為夜間模式
+        
+        // 初始化 Three.js 場景
+        function init() {
+            // 創建場景
+            scene = new THREE.Scene();
+            
+            // 創建相機
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 500;
+            
+            // 創建渲染器
+            renderer = new THREE.WebGLRenderer({ 
+                alpha: true,
+                antialias: true // 添加抗鋸齒效果
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio); // 支持高DPI顯示器
+            document.getElementById('scene-container').appendChild(renderer.domElement);
+            
+            // 添加環境光
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            // 添加方向光 - 模擬太陽光
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            // 檢查當前主題
+            isDarkMode = !document.body.classList.contains('light-mode');
+            
+            // 創建星星
+            createStars();
+            
+            // 創建星雲
+            createStarClusters();
+            
+            // 更新背景顏色
+            updateBackgroundColor();
+            
+            // 監聽窗口大小變化
+            window.addEventListener('resize', onWindowResize);
+            
+            // 監聽鼠標移動
+            document.addEventListener('mousemove', onMouseMove);
+            
+            // 開始動畫循環
+            animate();
+            
+            console.log("Three.js scene initialized");
+        }
+        
+        // 創建星星組
+        function createStarGroup(count, minSize, maxSize, color, opacity) {
+            // 為每顆星星創建不同的材質，實現大小和亮度的變化
+            for (let i = 0; i < count; i++) {
+                // 使用球面坐標創建均勻分布的星星
+                const radius = 800 + Math.random() * 1000; // 更大的半徑範圍
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                const x = radius * Math.sin(phi) * Math.cos(theta);
+                const y = radius * Math.sin(phi) * Math.sin(theta);
+                const z = radius * Math.cos(phi);
+                
+                // 隨機大小
+                const size = minSize + Math.random() * (maxSize - minSize);
+                
+                // 創建球體幾何體，而不是點
+                const geometry = new THREE.SphereGeometry(size, 8, 8);
+                
+                // 創建發光材質 - 根據當前主題調整顏色
+                const starColor = isDarkMode ? color : 0x555555; // 日間模式使用深灰色
+                
+                const material = new THREE.MeshBasicMaterial({
+                    color: starColor,
+                    transparent: true,
+                    opacity: isDarkMode ? opacity * (0.5 + Math.random() * 0.5) : opacity * (0.7 + Math.random() * 0.3)
+                });
+                
+                // 創建網格
+                const star = new THREE.Mesh(geometry, material);
+                star.position.set(x, y, z);
+                
+                // 添加閃爍效果參數
+                star.userData = {
+                    twinkleSpeed: 0.01 + Math.random() * 0.03,
+                    twinklePhase: Math.random() * Math.PI * 2,
+                    originalOpacity: material.opacity,
+                    originalSize: size,
+                    darkModeColor: color,
+                    lightModeColor: 0x555555 // 日間模式使用深灰色
+                };
+                
+                scene.add(star);
+                stars.push(star);
+            }
+        }
+        
+        // 創建星星
+        function createStars() {
+            // 清空現有星星
+            stars.forEach(star => scene.remove(star));
+            stars = [];
+            
+            // 創建不同大小和亮度的星星組
+            createStarGroup(3000, 0.1, 0.5, 0xffffff, 0.7); // 小型遠距離星星
+            createStarGroup(1000, 0.5, 1.2, 0xffffff, 0.8); // 中型星星
+            createStarGroup(500, 1.2, 2.5, 0xffffff, 0.9);  // 大型近距離星星
+            createStarGroup(100, 2.5, 4.0, 0xffffdd, 1.0);  // 特大亮星
+            
+            // 添加更多近距離的星球體
+            createNearbyStars();
+            
+            console.log("Created star system with various sizes");
+        }
+        
+        // 創建近距離星球體
+        function createNearbyStars() {
+            // 創建 10 個大型近距離星球 (減少數量)
+            for (let i = 0; i < 10; i++) {
+                // 在更廣闊的空間中分布星球
+                const distance = 150 + Math.random() * 500; // 更大的距離範圍
+                const angle = Math.random() * Math.PI * 2;
+                const height = -150 + Math.random() * 300; // 更大的高度範圍
+                
+                const x = distance * Math.cos(angle);
+                const y = height;
+                const z = distance * Math.sin(angle);
+                
+                // 隨機大小 - 比普通星星大得多
+                const size = 5 + Math.random() * 15;
+                
+                // 為每顆星球生成獨特的種子
+                const planetSeed = Math.random() * 10000;
+                
+                // 決定星球類型 - 每顆星球都不同
+                const planetType = Math.floor(Math.random() * 5); // 0-4 五種不同類型的星球
+                
+                // 創建更複雜的星球形狀
+                // 使用更高細分度的球體作為基礎
+                const geometry = new THREE.SphereGeometry(size, 64, 64); // 增加細分度
+                
+                // 添加更真實的星球表面變形
+                const positionAttribute = geometry.getAttribute('position');
+                const vertex = new THREE.Vector3();
+                
+                // 使用柏林噪聲模擬函數 - 加入種子使每顆星球獨特
+                function noise3D(x, y, z, scale) {
+                    // 簡化的柏林噪聲模擬，加入星球種子
+                    const X = Math.floor(x * scale + planetSeed);
+                    const Y = Math.floor(y * scale + planetSeed);
+                    const Z = Math.floor(z * scale + planetSeed);
+                    
+                    // 使用正弦函數創建偽隨機值
+                    return Math.sin(X * 12.9898 + Y * 78.233 + Z * 37.719) * 43758.5453 % 1;
+                }
+                
+                // 分形噪聲函數 - 模擬真實地形
+                function fractalNoise(x, y, z, octaves, persistence) {
+                    // 多個頻率的噪聲疊加
+                    let noise = 0;
+                    let amplitude = 1.0;
+                    let frequency = 1.0;
+                    let maxValue = 0;
+                    
+                    for (let i = 0; i < octaves; i++) {
+                        // 不同頻率和振幅的噪聲疊加
+                        noise += amplitude * noise3D(x * frequency, y * frequency, z * frequency, 1);
+                        maxValue += amplitude;
+                        amplitude *= persistence; // 每層振幅變化
+                        frequency *= 2.0; // 每層頻率翻倍
+                    }
+                    
+                    // 標準化
+                    return noise / maxValue;
+                }
+                
+                // 應用噪聲到每個頂點
+                for (let i = 0; i < positionAttribute.count; i++) {
+                    vertex.fromBufferAttribute(positionAttribute, i);
+                    const normalizedPos = vertex.clone().normalize();
+                    
+                    // 根據星球類型應用不同的地形特徵
+                    let totalNoise = 0;
+                    
+                    switch(planetType) {
+                        case 0: // 類地行星 - 山脈、海洋和大陸
+                            const continents = fractalNoise(normalizedPos.x, normalizedPos.y, normalizedPos.z, 6, 0.65) * 0.25;
+                            const mountains = fractalNoise(normalizedPos.x * 3, normalizedPos.y * 3, normalizedPos.z * 3, 4, 0.5) * 0.1;
+                            // 只在大陸上添加山脈
+                            totalNoise = continents + (continents > 0.12 ? mountains : 0);
+                            break;
+                            
+                        case 1: // 類月球 - 大量隕石坑
+                            const baseTerrain = fractalNoise(normalizedPos.x, normalizedPos.y, normalizedPos.z, 3, 0.5) * 0.1;
+                            // 大量隕石坑
+                            for (let c = 0; c < 10; c++) {
+                                const craterSeed = noise3D(c, c, c, 1) * 10;
+                                const craterSize = 0.5 + noise3D(c+1, c+1, c+1, 1) * 2;
+                                const craterX = noise3D(c+2, 0, 0, 1) * 2 - 1;
+                                const craterY = noise3D(0, c+2, 0, 1) * 2 - 1;
+                                const craterZ = noise3D(0, 0, c+2, 1) * 2 - 1;
+                                const craterPos = new THREE.Vector3(craterX, craterY, craterZ).normalize();
+                                
+                                // 計算點到隕石坑中心的距離
+                                const dist = normalizedPos.distanceTo(craterPos);
+                                
+                                // 如果在隕石坑範圍內，添加凹陷
+                                if (dist < craterSize * 0.15) {
+                                    const craterDepth = 0.15 * (1 - dist / (craterSize * 0.15));
+                                    totalNoise -= craterDepth;
+                                }
+                            }
+                            totalNoise += baseTerrain;
+                            break;
+                            
+                        case 2: // 氣態巨行星 - 平滑的條紋
+                            // 水平條紋
+                            const bands = Math.sin(normalizedPos.y * 10 + planetSeed) * 0.05;
+                            // 大型風暴
+                            const storms = fractalNoise(normalizedPos.x * 2, normalizedPos.y * 2, normalizedPos.z * 2, 3, 0.7) * 0.1;
+                            totalNoise = bands + storms * 0.5;
+                            break;
+                            
+                        case 3: // 火山行星 - 大量火山和熔岩流
+                            const baseSurface = fractalNoise(normalizedPos.x, normalizedPos.y, normalizedPos.z, 4, 0.5) * 0.15;
+                            // 添加火山錐
+                            for (let v = 0; v < 5; v++) {
+                                const volcanoX = noise3D(v, 0, 0, 1) * 2 - 1;
+                                const volcanoY = noise3D(0, v, 0, 1) * 2 - 1;
+                                const volcanoZ = noise3D(0, 0, v, 1) * 2 - 1;
+                                const volcanoPos = new THREE.Vector3(volcanoX, volcanoY, volcanoZ).normalize();
+                                
+                                // 計算點到火山中心的距離
+                                const dist = normalizedPos.distanceTo(volcanoPos);
+                                
+                                // 如果在火山範圍內，添加凸起
+                                if (dist < 0.3) {
+                                    const volcanoHeight = 0.3 * (1 - dist / 0.3);
+                                    totalNoise += volcanoHeight * volcanoHeight * 0.5;
+                                }
+                            }
+                            totalNoise += baseSurface;
+                            break;
+                            
+                        case 4: // 冰凍行星 - 冰川和裂縫
+                            const iceSurface = fractalNoise(normalizedPos.x, normalizedPos.y, normalizedPos.z, 5, 0.6) * 0.1;
+                            // 添加冰川裂縫
+                            const cracks = (Math.abs(fractalNoise(normalizedPos.x * 8, normalizedPos.y * 8, normalizedPos.z * 8, 2, 0.9)) - 0.5) * 0.1;
+                            totalNoise = iceSurface + cracks;
+                            break;
+                    }
+                    
+                    // 添加通用的小型表面細節
+                    const detailNoise = fractalNoise(normalizedPos.x * 15, normalizedPos.y * 15, normalizedPos.z * 15, 2, 0.5) * 0.03;
+                    totalNoise += detailNoise;
+                    
+                    // 應用噪聲，但保持整體形狀
+                    vertex.normalize().multiplyScalar(size * (1 + totalNoise));
+                    
+                    // 更新頂點
+                    positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
+                }
+                
+                // 更新法線
+                geometry.computeVertexNormals();
+                
+                // 選擇星球顏色 - 根據星球類型
+                let starColor;
+                let colorChoice = Math.random(); // 移到外部作用域
+                
+                // 根據星球類型選擇顏色
+                if (isDarkMode) {
+                    // 夜間模式顏色
+                    switch(planetType) {
+                        case 0: // 類地行星 - 藍綠色調
+                            starColor = colorChoice > 0.5 ? 0x446677 : 0x335566;
+                            break;
+                        case 1: // 類月球 - 灰色調
+                            starColor = colorChoice > 0.5 ? 0x888888 : 0x777777;
+                            break;
+                        case 2: // 氣態巨行星 - 棕黃色調
+                            starColor = colorChoice > 0.5 ? 0xaa8866 : 0x997755;
+                            break;
+                        case 3: // 火山行星 - 紅色調
+                            starColor = colorChoice > 0.5 ? 0x993333 : 0x882222;
+                            break;
+                        case 4: // 冰凍行星 - 藍白色調
+                            starColor = colorChoice > 0.5 ? 0xaabbcc : 0x99aacc;
+                            break;
+                    }
+                } else {
+                    // 日間模式顏色 - 更淺的版本
+                    switch(planetType) {
+                        case 0: // 類地行星 - 淺藍綠色調
+                            starColor = colorChoice > 0.5 ? 0x88aacc : 0x7799bb;
+                            break;
+                        case 1: // 類月球 - 淺灰色調
+                            starColor = colorChoice > 0.5 ? 0xaaaaaa : 0x999999;
+                            break;
+                        case 2: // 氣態巨行星 - 淺棕黃色調
+                            starColor = colorChoice > 0.5 ? 0xccaa88 : 0xbb9977;
+                            break;
+                        case 3: // 火山行星 - 淺紅色調
+                            starColor = colorChoice > 0.5 ? 0xcc7777 : 0xbb6666;
+                            break;
+                        case 4: // 冰凍行星 - 淺藍白色調
+                            starColor = colorChoice > 0.5 ? 0xccddee : 0xbbccee;
+                            break;
+                    }
+                }
+                
+                // 創建材質 - 根據星球類型調整參數
+                const material = new THREE.MeshStandardMaterial({
+                    color: starColor,
+                    roughness: planetType === 1 ? 0.9 : (planetType === 4 ? 0.3 : 0.7),  // 月球最粗糙，冰凍行星最光滑
+                    metalness: planetType === 3 ? 0.3 : 0.1,  // 火山行星稍微金屬感強一些
+                    transparent: false,
+                    flatShading: planetType === 1 || planetType === 3  // 月球和火山行星使用平面著色
+                });
+                
+                // 創建網格
+                const star = new THREE.Mesh(geometry, material);
+                star.position.set(x, y, z);
+                
+                // 添加隨機旋轉
+                star.rotation.x = Math.random() * Math.PI;
+                star.rotation.y = Math.random() * Math.PI;
+                star.rotation.z = Math.random() * Math.PI;
+                
+                // 添加閃爍效果參數 - 較慢的閃爍
+                star.userData = {
+                    twinkleSpeed: 0.005 + Math.random() * 0.01, // 較慢的閃爍
+                    twinklePhase: Math.random() * Math.PI * 2,
+                    originalOpacity: 1.0, // 完全不透明
+                    originalSize: size,
+                    darkModeColor: starColor,
+                    lightModeColor: starColor, // 保持相同的顏色，只是亮度不同
+                    isNearby: true, // 標記為近距離星球
+                    planetType: planetType, // 記錄星球類型
+                    rotationSpeed: {
+                        x: (Math.random() - 0.5) * 0.001,
+                        y: (Math.random() - 0.5) * 0.001,
+                        z: (Math.random() - 0.5) * 0.001
+                    }
+                };
+                
+                scene.add(star);
+                stars.push(star);
+            }
+            
+            console.log("Added diverse planet-like celestial bodies");
+        }
+        
+        // 創建星雲團
+        function createStarClusters() {
+            // 創建幾個星雲團
+            for (let i = 0; i < 5; i++) {
+                // 隨機位置
+                const radius = 1000 + Math.random() * 500;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                const x = radius * Math.sin(phi) * Math.cos(theta);
+                const y = radius * Math.sin(phi) * Math.sin(theta);
+                const z = radius * Math.cos(phi);
+                
+                // 創建粒子系統
+                const particleCount = 500 + Math.floor(Math.random() * 500);
+                const particles = new THREE.BufferGeometry();
+                const positions = [];
+                const colors = [];
+                
+                // 星雲團大小
+                const clusterSize = 100 + Math.random() * 150;
+                
+                // 星雲顏色 - 根據當前主題調整
+                let clusterColor;
+                if (isDarkMode) {
+                    // 夜間模式 - 使用淡藍色或淡紫色
+                    clusterColor = new THREE.Color(
+                        0.8 + Math.random() * 0.2,
+                        0.8 + Math.random() * 0.2,
+                        0.9 + Math.random() * 0.1
+                    );
+                } else {
+                    // 日間模式 - 使用深灰色或深藍色
+                    clusterColor = new THREE.Color(
+                        0.3 + Math.random() * 0.1,
+                        0.3 + Math.random() * 0.1,
+                        0.4 + Math.random() * 0.1
+                    );
+                }
+                
+                // 創建星雲粒子
+                for (let j = 0; j < particleCount; j++) {
+                    // 在球體內隨機分布
+                    const px = x + (Math.random() - 0.5) * clusterSize;
+                    const py = y + (Math.random() - 0.5) * clusterSize;
+                    const pz = z + (Math.random() - 0.5) * clusterSize;
+                    
+                    positions.push(px, py, pz);
+                    
+                    // 顏色漸變
+                    const intensity = isDarkMode ? 0.2 + Math.random() * 0.8 : 0.4 + Math.random() * 0.6;
+                    colors.push(clusterColor.r * intensity, clusterColor.g * intensity, clusterColor.b * intensity);
+                }
+                
+                particles.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                particles.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+                
+                // 創建粒子材質
+                const particleMaterial = new THREE.PointsMaterial({
+                    size: 1.5,
+                    transparent: true,
+                    opacity: isDarkMode ? 0.2 : 0.4,
+                    vertexColors: true,
+                    blending: THREE.AdditiveBlending
+                });
+                
+                // 創建粒子系統
+                const particleSystem = new THREE.Points(particles, particleMaterial);
+                particleSystem.userData = {
+                    isDarkModeSystem: true,
+                    darkModeOpacity: 0.2,
+                    lightModeOpacity: 0.4
+                };
+                
+                scene.add(particleSystem);
+                stars.push(particleSystem);
+            }
+            
+            console.log("Created star clusters");
+        }
+        
+        // 為星球添加光暈效果 - 保留函數但不再使用
+        function addStarGlow(star) {
+            // 函數保留但不再使用
+        }
+        
+        // 更新背景顏色
+        function updateBackgroundColor() {
+            isDarkMode = !document.body.classList.contains('light-mode');
+            renderer.setClearColor(0x000000, isDarkMode ? 0.1 : 0);
+            console.log("Background color updated for", isDarkMode ? "dark" : "light", "mode");
+        }
+        
+        // 更新星星顏色和亮度以適應當前主題
+        function updateStarsForTheme() {
+            isDarkMode = !document.body.classList.contains('light-mode');
+            
+            stars.forEach(star => {
+                if (star instanceof THREE.Mesh && star.userData) {
+                    // 更新星星顏色
+                    star.material.color.setHex(isDarkMode ? star.userData.darkModeColor : star.userData.lightModeColor);
+                    
+                    // 更新不透明度基準值
+                    star.userData.originalOpacity = isDarkMode ? 
+                        star.userData.originalOpacity * 0.8 : // 夜間模式稍微降低亮度
+                        star.userData.originalOpacity * 1.5;  // 日間模式提高亮度
+                }
+                else if (star instanceof THREE.Points && star.userData) {
+                    // 更新星雲團不透明度
+                    star.material.opacity = isDarkMode ? star.userData.darkModeOpacity : star.userData.lightModeOpacity;
+                }
+            });
+            
+            console.log("Stars updated for", isDarkMode ? "dark" : "light", "mode");
+        }
+        
+        // 處理窗口大小變化
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            console.log("Window resized:", window.innerWidth, "x", window.innerHeight);
+        }
+        
+        // 處理鼠標移動 - 創建視差效果
+        function onMouseMove(event) {
+            targetMouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            targetMouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        }
+        
+        // 更新鼠標位置 - 平滑過渡
+        function updateMousePosition() {
+            mouseX += (targetMouseX - mouseX) * 0.05;
+            mouseY += (targetMouseY - mouseY) * 0.05;
+            
+            // 根據鼠標位置旋轉相機
+            camera.position.x = mouseX * 30;
+            camera.position.y = mouseY * 30;
+            camera.lookAt(scene.position);
+        }
+        
+        // 動畫循環
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // 更新鼠標位置
+            updateMousePosition();
+            
+            // 緩慢旋轉整個場景
+            scene.rotation.y += 0.0005;
+            
+            // 更新星星閃爍效果
+            stars.forEach(star => {
+                if (star instanceof THREE.Mesh && star.userData) {
+                    // 更新閃爍相位
+                    star.userData.twinklePhase += star.userData.twinkleSpeed;
+                    
+                    // 計算閃爍因子
+                    const twinkleFactor = 0.7 + 0.3 * Math.sin(star.userData.twinklePhase);
+                    
+                    // 應用到不透明度
+                    star.material.opacity = star.userData.originalOpacity * twinkleFactor;
+                    
+                    // 輕微縮放 - 近距離星球縮放更明顯
+                    const scaleFactor = star.userData.isNearby ? 
+                        0.85 + 0.15 * twinkleFactor : // 近距離星球縮放更明顯
+                        0.9 + 0.1 * twinkleFactor;   // 普通星星輕微縮放
+                    
+                    star.scale.set(scaleFactor, scaleFactor, scaleFactor);
+                    
+                    // 如果是近距離星球，添加自轉效果
+                    if (star.userData.isNearby && star.userData.rotationSpeed) {
+                        star.rotation.x += star.userData.rotationSpeed.x;
+                        star.rotation.y += star.userData.rotationSpeed.y;
+                        star.rotation.z += star.userData.rotationSpeed.z;
+                    }
+                }
+            });
+            
+            // 渲染場景
+            renderer.render(scene, camera);
+        }
+        
+        // 初始化場景
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>直接 Canvas 測試</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding-top: 20vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- 直接在 HTML 中放置 Canvas 元素 -->
+    <canvas id="canvas"></canvas>
+    
+    <div class="content">
+        <h1>直接 Canvas 測試</h1>
+        <p>Canvas 元素直接放在 HTML 中，而不是通過 JavaScript 創建</p>
+    </div>
+
+    <script>
+        // 獲取 Canvas 元素
+        const canvas = document.getElementById('canvas');
+        
+        // 設置 Canvas 大小為窗口大小
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            console.log(`Canvas resized: ${canvas.width}x${canvas.height}`);
+        }
+        
+        // 初始化 Canvas 大小
+        resizeCanvas();
+        
+        // 監聽窗口大小變化
+        window.addEventListener('resize', resizeCanvas);
+        
+        // 獲取繪圖上下文
+        const ctx = canvas.getContext('2d');
+        
+        // 星星參數
+        const stars = [];
+        const starCount = 200;
+        
+        // 創建星星
+        function createStars() {
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speed: Math.random() * 0.05 + 0.01
+                });
+            }
+        }
+        
+        // 繪製星星
+        function drawStars() {
+            // 清空畫布，使用半透明黑色來創建拖尾效果
+            ctx.fillStyle = 'rgba(18, 18, 18, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 繪製所有星星
+            for (let i = 0; i < stars.length; i++) {
+                const star = stars[i];
+                
+                // 更新星星位置
+                star.y += star.speed;
+                
+                // 如果星星超出畫布底部，將其重置到頂部
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+                
+                // 繪製星星
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+            
+            // 添加調試信息
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '16px Arial';
+            ctx.fillText(`Stars: ${stars.length}`, 10, 30);
+            ctx.fillText(`Canvas: ${canvas.width}x${canvas.height}`, 10, 60);
+            
+            // 繼續動畫
+            requestAnimationFrame(drawStars);
+        }
+        
+        // 初始化星星
+        createStars();
+        
+        // 啟動動畫
+        drawStars();
+        
+        console.log("Animation started with", stars.length, "stars");
+    </script>
+</body>
+</html>
