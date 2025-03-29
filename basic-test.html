@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>基本 Canvas 測試</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>基本 Canvas 測試</h1>
+        <p>這個頁面只包含最基本的 Canvas 繪圖代碼</p>
+    </div>
+
+    <script>
+        // 創建 Canvas 元素
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        document.body.appendChild(canvas);
+
+        // 獲取繪圖上下文
+        const ctx = canvas.getContext('2d');
+
+        // 繪製一些基本形狀
+        function draw() {
+            // 清空畫布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 繪製一個白色圓形
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 50, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+
+            // 繪製一些星星
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 2 + 0.5;
+
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.fill();
+            }
+
+            // 添加調試信息
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '16px Arial';
+            ctx.fillText(`Canvas size: ${canvas.width}x${canvas.height}`, 10, 30);
+            ctx.fillText(`Time: ${new Date().toLocaleTimeString()}`, 10, 60);
+
+            // 繼續動畫
+            requestAnimationFrame(draw);
+        }
+
+        // 啟動動畫
+        draw();
+
+        // 處理窗口大小變化
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // 輸出調試信息
+        console.log('Canvas created:', canvas);
+        console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
+    </script>
+</body>
+</html>

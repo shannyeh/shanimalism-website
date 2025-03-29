@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Background Preview</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow: hidden;
+        }
+        
+        body.light-mode {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* 直接在頁面中定義 Canvas 樣式 */
+        #space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* 使用正值 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 直接在 HTML 中放置 Canvas 元素 -->
+    <canvas id="space-background"></canvas>
+    
+    <div class="container">
+        <h1>Space Background Preview</h1>
+        <p>這是一個專門用於預覽宇宙背景效果的頁面</p>
+        <button id="theme-toggle">切換日/夜間模式</button>
+    </div>
+
+    <script>
+        // 主題切換功能
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            
+            // 觸發主題變更事件
+            const event = new CustomEvent('themeChanged', {
+                detail: {
+                    theme: document.body.classList.contains('light-mode') ? 'light' : 'dark'
+                }
+            });
+            document.dispatchEvent(event);
+        });
+    </script>
+    
+    <!-- 引入宇宙背景腳本 -->
+    <script>
+        // 內嵌基本的星星動畫代碼，確保有東西可以顯示
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Inline space background initializing...");
+            
+            // 獲取 Canvas 元素
+            const canvas = document.getElementById('space-background');
+            
+            // 設置 Canvas 大小
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                console.log(`Canvas resized to: ${canvas.width}x${canvas.height}`);
+            }
+            
+            // 初始化 Canvas 大小
+            resizeCanvas();
+            
+            // 監聽窗口大小變化
+            window.addEventListener('resize', resizeCanvas);
+            
+            // 獲取繪圖上下文
+            const ctx = canvas.getContext('2d');
+            
+            // 星星參數
+            const starCount = 200;
+            const stars = [];
+            
+            // 創建星星
+            function createStars() {
+                for (let i = 0; i < starCount; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: Math.random() * 2 + 0.5,
+                        brightness: 0.5 + Math.random() * 0.5
+                    });
+                }
+                console.log(`Created ${stars.length} stars`);
+            }
+            
+            // 繪製星星
+            function drawStars() {
+                // 清空畫布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 繪製所有星星
+                for (let i = 0; i < stars.length; i++) {
+                    const star = stars[i];
+                    
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness})`;
+                    ctx.fill();
+                }
+                
+                // 添加調試信息
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.font = '16px Arial';
+                ctx.fillText(`Stars: ${stars.length}`, 10, 30);
+                ctx.fillText(`Canvas: ${canvas.width}x${canvas.height}`, 10, 60);
+                
+                // 繼續動畫
+                requestAnimationFrame(drawStars);
+            }
+            
+            // 初始化星星
+            createStars();
+            
+            // 啟動動畫
+            drawStars();
+            
+            console.log("Inline space background initialized");
+        });
+    </script>
+    
+    <!-- 最後才引入外部腳本 -->
+    <script src="js/spaceBackground.js"></script>
+</body>
+</html>
