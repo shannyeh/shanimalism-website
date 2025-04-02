@@ -39,7 +39,7 @@ html.dark-mode {
 }
 
 html {
-    background-color: var(--background-color);
+    background-color: transparent;
     height: 100%;
     width: 100%;
     scroll-behavior: smooth;
@@ -48,7 +48,7 @@ html {
 body {
     font-family: var(--font-body);
     color: var(--text-color);
-    background-color: var(--background-color);
+    background-color: transparent;
     line-height: 1.6;
     overflow-x: hidden;
     height: 100%;
@@ -58,7 +58,7 @@ body {
 body, html, .main-content, .services, .projects, .about, .contact, 
 .service-item, .project-item, .about-content, .contact-content,
 .section-header, .services-grid, .projects-grid, .project-info {
-    background-color: var(--background-color);
+    background-color: transparent;
 }
 
 a, button, input[type="submit"], .logo, .sound-toggle, .social-link {
@@ -161,7 +161,7 @@ button {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background-color: var(--background-color);
+    background-color: transparent;
     transform: scale(0);
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     z-index: 3; 
@@ -340,7 +340,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: var(--section-spacing);
-    background-color: var(--background-color) !important;
+    background-color: transparent !important;
 }
 
 /* Hero Section */
@@ -354,7 +354,7 @@ button {
     position: relative;
     overflow: hidden; 
     padding: 0; 
-    background-color: var(--background-color);
+    background-color: transparent;
 }
 
 .featured-image {
@@ -388,7 +388,7 @@ button {
     left: 0;
     width: 100%;
     height: 30%;
-    background: linear-gradient(to top, rgba(var(--background-color-rgb), 1), rgba(var(--background-color-rgb), 0));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
     pointer-events: none;
 }
 
@@ -456,7 +456,7 @@ button {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    background-color: var(--background-color) !important;
+    background-color: transparent !important;
 }
 
 .service-item:hover {
@@ -509,7 +509,7 @@ button {
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
-    background-color: var(--background-color) !important;
+    background-color: transparent !important;
 }
 
 .project-image {
@@ -605,7 +605,7 @@ button {
 .services, .projects, .about, .contact {
     padding: 0 calc(var(--spacing-unit) * 5);
     margin-top: var(--section-spacing);
-    background-color: var(--background-color) !important;
+    background-color: transparent !important;
 }
 
 /* 第一個非Hero區塊需要額外的上邊距 */
@@ -763,8 +763,9 @@ body::before {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    background-image: none;
-    background-size: auto;
+    /* 移除舊的背景圖像設置，現在使用 Three.js 3D 效果 */
+    /* background-image: none; */
+    /* background-size: auto; */
 }
 
 /* Space background container - will be populated by JavaScript */
@@ -1009,4 +1010,51 @@ body::before {
     .featured-image {
         max-width: 100%;
     }
+}
+
+/* Space Preview Styles */
+.space-preview-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.space-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.space-controls button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.space-controls button:hover {
+    background-color: #666;
+}
+
+.space-info {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
 }
