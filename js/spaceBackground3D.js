@@ -79,8 +79,9 @@ document.addEventListener("DOMContentLoaded", function() {
             window.addEventListener('resize', onWindowResize, false);
             
             // 監聽主題變更
-            document.addEventListener('themeChanged', function(e) {
-                isDarkMode = e.detail.isDarkMode;
+            document.addEventListener('themeChanged', function(event) {
+                console.log("Theme changed event received in space background:", event.detail.theme);
+                isDarkMode = event.detail.theme === 'dark';
                 toggleTheme();
             });
             
