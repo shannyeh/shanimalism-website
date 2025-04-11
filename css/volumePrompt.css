@@ -1,0 +1,189 @@
+/* 宇宙風格音量提示樣式 */
+.volume-prompt {
+    position: fixed;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%) scale(0.95);
+    background-color: rgba(245, 245, 245, 0.15);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.02em;
+    font-size: 12px;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 180px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+    pointer-events: all;
+}
+
+.volume-prompt.show {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.dark-mode .volume-prompt {
+    background-color: rgba(18, 18, 18, 0.15);
+    border-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.light-mode .volume-prompt {
+    background-color: rgba(245, 245, 245, 0.15);
+    color: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* 宇宙風格音量圖標 */
+.volume-prompt-icon {
+    display: block;
+    margin: 0 auto 15px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+.dark-mode .volume-prompt-icon {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.volume-prompt-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px rgba(200, 200, 255, 0.3);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.volume-prompt-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(200, 200, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.volume-prompt-text {
+    display: block;
+    line-height: 1.5;
+    font-weight: 200;
+    margin-bottom: 15px;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    max-width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.volume-prompt-text strong {
+    font-weight: 600;
+}
+
+/* 星星動畫效果 */
+@keyframes cosmic-pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@keyframes star-twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.2; }
+}
+
+.volume-prompt-icon i {
+    animation: cosmic-pulse 3s infinite;
+}
+
+/* 星星裝飾 */
+.cosmic-star {
+    position: absolute;
+    background-color: rgba(200, 200, 255, 0.8);
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    animation: star-twinkle 2s infinite;
+}
+
+/* 關閉按鈕 */
+.volume-prompt-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.3s;
+    color: rgba(0, 0, 0, 0.6);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    padding: 5px;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+.dark-mode .volume-prompt-close {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.volume-prompt-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .volume-prompt-close:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 動作按鈕 */
+.volume-prompt-action {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 6px 15px;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.05em;
+    font-weight: 300;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.dark-mode .volume-prompt-action {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.volume-prompt-action:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    transform: translateY(-2px);
+}
+
+.dark-mode .volume-prompt-action:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
