@@ -120,7 +120,7 @@ button {
     top: 0;
     left: 0;
     width: 100%;
-    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 5); 
+    padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 5); 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -133,24 +133,45 @@ button {
 /* Logo */
 .logo {
     position: relative;
-}
-
-.logo-static {
-    width: 40px;
-    height: 40px;
+    height: 100px;
+    width: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--primary-color);
-    border-radius: 50%;
+    overflow: hidden;
 }
 
-.logo-static span {
-    font-family: var(--font-main);
-    font-size: 20px;
-    font-weight: 300;
-    color: var(--primary-color);
-    letter-spacing: -0.03em;
+/* Logo 圖片樣式 */
+.logo-img {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+    object-position: center;
+    transition: opacity 0.3s ease;
+    transform: scale(1.2);
+    transform-origin: center;
+}
+
+/* 日間模式顯示黑色 logo，隱藏白色 logo */
+.logo-light {
+    display: block;
+    opacity: 1;
+}
+
+.logo-dark {
+    display: none;
+    opacity: 0;
+}
+
+/* 夜間模式顯示白色 logo，隱藏黑色 logo */
+.dark-mode .logo-light {
+    display: none;
+    opacity: 0;
+}
+
+.dark-mode .logo-dark {
+    display: block;
+    opacity: 1;
 }
 
 /* 月亮效果 */
@@ -691,7 +712,7 @@ button {
     }
     
     .site-header {
-        padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+        padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 2);
     }
     
     .main-content {
@@ -716,6 +737,18 @@ button {
     align-items: center;
     border-top: 1px solid rgba(var(--primary-color-rgb), 0.1);
     margin-top: calc(var(--spacing-unit) * 10);
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: calc(var(--spacing-unit) * 1);
+    padding-bottom: calc(var(--spacing-unit) * 6);
+    text-align: center;
 }
 
 /* Ambient Controls */
@@ -959,7 +992,18 @@ body::before {
     }
     
     .site-header {
-        padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+        padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 2);
+    }
+    
+    .logo {
+        height: 100px;
+        width: 100px;
+    }
+    
+    .logo-img {
+        height: 90px;
+        width: 90px;
+        transform: scale(1.2);
     }
     
     .main-content {
@@ -993,6 +1037,17 @@ body::before {
 @media (max-width: 480px) {
     body {
         font-size: 14px;
+    }
+    
+    .logo {
+        height: 80px;
+        width: 80px;
+    }
+    
+    .logo-img {
+        height: 80px;
+        width: 80px;
+        transform: scale(1.2);
     }
     
     .hero-title {
