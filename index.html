@@ -33,6 +33,7 @@
     <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="css/styles.css?v=1.0.7">
     <link rel="stylesheet" href="css/musicPlayer.css?v=1.0.10">
+    <link rel="stylesheet" href="css/volumePrompt.css?v=1.0.0">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -238,6 +239,20 @@
         </div>
     </footer>
 
+    <!-- 宇宙風格音量提示 -->
+    <div class="volume-prompt">
+        <span class="volume-prompt-icon"><i class="fas fa-volume-up"></i></span>
+        <span class="volume-prompt-text"><strong>Volume up.</strong> Breathe in the chill between the stars.</span>
+        <button class="volume-prompt-action">tune in</button>
+        <span class="volume-prompt-close">&times;</span>
+        <!-- 裝飾星星 -->
+        <span class="cosmic-star" style="top: 15%; left: 20%;"></span>
+        <span class="cosmic-star" style="top: 25%; left: 85%;"></span>
+        <span class="cosmic-star" style="top: 65%; left: 15%;"></span>
+        <span class="cosmic-star" style="top: 80%; left: 75%;"></span>
+        <span class="cosmic-star" style="top: 40%; left: 90%;"></span>
+    </div>
+
     <!-- Three.js 庫 - 不使用defer確保優先載入 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- 網站腳本 -->
@@ -245,5 +260,6 @@
     <script src="js/navigation.js?v=1.0.3" defer></script>
     <script src="js/musicPlayer.js?v=1.1.1" defer></script>
     <script src="js/spaceBackground3D.js?v=1.0.1"></script>
+    <script src="js/volumePrompt.js?v=1.0.0" defer></script>
 </body>
 </html>
