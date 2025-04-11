@@ -123,11 +123,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.album-cover:hover {
-    transform: scale(1.05) translateY(-4px);
-    filter: grayscale(0);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-}
+/* 移除歌曲圖片的 hover 效果，保持純圖片顯示 */
 
 .track-info {
     flex: 1;
