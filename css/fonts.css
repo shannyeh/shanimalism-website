@@ -1,0 +1,29 @@
+/* Albertus Nova Thin Font */
+@font-face {
+    font-family: 'Albertus Nova';
+    src: url('../assets/fonts/Albertus Nova/albertusnovathin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Calibri Font */
+@font-face {
+    font-family: 'Calibri';
+    src: local('Calibri');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 確保字體在各種瀏覽器中正確顯示 */
+.albertus-nova-thin {
+    font-family: 'Albertus Nova', serif;
+    font-weight: 100;
+    letter-spacing: 0.2em; /* 字母間距 200 */
+}
+
+/* 用於內文和小字的 Calibri 字體 */
+.calibri-text {
+    font-family: 'Calibri', 'Arial', sans-serif;
+    letter-spacing: 0.2em; /* 字母間距 200 */
+}

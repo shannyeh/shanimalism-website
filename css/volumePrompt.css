@@ -182,9 +182,10 @@
     font-size: 11px;
     cursor: var(--cursor-pointer);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    letter-spacing: 0.05em;
-    font-weight: 300;
-    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.2em; /* 字母間距 200 */
+    font-weight: 100; /* Thin weight */
+    font-family: var(--font-heading);
+    text-transform: uppercase;
 }
 
 .dark-mode .volume-prompt-action {
