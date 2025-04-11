@@ -24,7 +24,7 @@
 }
 
 .music-player.collapsed {
-    transform: translateX(calc(-100% + 25px));
+    transform: translateX(calc(-100% + 15px));
     border-radius: 0 16px 16px 0;
 }
 
@@ -33,35 +33,40 @@
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    z-index: 10;
+    top: 15px;
+    right: 10px;
 }
 
 .toggle-player {
     background: none;
     border: none;
     cursor: var(--cursor-pointer);
-    padding: 6px;
+    padding: 4px;
     opacity: 0.8;
     transition: all 0.4s ease;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     position: relative;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .toggle-player:hover {
     opacity: 1;
-    transform: translateX(-3px);
+    transform: scale(1.1);
 }
 
 .toggle-icon {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -69,13 +74,11 @@
 .toggle-icon::before {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-left: 1px solid var(--text-color);
     border-bottom: 1px solid var(--text-color);
-    top: 50%;
-    left: 50%;
-    transform: translate(-60%, -50%) rotate(45deg);
+    transform: rotate(45deg);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -83,9 +86,9 @@
 .collapsed .toggle-icon::before {
     border-left: 1px solid var(--text-color);
     border-bottom: 1px solid var(--text-color);
-    transform: translate(-40%, -50%) rotate(-135deg);
-    width: 10px;
-    height: 10px;
+    transform: rotate(-135deg);
+    width: 8px;
+    height: 8px;
 }
 
 .toggle-icon::after {
@@ -102,6 +105,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 .album-cover {
@@ -443,9 +447,11 @@
 
 .music-player.collapsed .player-header {
     margin-bottom: 0;
+    /* 保持與展開狀態相同的位置 */
     position: absolute;
-    right: -5px;
-    top: 20px;
+    top: 15px;
+    right: 10px;
+    transform: none;
 }
 
 /* 響應式調整 */
@@ -472,6 +478,6 @@
     }
     
     .music-player.collapsed {
-        transform: translateX(calc(-100% + 30px));
+        transform: translateX(calc(-100% + 15px));
     }
 }
