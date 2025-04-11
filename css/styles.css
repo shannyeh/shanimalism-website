@@ -74,7 +74,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 100; /* Thin weight */
     margin-bottom: 1rem;
     letter-spacing: 0.2em; /* 字母間距 200 */
-    text-transform: uppercase;
 }
 
 a {
@@ -357,7 +356,6 @@ button:hover,
     opacity: 0.8;
     padding: calc(var(--spacing-unit) * 0.5) 0;
     position: relative;
-    text-transform: uppercase;
 }
 
 .navigation a:hover {

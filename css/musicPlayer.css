@@ -136,7 +136,6 @@
     letter-spacing: 0.2em; /* 字母間距 200 */
     color: var(--text-color);
     font-family: var(--font-heading);
-    text-transform: uppercase;
 }
 
 .track-artist {
