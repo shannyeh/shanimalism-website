@@ -20,7 +20,7 @@ class MusicPlayer {
         this.audio.addEventListener('ended', () => this.playNext());
         
         // 設置自動播放
-        this.audio.autoplay = true;
+        this.audio.autoplay = false; // 禁用自動播放，等待用戶互動
         
         // 獲取DOM元素
         this.playerElement = document.querySelector('.music-player');
@@ -308,45 +308,25 @@ class MusicPlayer {
     
     // 嘗試自動播放音樂
     attemptAutoplay() {
-        console.log('Attempting autoplay...');
+        console.log('不再嘗試自動播放，等待用戶互動');
+        // 不再嘗試自動播放，而是等待用戶點擊 tune in 按鈕或調整音量
+        // 更新 UI 為非播放狀態
+        this._updatePlayPauseUI(false);
         
-        // 立即將播放器界面設置為播放狀態
-        this._updatePlayPauseUI(true);
-        
-        // 嘗試直接播放，會觸發瀏覽器的授權提示
-        this.audio.play()
-            .then(() => {
-                console.log('Autoplay successful!');
-                // 播放成功，界面已經設置為播放狀態
-                localStorage.setItem('isPlaying', 'true');
-            })
-            .catch(error => {
-                console.log('Autoplay failed, waiting for user interaction:', error);
-                
-                // 即使播放失敗，仍然保持播放器界面為播放狀態
-                // 當用戶點擊頁面時將自動嘗試播放
-                const autoplayHandler = () => {
-                    this.play();
-                    // 移除所有事件監聽器，避免重複播放
-                    ['click', 'touchstart', 'keydown'].forEach(event => {
-                        document.removeEventListener(event, autoplayHandler);
-                    });
-                };
-                
-                // 添加多種互動事件監聽器
-                ['click', 'touchstart', 'keydown'].forEach(event => {
-                    document.addEventListener(event, autoplayHandler);
-                });
-            });
+        // 不再添加事件監聽器，等待用戶點擊 tune in 按鈕
     }
 }
 
 // Initialize music player after DOM has loaded
 document.addEventListener('DOMContentLoaded', function() {
-    const player = new MusicPlayer();
-    
-    // 嘗試自動播放
-    setTimeout(() => {
-        player.attemptAutoplay();
-    }, 1000); // 延遲 1 秒後嘗試自動播放，確保頁面已完全加載
+    console.log("DOM loaded, initializing music player");
+    try {
+        const player = new MusicPlayer();
+        window.musicPlayer = player; // 將播放器實例添加到全局變量
+        player.loadTrack(0);
+        // 不再自動播放，等待用戶點擊 tune in 按鈕或調整音量
+        // player.attemptAutoplay(); // 已移除自動播放
+    } catch (e) {
+        console.error("Error initializing music player:", e);
+    }
 });

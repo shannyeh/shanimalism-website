@@ -24,16 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 加入更多星星的動畫效果
     addCosmicEffects();
     
-    // 直接顯示提示（用於測試）
+    // 顯示提示，但不自動關閉
     setTimeout(function() {
         console.log('顯示音量提示');
         volumePrompt.classList.add('show');
         volumePrompt.style.display = 'block';
         
-        // 20秒後自動隱藏提示
-        setTimeout(function() {
-            hidePrompt();
-        }, 20000);
+        // 不再自動關閉，只能由用戶點擊關閉
     }, 1000);
     
     // 點擊關閉按鈕隱藏提示 - 直接使用onclick屬性
@@ -43,21 +40,57 @@ document.addEventListener('DOMContentLoaded', function() {
         return false; // 防止事件冒泡
     };
     
-    // 點擊校準音量按鈕
+    // 點擊 tune in 按鈕
     actionBtn.addEventListener('click', function() {
-        // 獲取音樂播放器實例
-        const volumeSlider = document.querySelector('.volume-slider');
-        if (volumeSlider) {
-            // 設置音量為70%
-            volumeSlider.value = 0.7;
-            // 觸發輸入事件來更新音量
-            const event = new Event('input');
-            volumeSlider.dispatchEvent(event);
+        console.log('點擊 tune in 按鈕');
+        
+        // 直接使用全局音樂播放器實例
+        if (window.musicPlayer) {
+            console.log('找到音樂播放器實例');
             
-            // 如果有音樂播放器的音量設置方法，也直接調用
+            // 設置音量為70%
+            window.musicPlayer.audio.volume = 0.7;
+            
+            // 更新音量滑塊
+            if (window.musicPlayer.volumeSlider) {
+                window.musicPlayer.volumeSlider.value = 0.7;
+            }
+            
+            // 播放音樂
+            window.musicPlayer.play();
+            console.log('已呼叫音樂播放器的 play 方法');
+        } else {
+            console.error('找不到音樂播放器實例');
+            
+            // 備用方案：直接操作 DOM 元素
             const audio = document.querySelector('audio');
-            if (audio) {
+            const volumeSlider = document.querySelector('.volume-slider');
+            const musicPlayer = document.querySelector('.music-player');
+            
+            if (audio && volumeSlider) {
+                // 設置音量
                 audio.volume = 0.7;
+                volumeSlider.value = 0.7;
+                
+                // 觸發輸入事件
+                const event = new Event('input');
+                volumeSlider.dispatchEvent(event);
+                
+                // 播放音樂
+                audio.play()
+                    .then(() => {
+                        console.log('音樂已開始播放');
+                        if (musicPlayer) {
+                            musicPlayer.classList.add('playing');
+                            const playButton = musicPlayer.querySelector('.play-button');
+                            if (playButton) {
+                                playButton.classList.add('playing');
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('播放音樂時發生錯誤:', error);
+                    });
             }
         }
         
