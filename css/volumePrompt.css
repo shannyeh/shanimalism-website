@@ -185,7 +185,6 @@
     letter-spacing: 0.2em; /* 字母間距 200 */
     font-weight: 100; /* Thin weight */
     font-family: var(--font-heading);
-    text-transform: uppercase;
 }
 
 .dark-mode .volume-prompt-action {
