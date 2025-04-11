@@ -24,8 +24,8 @@
 }
 
 .music-player.collapsed {
-    transform: translateY(calc(100% - 70px));
-    border-radius: 16px 16px 0 0;
+    transform: translateX(calc(-100% + 25px));
+    border-radius: 0 16px 16px 0;
 }
 
 .player-header {
@@ -33,6 +33,8 @@
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .toggle-player {
@@ -40,16 +42,17 @@
     border: none;
     cursor: var(--cursor-pointer);
     padding: 6px;
-    opacity: 0.6;
+    opacity: 0.8;
     transition: all 0.4s ease;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     position: relative;
+    z-index: 10;
 }
 
 .toggle-player:hover {
     opacity: 1;
-    transform: translateY(-3px);
+    transform: translateX(-3px);
 }
 
 .toggle-icon {
@@ -66,26 +69,34 @@
 .toggle-icon::before {
     content: '';
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     border-left: 1px solid var(--text-color);
     border-bottom: 1px solid var(--text-color);
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -50%) rotate(45deg);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 折疊狀態 */
+/* 折疊狀態 - 向右箭頭 */
 .collapsed .toggle-icon::before {
-    transform: rotate(-45deg) translate(-2px, -2px);
-    width: 12px;
-    height: 12px;
+    border-left: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    transform: translate(-40%, -50%) rotate(-135deg);
+    width: 10px;
+    height: 10px;
 }
 
-.toggle-icon::after, 
+.toggle-icon::after {
+    display: none;
+}
+
 .toggle-icon span {
     display: none;
 }
+
+
 
 .album-info {
     display: flex;
@@ -425,10 +436,16 @@
 .music-player.collapsed .controls {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.3s ease;
 }
+
+
 
 .music-player.collapsed .player-header {
     margin-bottom: 0;
+    position: absolute;
+    right: -5px;
+    top: 20px;
 }
 
 /* 響應式調整 */
@@ -452,5 +469,9 @@
         left: 10px;
         width: calc(100% - 20px);
         border-radius: 16px;
+    }
+    
+    .music-player.collapsed {
+        transform: translateX(calc(-100% + 30px));
     }
 }
