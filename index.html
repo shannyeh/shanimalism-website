@@ -27,8 +27,8 @@
         // 初始設置 favicon
         function updateFavicon() {
             const isDarkMode = document.documentElement.classList.contains('dark-mode');
-            document.getElementById('favicon-light').rel = isDarkMode ? '' : 'icon';
-            document.getElementById('favicon-dark').rel = isDarkMode ? 'icon' : '';
+            document.getElementById('favicon-light').rel = isDarkMode ? 'icon' : '';
+            document.getElementById('favicon-dark').rel = isDarkMode ? '' : 'icon';
         }
         
         // 頁面加載時設置 favicon
