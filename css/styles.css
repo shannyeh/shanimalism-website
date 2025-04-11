@@ -111,7 +111,17 @@ button {
     font-size: 14px;
     color: var(--primary-color);
     cursor: var(--cursor-pointer);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 統一的按鈕 hover 效果 */
+button:hover,
+.button:hover,
+[class*="-button"]:hover,
+[class*="-btn"]:hover,
+[class*="-toggle"]:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
 /* Header */
@@ -139,6 +149,7 @@ button {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    cursor: var(--cursor-pointer);
 }
 
 /* Logo 圖片樣式 */
