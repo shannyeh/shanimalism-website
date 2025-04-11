@@ -4,7 +4,7 @@ const musicLibrary = [
         title: "Romanticism 2.0",
         artist: "Yun",
         file: "assets/sounds/music/y2mate.com - 姜云升  浪漫主义 伴奏.mp3",
-        cover: "assets/images/favicon/barebreathe favicon_white.png"
+        cover: "assets/images/favicon/barebreathe%20favicon_white.png"
     }
 ];
 
@@ -18,6 +18,9 @@ class MusicPlayer {
         // 初始化音頻對象
         this.audio = new Audio();
         this.audio.addEventListener('ended', () => this.playNext());
+        
+        // 設置自動播放
+        this.audio.autoplay = true;
         
         // 獲取DOM元素
         this.playerElement = document.querySelector('.music-player');
@@ -63,6 +66,9 @@ class MusicPlayer {
         
         // 加載當前曲目
         this.loadTrack(this.currentTrackIndex);
+        
+        // 嘗試自動播放
+        this.attemptAutoplay();
         
         // 監聽主題變更
         this.observeThemeChanges();
@@ -155,18 +161,20 @@ class MusicPlayer {
     play() {
         console.log('play method called');
         
-        // Play the audio
+        // 先更新 UI 為播放狀態，不管播放是否成功
+        this._updatePlayPauseUI(true);
+        localStorage.setItem('isPlaying', 'true');
+        
+        // 嘗試播放音頻
         this.audio.play()
             .then(() => {
                 console.log('Audio playback started successfully');
-                // Update UI after successful playback start
-                this._updatePlayPauseUI(true);
             })
             .catch(error => {
                 console.error('Error playing audio:', error);
+                // 即使播放失敗，仍然保持播放器界面為播放狀態
+                // 當用戶與頁面互動時，我們會在 attemptAutoplay 方法中再次嘗試播放
             });
-        
-        localStorage.setItem('isPlaying', 'true');
     }
     
     pause() {
@@ -297,9 +305,48 @@ class MusicPlayer {
             // Since we use CSS variables, most styles will adapt automatically
         });
     }
+    
+    // 嘗試自動播放音樂
+    attemptAutoplay() {
+        console.log('Attempting autoplay...');
+        
+        // 立即將播放器界面設置為播放狀態
+        this._updatePlayPauseUI(true);
+        
+        // 嘗試直接播放，會觸發瀏覽器的授權提示
+        this.audio.play()
+            .then(() => {
+                console.log('Autoplay successful!');
+                // 播放成功，界面已經設置為播放狀態
+                localStorage.setItem('isPlaying', 'true');
+            })
+            .catch(error => {
+                console.log('Autoplay failed, waiting for user interaction:', error);
+                
+                // 即使播放失敗，仍然保持播放器界面為播放狀態
+                // 當用戶點擊頁面時將自動嘗試播放
+                const autoplayHandler = () => {
+                    this.play();
+                    // 移除所有事件監聽器，避免重複播放
+                    ['click', 'touchstart', 'keydown'].forEach(event => {
+                        document.removeEventListener(event, autoplayHandler);
+                    });
+                };
+                
+                // 添加多種互動事件監聽器
+                ['click', 'touchstart', 'keydown'].forEach(event => {
+                    document.addEventListener(event, autoplayHandler);
+                });
+            });
+    }
 }
 
 // Initialize music player after DOM has loaded
 document.addEventListener('DOMContentLoaded', function() {
-    new MusicPlayer();
+    const player = new MusicPlayer();
+    
+    // 嘗試自動播放
+    setTimeout(() => {
+        player.attemptAutoplay();
+    }, 1000); // 延遲 1 秒後嘗試自動播放，確保頁面已完全加載
 });
