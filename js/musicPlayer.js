@@ -1,34 +1,10 @@
 // 音樂資料庫
 const musicLibrary = [
     {
-        title: "Ambient Flow",
-        artist: "Barebreathe Studio",
-        file: "assets/sounds/music/ambient-flow.mp3",
-        cover: "assets/images/music-covers/ambient-flow.jpg"
-    },
-    {
-        title: "Minimal Waves",
-        artist: "Barebreathe Studio",
-        file: "assets/sounds/music/minimal-waves.mp3",
-        cover: "assets/images/music-covers/minimal-waves.jpg"
-    },
-    {
-        title: "Distant Dreams",
-        artist: "Barebreathe Studio",
-        file: "assets/sounds/music/distant-dreams.mp3",
-        cover: "assets/images/music-covers/distant-dreams.jpg"
-    },
-    {
-        title: "Quiet Thoughts",
-        artist: "Barebreathe Studio",
-        file: "assets/sounds/music/quiet-thoughts.mp3",
-        cover: "assets/images/music-covers/quiet-thoughts.jpg"
-    },
-    {
-        title: "Gentle Breeze",
-        artist: "Barebreathe Studio",
-        file: "assets/sounds/music/gentle-breeze.mp3",
-        cover: "assets/images/music-covers/gentle-breeze.jpg"
+        title: "Romanticism 2.0",
+        artist: "Yun",
+        file: "assets/sounds/music/y2mate.com - 姜云升  浪漫主义 伴奏.mp3",
+        cover: "assets/images/favicon/barebreathe favicon_white.png"
     }
 ];
 
