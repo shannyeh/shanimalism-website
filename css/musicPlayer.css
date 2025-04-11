@@ -130,7 +130,7 @@
 }
 
 .track-title {
-    font-size: 15px;
+    font-size: 13px; /* 減小字體大小 */
     font-weight: 100; /* Thin weight */
     margin-bottom: 8px;
     letter-spacing: 0.2em; /* 字母間距 200 */
