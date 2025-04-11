@@ -10,8 +10,8 @@
 /* Calibri Font */
 @font-face {
     font-family: 'Calibri';
-    src: local('Calibri');
-    font-weight: normal;
+    src: local('Calibri Light'), local('Calibri-Light');
+    font-weight: 300; /* Light */
     font-style: normal;
 }
 
