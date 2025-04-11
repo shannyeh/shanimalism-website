@@ -57,11 +57,7 @@ body {
     transition: background-color 0.5s ease, color 0.5s ease;
     cursor: var(--cursor-default);
     letter-spacing: 0.2em; /* 字母間距 200 */
-    font-weight: 200; /* 更細的粗細度 */
-    -webkit-font-smoothing: antialiased; /* 增強字體渲染 */
-    -moz-osx-font-smoothing: grayscale; /* 增強字體渲染 */
-    font-synthesis: none; /* 避免字體合成增粗 */
-    opacity: 0.85; /* 略微降低不透明度使字體看起來更細 */
+    font-weight: 300; /* Light 粗細度 */
 }
 
 body, html, .main-content, .services, .projects, .about, .contact, 

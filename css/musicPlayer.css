@@ -143,12 +143,8 @@
     opacity: 0.7;
     letter-spacing: 0.2em; /* 字母間距 200 */
     color: var(--text-color);
-    font-weight: 200; /* 更細的粗細度 */
+    font-weight: normal;
     font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased; /* 增強字體渲染 */
-    -moz-osx-font-smoothing: grayscale; /* 增強字體渲染 */
-    font-synthesis: none; /* 避免字體合成增粗 */
-    opacity: 0.85; /* 略微降低不透明度使字體看起來更細 */
 }
 
 .progress-container {

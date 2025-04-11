@@ -90,25 +90,18 @@
 .volume-prompt-text {
     display: block;
     line-height: 1.5;
-    font-weight: 200; /* 更細的粗細度 */
+    font-weight: 200;
     margin-bottom: 15px;
-    letter-spacing: 0.2em; /* 字母間距 200 */
+    letter-spacing: 0.05em;
     font-size: 12px;
-    font-family: var(--font-body); /* Calibri Light */
+    font-family: 'IBM Plex Mono', monospace;
     max-width: 160px;
     margin-left: auto;
     margin-right: auto;
-    -webkit-font-smoothing: antialiased; /* 增強字體渲染 */
-    -moz-osx-font-smoothing: grayscale; /* 增強字體渲染 */
-    font-synthesis: none; /* 避免字體合成增粗 */
-    opacity: 0.85; /* 略微降低不透明度使字體看起來更細 */
 }
 
 .volume-prompt-text strong {
-    font-weight: 700; /* 更粗的粗體效果 */
-    font-family: var(--font-body); /* Calibri Light */
-    opacity: 1; /* 完全不透明度使粗體更明顯 */
-    letter-spacing: 0.15em; /* 稍微縮小字母間距使粗體更明顯 */
+    font-weight: 600;
 }
 
 /* 星星動畫效果 */
