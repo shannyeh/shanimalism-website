@@ -6,7 +6,8 @@
     --text-color: #333333;
     --background-color: #f5f5f5;
     --font-main: 'IBM Plex Mono', monospace;
-    --font-body: 'Inter', sans-serif;
+    --font-body: 'Calibri', 'Arial', sans-serif;
+    --font-heading: 'Albertus Nova', serif;
     --spacing-unit: 8px;
     --section-spacing: 180px;
     --primary-color-rgb: 0, 0, 0;
@@ -47,12 +48,15 @@ html {
 
 body {
     font-family: var(--font-body);
-    color: var(--text-color);
-    background-color: transparent;
+    color: var(--primary-color);
+    background-color: var(--background-color);
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
-    height: 100%;
-    width: 100%;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    cursor: var(--cursor-default);
+    letter-spacing: 0.2em; /* 字母間距 200 */
 }
 
 body, html, .main-content, .services, .projects, .about, .contact, 
@@ -66,10 +70,11 @@ a, button, input[type="submit"], .logo, .sound-toggle, .social-link {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-main);
-    font-weight: 300;
+    font-family: var(--font-heading);
+    font-weight: 100; /* Thin weight */
     margin-bottom: 1rem;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.2em; /* 字母間距 200 */
+    text-transform: uppercase;
 }
 
 a {
@@ -345,13 +350,14 @@ button:hover,
 }
 
 .navigation a {
-    font-family: var(--font-main);
+    font-family: var(--font-heading);
     font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 0.02em;
+    font-weight: 100;
+    letter-spacing: 0.2em;
     opacity: 0.8;
     padding: calc(var(--spacing-unit) * 0.5) 0;
     position: relative;
+    text-transform: uppercase;
 }
 
 .navigation a:hover {
@@ -467,8 +473,8 @@ button:hover,
 
 .section-header h2 {
     font-size: clamp(24px, 5vw, 32px);
-    font-weight: 200;
-    letter-spacing: -0.03em;
+    font-weight: 100; /* Thin weight */
+    letter-spacing: 0.2em; /* 字母間距 200 */
     position: relative;
 }
 
@@ -529,7 +535,8 @@ button:hover,
 .service-item h3 {
     font-size: 18px;
     margin-bottom: calc(var(--spacing-unit) * 2);
-    font-weight: 300;
+    font-weight: 100; /* Thin weight */
+    letter-spacing: 0.2em; /* 字母間距 200 */
 }
 
 .service-item p {
@@ -580,7 +587,8 @@ button:hover,
 .project-info h3 {
     font-size: 18px;
     margin-bottom: calc(var(--spacing-unit) * 1);
-    font-weight: 300;
+    font-weight: 100; /* Thin weight */
+    letter-spacing: 0.2em; /* 字母間距 200 */
     transition: all 0.3s ease;
 }
 
@@ -692,6 +700,8 @@ button:hover,
     
     .section-header h2 {
         font-size: 24px;
+        font-weight: 100; /* Thin weight */
+        letter-spacing: 0.2em; /* 字母間距 200 */
     }
     
     .about-text, .contact-text {
@@ -723,6 +733,8 @@ button:hover,
     
     .section-header h2 {
         font-size: 24px;
+        font-weight: 100; /* Thin weight */
+        letter-spacing: 0.2em; /* 字母間距 200 */
     }
 }
 

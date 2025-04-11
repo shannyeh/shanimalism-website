@@ -131,18 +131,21 @@
 
 .track-title {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 100; /* Thin weight */
     margin-bottom: 8px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.2em; /* 字母間距 200 */
     color: var(--text-color);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
 }
 
 .track-artist {
     font-size: 12px;
     opacity: 0.7;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.2em; /* 字母間距 200 */
     color: var(--text-color);
-    font-weight: 300;
+    font-weight: normal;
+    font-family: var(--font-body);
 }
 
 .progress-container {
