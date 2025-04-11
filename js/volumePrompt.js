@@ -3,34 +3,45 @@
  * 當音樂自動播放時，顯示宇宙風格的提示來引導用戶調整音量
  */
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('音量提示腳本已載入');
+    
     // 獲取DOM元素
     const volumePrompt = document.querySelector('.volume-prompt');
     const closeBtn = document.querySelector('.volume-prompt-close');
     const actionBtn = document.querySelector('.volume-prompt-action');
     
+    // 確認元素存在
+    if (!volumePrompt) {
+        console.error('找不到音量提示元素');
+        return;
+    }
+    
+    if (!closeBtn) {
+        console.error('找不到關閉按鈕元素');
+        return;
+    }
+    
     // 加入更多星星的動畫效果
     addCosmicEffects();
     
-    // 檢查是否已經顯示過提示（使用sessionStorage記錄，每次會話只顯示一次）
-    const hasShownPrompt = sessionStorage.getItem('volumePromptShown');
-    
-    // 如果沒有顯示過提示，則顯示
-    if (!hasShownPrompt) {
-        // 延遞3秒後顯示提示，確保頁面已完全加載
+    // 直接顯示提示（用於測試）
+    setTimeout(function() {
+        console.log('顯示音量提示');
+        volumePrompt.classList.add('show');
+        volumePrompt.style.display = 'block';
+        
+        // 20秒後自動隱藏提示
         setTimeout(function() {
-            volumePrompt.classList.add('show');
-            
-            // 20秒後自動隱藏提示
-            setTimeout(function() {
-                hidePrompt();
-            }, 20000);
-        }, 3000);
-    }
+            hidePrompt();
+        }, 20000);
+    }, 1000);
     
-    // 點擊關閉按鈕隱藏提示
-    closeBtn.addEventListener('click', function() {
+    // 點擊關閉按鈕隱藏提示 - 直接使用onclick屬性
+    closeBtn.onclick = function() {
+        console.log('關閉按鈕被點擊');
         hidePrompt();
-    });
+        return false; // 防止事件冒泡
+    };
     
     // 點擊校準音量按鈕
     actionBtn.addEventListener('click', function() {
@@ -54,10 +65,28 @@ document.addEventListener('DOMContentLoaded', function() {
         hidePrompt();
     });
     
-    // 隱藏提示並記錄已顯示
+    // 隱藏提示函數
     function hidePrompt() {
-        volumePrompt.classList.remove('show');
-        sessionStorage.setItem('volumePromptShown', 'true');
+        console.log('執行 hidePrompt 函數');
+        try {
+            // 確保元素存在
+            if (!volumePrompt) {
+                throw new Error('找不到音量提示元素');
+            }
+            
+            // 移除顯示類名
+            volumePrompt.classList.remove('show');
+            // 添加隱藏類名
+            volumePrompt.classList.add('hidden');
+            // 直接設置為不可見
+            volumePrompt.style.display = 'none';
+            // 記錄已顯示
+            sessionStorage.setItem('volumePromptShown', 'true');
+            
+            console.log('提示框已成功隱藏');
+        } catch (error) {
+            console.error('隱藏提示框時發生錯誤:', error);
+        }
     }
     
     // 監聽音量變化
