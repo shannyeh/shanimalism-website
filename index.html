@@ -19,6 +19,35 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon/barebreathe favicon_white.png" id="favicon-light">
+    <link rel="icon" href="assets/images/favicon/barebreathe favicon_black.png" id="favicon-dark">
+    <script>
+        // 初始設置 favicon
+        function updateFavicon() {
+            const isDarkMode = document.documentElement.classList.contains('dark-mode');
+            document.getElementById('favicon-light').rel = isDarkMode ? '' : 'icon';
+            document.getElementById('favicon-dark').rel = isDarkMode ? 'icon' : '';
+        }
+        
+        // 頁面加載時設置 favicon
+        document.addEventListener('DOMContentLoaded', updateFavicon);
+        
+        // 監聽主題變更
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    updateFavicon();
+                }
+            });
+        });
+        
+        // 在頁面加載後開始觀察 html 元素的 class 變化
+        document.addEventListener('DOMContentLoaded', function() {
+            observer.observe(document.documentElement, { attributes: true });
+        });
+    </script>
     <meta name="twitter:title" content="BareBreathe - Brand & Creative Studio">
     <meta name="twitter:description" content="Discover authenticity with Barebreathe Studio, blending minimalist art, brand consulting, photography, and AI-based therapeutic apps designed to inspire and heal.">
     <meta property="og:image" content="assets/images/social-preview.jpg">
