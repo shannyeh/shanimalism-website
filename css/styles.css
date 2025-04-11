@@ -286,7 +286,7 @@ button:hover,
     display: flex;
     align-items: center;
     z-index: 90;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
     pointer-events: none;
     transform: translateY(-50%);
@@ -310,7 +310,7 @@ button:hover,
     position: relative;
     opacity: 0;
     transform: translateX(20px);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     margin-right: calc(var(--spacing-unit) * 3);
 }
 
@@ -319,20 +319,29 @@ button:hover,
     transform: translateX(0);
 }
 
+/* 為每個菜單項目設置不同的延遲，使其依次出現 */
 .navigation li:nth-child(1) {
-    transition-delay: 0.1s;
+    transition-delay: 0.05s;
 }
 
 .navigation li:nth-child(2) {
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
 }
 
 .navigation li:nth-child(3) {
-    transition-delay: 0.3s;
+    transition-delay: 0.15s;
 }
 
 .navigation li:nth-child(4) {
-    transition-delay: 0.4s;
+    transition-delay: 0.2s;
+}
+
+.navigation li:nth-child(5) {
+    transition-delay: 0.25s;
+}
+
+.navigation li:nth-child(6) {
+    transition-delay: 0.3s;
 }
 
 .navigation a {
