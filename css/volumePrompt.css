@@ -11,9 +11,10 @@
     padding: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
     z-index: 1000;
-    font-family: 'IBM Plex Mono', monospace;
-    letter-spacing: 0.02em;
+    font-family: var(--font-body);
+    letter-spacing: 0.2em; /* 字母間距 200 */
     font-size: 12px;
+    font-weight: 300; /* Light 粗細度 */
     opacity: 0;
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     max-width: 180px;
@@ -89,18 +90,25 @@
 .volume-prompt-text {
     display: block;
     line-height: 1.5;
-    font-weight: 200;
+    font-weight: 200; /* 更細的粗細度 */
     margin-bottom: 15px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.2em; /* 字母間距 200 */
     font-size: 12px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-body); /* Calibri Light */
     max-width: 160px;
     margin-left: auto;
     margin-right: auto;
+    -webkit-font-smoothing: antialiased; /* 增強字體渲染 */
+    -moz-osx-font-smoothing: grayscale; /* 增強字體渲染 */
+    font-synthesis: none; /* 避免字體合成增粗 */
+    opacity: 0.85; /* 略微降低不透明度使字體看起來更細 */
 }
 
 .volume-prompt-text strong {
-    font-weight: 600;
+    font-weight: 700; /* 更粗的粗體效果 */
+    font-family: var(--font-body); /* Calibri Light */
+    opacity: 1; /* 完全不透明度使粗體更明顯 */
+    letter-spacing: 0.15em; /* 稍微縮小字母間距使粗體更明顯 */
 }
 
 /* 星星動畫效果 */
