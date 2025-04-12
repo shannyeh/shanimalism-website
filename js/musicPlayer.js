@@ -324,13 +324,28 @@ class MusicPlayer {
         
         // Load player collapsed state
         const collapsed = localStorage.getItem('playerCollapsed');
-        if (collapsed === 'true') {
+        
+        // 檢查當前視窗寬度
+        const isMobile = window.innerWidth <= 768;
+        
+        // 如果是手機或小屏幕設備，預設為展開狀態
+        if (collapsed === 'true' && !isMobile) {
+            // 大屏幕上按照儲存的狀態設置
             this.playerElement.classList.add('collapsed');
             
             // 確保底部展開按鈕顯示
             const musicToggleButton = document.getElementById('musicToggleButton');
             if (musicToggleButton) {
                 musicToggleButton.style.display = 'block';
+            }
+        } else if (isMobile) {
+            // 手機版預設為展開狀態，忽略儲存的收起狀態
+            this.playerElement.classList.remove('collapsed');
+            
+            // 隱藏底部展開按鈕
+            const musicToggleButton = document.getElementById('musicToggleButton');
+            if (musicToggleButton) {
+                musicToggleButton.style.display = 'none';
             }
         }
         
@@ -380,6 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 添加底部展開按鈕的點擊事件
         const musicToggleButton = document.getElementById('musicToggleButton');
         if (musicToggleButton) {
+            // 點擊事件
             musicToggleButton.addEventListener('click', function() {
                 const musicPlayer = document.querySelector('.music-player');
                 if (musicPlayer && musicPlayer.classList.contains('collapsed')) {
@@ -388,12 +404,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
+            // 觸摸事件支持
+            musicToggleButton.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const musicPlayer = document.querySelector('.music-player');
+                if (musicPlayer && musicPlayer.classList.contains('collapsed')) {
+                    musicPlayer.classList.remove('collapsed');
+                    musicToggleButton.style.display = 'none';
+                }
+            }, { passive: false });
+            
             // 檢查播放器的初始狀態
             const musicPlayer = document.querySelector('.music-player');
-            if (musicPlayer && musicPlayer.classList.contains('collapsed')) {
+            const isMobile = window.innerWidth <= 768;
+            
+            // 如果是大屏幕且播放器收起，顯示底部按鈕
+            if (musicPlayer && musicPlayer.classList.contains('collapsed') && !isMobile) {
                 musicToggleButton.style.display = 'block';
+            } else {
+                musicToggleButton.style.display = 'none';
             }
         }
+        
+        // 監聽視窗大小變化，調整播放器狀態
+        window.addEventListener('resize', function() {
+            const musicPlayer = document.querySelector('.music-player');
+            const musicToggleButton = document.getElementById('musicToggleButton');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (!musicPlayer || !musicToggleButton) return;
+            
+            // 如果是手機或小屏幕設備，確保播放器展開
+            if (isMobile && musicPlayer.classList.contains('collapsed')) {
+                musicPlayer.classList.remove('collapsed');
+                musicToggleButton.style.display = 'none';
+            }
+        });
         
         // 不再自動播放，等待用戶點擊 tune in 按鈕或調整音量
         // player.attemptAutoplay(); // 已移除自動播放
