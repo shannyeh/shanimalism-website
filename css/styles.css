@@ -711,146 +711,6 @@ button:hover,
     .contact-link {
         font-size: 20px;
     }
-    
-    /* 手機版本導航菜單從右側滑入 */
-    .navigation {
-        position: fixed;
-        top: 0;
-        right: -200px; /* 初始位置在視窗右側外 */
-        height: 100vh;
-        width: 200px;
-        background-color: var(--background-color);
-        backdrop-filter: blur(10px);
-        border-left: 1px solid rgba(var(--primary-color-rgb), 0.1);
-        padding: 120px 0 20px; /* 調整頂部 padding，讓菜單項目往下移 */
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        pointer-events: none;
-        transition: right 0.4s ease, opacity 0.3s ease;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        z-index: 90;
-    }
-    
-    .close-menu {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 30px;
-        height: 30px;
-        background: none;
-        border: none;
-        cursor: var(--cursor-pointer);
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-    }
-
-    .close-icon {
-        position: relative;
-        width: 16px;
-        height: 16px;
-        display: block;
-    }
-
-    .close-icon::before,
-    .close-icon::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 16px;
-        height: 2px;
-        background-color: var(--primary-color);
-        transform: translate(-50%, -50%);
-        transition: transform 0.3s ease;
-    }
-
-    .close-icon::before {
-        transform: translate(-50%, -50%) rotate(45deg);
-    }
-
-    .close-icon::after {
-        transform: translate(-50%, -50%) rotate(-45deg);
-    }
-
-    .close-menu:hover .close-icon::before,
-    .close-menu:hover .close-icon::after {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    .navigation.active {
-        right: 0; /* 滑入視窗 */
-        opacity: 1;
-        pointer-events: auto;
-    }
-    
-    .navigation ul {
-        flex-direction: column-reverse;
-        width: 100%;
-        padding: 5px 0;
-        align-items: center;
-        white-space: nowrap;
-        display: flex;
-        justify-content: flex-start;
-    }
-    
-    .navigation li {
-        margin: 12px 0;
-        width: 100%;
-        text-align: center;
-        transform: translateX(20px);
-        opacity: 0;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .navigation a {
-        display: inline-block;
-        padding: 6px 12px;
-        font-size: 11px;
-        width: auto;
-        white-space: nowrap;
-        overflow: visible;
-        letter-spacing: 0.1em;
-        font-weight: 300;
-    }
-    
-    .navigation.active li {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    
-    /* 導航菜單展開順序 - 保持與大屏幕版本一致 */
-    .navigation.active li:nth-child(6) {
-        transition-delay: 0.3s;
-    }
-    
-    .navigation.active li:nth-child(5) {
-        transition-delay: 0.25s;
-    }
-    
-    .navigation.active li:nth-child(4) {
-        transition-delay: 0.2s;
-    }
-    
-    .navigation.active li:nth-child(3) {
-        transition-delay: 0.15s;
-    }
-    
-    .navigation.active li:nth-child(2) {
-        transition-delay: 0.1s;
-    }
-    
-    .navigation.active li:nth-child(1) {
-        transition-delay: 0.05s;
-    }
 }
 
 @media (max-width: 768px) {
@@ -859,8 +719,7 @@ button:hover,
     }
     
     .hero {
-        height: 100vh;
-        margin-bottom: calc(var(--spacing-unit) * 6);
+        height: calc(100vh - 60px);
     }
     
     .services-grid, .projects-grid {
@@ -1204,6 +1063,99 @@ body::before {
         flex-direction: column;
         gap: calc(var(--spacing-unit) * 4);
         align-items: flex-start;
+    }
+    
+    /* 手機版本導航菜單向下展開 - 位於漢堡菜單和主題切換按鈕下方 */
+    .navigation {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        height: auto;
+        width: auto;
+        min-width: 120px;
+        background-color: var(--background-color);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+        border-radius: 4px;
+        transform: translateY(10px);
+        padding: 12px 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .navigation.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .navigation ul {
+        flex-direction: column-reverse;
+        width: auto;
+        padding: 5px 0;
+        align-items: center;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .navigation li {
+        margin: 8px 0;
+        width: auto;
+        text-align: center;
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .navigation a {
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 11px;
+        width: auto;
+        white-space: nowrap;
+        overflow: visible;
+        letter-spacing: 0.1em;
+        font-weight: 300;
+    }
+    
+    .navigation.active li {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    /* 導航菜單展開順序 - 保持與大屏幕版本一致 */
+    .navigation.active li:nth-child(6) {
+        transition-delay: 0.3s;
+    }
+    
+    .navigation.active li:nth-child(5) {
+        transition-delay: 0.25s;
+    }
+    
+    .navigation.active li:nth-child(4) {
+        transition-delay: 0.2s;
+    }
+    
+    .navigation.active li:nth-child(3) {
+        transition-delay: 0.15s;
+    }
+    
+    .navigation.active li:nth-child(2) {
+        transition-delay: 0.1s;
+    }
+    
+    .navigation.active li:nth-child(1) {
+        transition-delay: 0.05s;
     }
 }
 
