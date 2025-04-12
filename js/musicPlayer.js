@@ -104,9 +104,18 @@ class MusicPlayer {
             this.progressContainer.addEventListener('click', (e) => this.setProgress(e));
         }
         
-        // 靜音切換按鈕事件
+        // 靜音切換按鈕事件 - 增加觸摸事件支持
         if (this.muteToggleBtn) {
+            // 點擊事件
             this.muteToggleBtn.addEventListener('click', () => this.toggleMute());
+            
+            // 觸摸事件支持
+            this.muteToggleBtn.addEventListener('touchstart', (e) => {
+                // 防止觸摸事件的默認行為（如滾動）
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleMute();
+            }, { passive: false });
         }
         
         // 音頻時間更新事件
