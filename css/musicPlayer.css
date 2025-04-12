@@ -488,8 +488,9 @@
     }
     
     .music-toggle-button:hover {
-        height: 10px;
+        height: 6px; /* 保持原始高度 */
         background-color: rgba(255, 255, 255, 0.7);
+        transform: translateX(-50%) translateY(-4px); /* 向上移動一點，露出更多 */
     }
     
     /* 添加動畫效果吸引注意 */
@@ -499,8 +500,15 @@
         100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
     }
     
+    /* 添加上下浮動動畫 */
+    @keyframes float-up-down {
+        0% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(-2px); }
+        100% { transform: translateX(-50%) translateY(0); }
+    }
+    
     .music-toggle-button {
-        animation: pulse-glow 2s infinite ease-in-out;
+        animation: pulse-glow 2s infinite ease-in-out, float-up-down 3s infinite ease-in-out;
     }
     
     .album-cover {
