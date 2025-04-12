@@ -24,7 +24,7 @@
 }
 
 .music-player.collapsed {
-    transform: translateX(calc(-100% + 15px));
+    transform: translateX(calc(-100% + 25px)); /* 增加可見部分，使展開按鈕更容易點擊 */
     border-radius: 0 16px 16px 0;
 }
 
@@ -43,7 +43,7 @@
     background: none;
     border: none;
     cursor: var(--cursor-pointer);
-    padding: 4px;
+    padding: 8px; /* 增加內邊距，擴大點擊區域 */
     opacity: 0.8;
     transition: all 0.4s ease;
     width: 20px;
@@ -455,7 +455,7 @@
     /* 保持與展開狀態相同的位置 */
     position: absolute;
     top: 15px;
-    right: 10px;
+    right: 0; /* 讓按鈕更靠近右邊緣 */
     transform: none;
 }
 
@@ -474,8 +474,16 @@
         height: 56px;
     }
     
+    .toggle-player {
+        width: 24px; /* 在手機上增加按鈕大小 */
+        height: 24px; /* 在手機上增加按鈕大小 */
+        padding: 10px; /* 在手機上增加更大的點擊區域 */
+        margin: -10px; /* 使用負邊距保持視覺大小不變 */
+    }
+    
     .music-player.collapsed {
-        transform: translateX(-150%);
+        transform: translateX(calc(-100% + 45px)); /* 增加更多可見部分，使展開按鈕更容易點擊 */
+        border-radius: 0 16px 16px 0;
     }
     
     .track-title {
@@ -508,7 +516,8 @@
     }
     
     .music-player.collapsed {
-        transform: translateX(-150%);
+        transform: translateX(calc(-100% + 45px)); /* 增加更多可見部分，使展開按鈕更容易點擊 */
+        border-radius: 0 16px 16px 0;
     }
     
     .album-cover {
