@@ -36,8 +36,11 @@ class MusicPlayer {
         this.pauseIcon = document.querySelector('.pause-icon');
         this.prevBtn = document.querySelector('.prev-btn');
         this.nextBtn = document.querySelector('.next-btn');
-        this.volumeSlider = document.querySelector('.volume-slider');
+        this.muteToggleBtn = document.querySelector('.mute-toggle-btn');
         this.togglePlayerBtn = document.querySelector('.toggle-player');
+        
+        // 儲存上一次的音量值，用於靜音切換
+        this.lastVolume = 0.7;
         
         // 檢查DOM元素是否存在
         if (!this.playerElement || !this.playPauseBtn) {
@@ -101,25 +104,9 @@ class MusicPlayer {
             this.progressContainer.addEventListener('click', (e) => this.setProgress(e));
         }
         
-        // 音量滑塊變更事件 - 添加觸摸事件支持
-        if (this.volumeSlider) {
-            // 支持標準輸入事件
-            this.volumeSlider.addEventListener('input', () => this.setVolume());
-            // 支持觸摸事件
-            this.volumeSlider.addEventListener('touchstart', (e) => {
-                // 防止觸摸事件的默認行為（如滾動）
-                e.stopPropagation();
-            }, { passive: false });
-            this.volumeSlider.addEventListener('touchmove', (e) => {
-                // 計算觸摸位置並更新音量
-                this.handleTouchVolume(e);
-                // 防止頁面滾動
-                e.preventDefault();
-            }, { passive: false });
-            this.volumeSlider.addEventListener('touchend', () => {
-                // 保存最終音量設置
-                localStorage.setItem('volume', this.audio.volume);
-            });
+        // 靜音切換按鈕事件
+        if (this.muteToggleBtn) {
+            this.muteToggleBtn.addEventListener('click', () => this.toggleMute());
         }
         
         // 音頻時間更新事件
@@ -267,32 +254,24 @@ class MusicPlayer {
         this.audio.currentTime = (clickX / width) * duration;
     }
     
-    setVolume() {
-        const volume = this.volumeSlider.value;
-        this.audio.volume = volume;
-        localStorage.setItem('volume', volume);
+    toggleMute() {
+        if (this.audio.volume > 0) {
+            // 如果當前有音量，則存儲當前音量並設置為靜音
+            this.lastVolume = this.audio.volume;
+            this.audio.volume = 0;
+            this.muteToggleBtn.classList.add('muted');
+        } else {
+            // 如果當前是靜音，則恢復上一次的音量
+            this.audio.volume = this.lastVolume > 0 ? this.lastVolume : 0.7;
+            this.muteToggleBtn.classList.remove('muted');
+        }
+        
+        // 存儲當前音量設置
+        localStorage.setItem('volume', this.audio.volume);
+        localStorage.setItem('lastVolume', this.lastVolume);
     }
     
-    handleTouchVolume(e) {
-        // 獲取觸摸位置
-        const touch = e.touches[0];
-        const volumeControl = this.volumeSlider;
-        const rect = volumeControl.getBoundingClientRect();
-        
-        // 計算相對位置 (0-1 範圍)
-        let relativePosition = (touch.clientX - rect.left) / rect.width;
-        
-        // 限制在 0-1 範圍內
-        relativePosition = Math.max(0, Math.min(1, relativePosition));
-        
-        // 設置滑塊值和音頻音量
-        volumeControl.value = relativePosition;
-        this.audio.volume = relativePosition;
-        
-        // 觸發自定義事件，通知音量變化
-        const event = new Event('input');
-        volumeControl.dispatchEvent(event);
-    }
+    // 已刪除不再使用的setVolume和handleTouchVolume函數
     
     togglePlayerVisibility() {
         this.playerElement.classList.toggle('collapsed');
@@ -312,9 +291,20 @@ class MusicPlayer {
     loadState() {
         // Load volume setting
         const volume = localStorage.getItem('volume');
+        const lastVolume = localStorage.getItem('lastVolume');
+        
         if (volume !== null) {
             this.audio.volume = parseFloat(volume);
-            this.volumeSlider.value = parseFloat(volume);
+            // 如果當前是靜音狀態，添加靜音樣式
+            if (parseFloat(volume) === 0 && this.muteToggleBtn) {
+                this.muteToggleBtn.classList.add('muted');
+            }
+        }
+        
+        if (lastVolume !== null) {
+            this.lastVolume = parseFloat(lastVolume);
+        } else {
+            this.lastVolume = 0.7; // 預設值
         }
         
         // Load current track index
