@@ -1,3 +1,31 @@
+/* Font Definitions - Merged from fonts.css */
+@font-face {
+    font-family: 'Albertus Nova';
+    src: url('../assets/fonts/Albertus Nova/albertusnovathin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Calibri';
+    src: local('Calibri Light'), local('Calibri-Light');
+    font-weight: 300; /* Light */
+    font-style: normal;
+}
+
+/* Font Classes */
+.albertus-nova-thin {
+    font-family: 'Albertus Nova', serif;
+    font-weight: 100;
+    letter-spacing: 0.2em; /* 字母間距 200 */
+}
+
+.calibri-text {
+    font-family: 'Calibri', 'Arial', sans-serif;
+    letter-spacing: 0.2em; /* 字母間距 200 */
+}
+
 /* Base Styles */
 :root {
     --primary-color: #000000;
