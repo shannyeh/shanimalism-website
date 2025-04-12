@@ -101,9 +101,25 @@ class MusicPlayer {
             this.progressContainer.addEventListener('click', (e) => this.setProgress(e));
         }
         
-        // 音量滑塊變更事件
+        // 音量滑塊變更事件 - 添加觸摸事件支持
         if (this.volumeSlider) {
+            // 支持標準輸入事件
             this.volumeSlider.addEventListener('input', () => this.setVolume());
+            // 支持觸摸事件
+            this.volumeSlider.addEventListener('touchstart', (e) => {
+                // 防止觸摸事件的默認行為（如滾動）
+                e.stopPropagation();
+            }, { passive: false });
+            this.volumeSlider.addEventListener('touchmove', (e) => {
+                // 計算觸摸位置並更新音量
+                this.handleTouchVolume(e);
+                // 防止頁面滾動
+                e.preventDefault();
+            }, { passive: false });
+            this.volumeSlider.addEventListener('touchend', () => {
+                // 保存最終音量設置
+                localStorage.setItem('volume', this.audio.volume);
+            });
         }
         
         // 音頻時間更新事件
@@ -255,6 +271,27 @@ class MusicPlayer {
         const volume = this.volumeSlider.value;
         this.audio.volume = volume;
         localStorage.setItem('volume', volume);
+    }
+    
+    handleTouchVolume(e) {
+        // 獲取觸摸位置
+        const touch = e.touches[0];
+        const volumeControl = this.volumeSlider;
+        const rect = volumeControl.getBoundingClientRect();
+        
+        // 計算相對位置 (0-1 範圍)
+        let relativePosition = (touch.clientX - rect.left) / rect.width;
+        
+        // 限制在 0-1 範圍內
+        relativePosition = Math.max(0, Math.min(1, relativePosition));
+        
+        // 設置滑塊值和音頻音量
+        volumeControl.value = relativePosition;
+        this.audio.volume = relativePosition;
+        
+        // 觸發自定義事件，通知音量變化
+        const event = new Event('input');
+        volumeControl.dispatchEvent(event);
     }
     
     togglePlayerVisibility() {
