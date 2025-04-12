@@ -1065,24 +1065,28 @@ body::before {
         align-items: flex-start;
     }
     
-    /* 手機版本導航菜單向下展開 */
+    /* 手機版本導航菜單向下展開 - 位於漢堡菜單和主題切換按鈕下方 */
     .navigation {
         position: absolute;
         top: 100%;
         right: 0;
-        left: 0;
         height: auto;
-        width: 100%;
+        width: auto;
+        min-width: 120px;
         background-color: var(--background-color);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.1);
-        transform: translateY(-100%);
-        padding: 8px 0;
+        border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+        border-radius: 4px;
+        transform: translateY(10px);
+        padding: 12px 0;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         opacity: 0;
         pointer-events: none;
         transition: transform 0.4s ease, opacity 0.3s ease;
         text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .navigation.active {
@@ -1092,19 +1096,25 @@ body::before {
     }
     
     .navigation ul {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: column-reverse;
+        width: auto;
         padding: 5px 0;
         align-items: center;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
     }
     
     .navigation li {
-        margin: 6px 0;
-        width: 100%;
+        margin: 8px 0;
+        width: auto;
         text-align: center;
         transform: translateY(-10px);
         opacity: 0;
         transition: transform 0.3s ease, opacity 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .navigation a {
@@ -1123,28 +1133,28 @@ body::before {
         opacity: 1;
     }
     
-    /* 導航菜單展開順序倒序 */
-    .navigation.active li:nth-child(1) {
+    /* 導航菜單展開順序 - 保持與大屏幕版本一致 */
+    .navigation.active li:nth-child(6) {
         transition-delay: 0.3s;
     }
     
-    .navigation.active li:nth-child(2) {
+    .navigation.active li:nth-child(5) {
         transition-delay: 0.25s;
     }
     
-    .navigation.active li:nth-child(3) {
+    .navigation.active li:nth-child(4) {
         transition-delay: 0.2s;
     }
     
-    .navigation.active li:nth-child(4) {
+    .navigation.active li:nth-child(3) {
         transition-delay: 0.15s;
     }
     
-    .navigation.active li:nth-child(5) {
+    .navigation.active li:nth-child(2) {
         transition-delay: 0.1s;
     }
     
-    .navigation.active li:nth-child(6) {
+    .navigation.active li:nth-child(1) {
         transition-delay: 0.05s;
     }
 }
