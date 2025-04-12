@@ -23,8 +23,9 @@
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* 大尺寸視窗的收起樣式 - 向左縮起 */
 .music-player.collapsed {
-    transform: translateX(calc(-100% + 25px)); /* 增加可見部分，使展開按鈕更容易點擊 */
+    transform: translateX(calc(-100% + 25px)); /* 向左縮起，保留右部一部分可見 */
     border-radius: 0 16px 16px 0;
 }
 
@@ -86,7 +87,7 @@
 .collapsed .toggle-icon::before {
     border-left: 1px solid var(--text-color);
     border-bottom: 1px solid var(--text-color);
-    transform: rotate(-135deg);
+    transform: rotate(-135deg); /* 旋轉為向右箭頭 */
     width: 8px;
     height: 8px;
 }
@@ -452,21 +453,54 @@
 
 .music-player.collapsed .player-header {
     margin-bottom: 0;
-    /* 保持與展開狀態相同的位置 */
     position: absolute;
     top: 15px;
-    right: 0; /* 讓按鈕更靠近右邊緣 */
+    right: 10px;
     transform: none;
 }
 
 /* 響應式調整 */
+/* Medium視窗大小以下的樣式 */
 @media (max-width: 768px) {
     .music-player {
-        bottom: 20px;
+        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
         width: 260px;
         padding: 16px;
+        border-radius: 16px 16px 0 0;
+    }
+    
+    /* 添加一個固定在底部的按鈕，用來展開音樂控制框 */
+    .music-toggle-button {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 4px 4px 0 0;
+        cursor: pointer;
+        z-index: 101;
+        transition: all 0.3s ease;
+        display: none; /* 預設為隱藏，只有在播放器收起時才顯示 */
+    }
+    
+    .music-toggle-button:hover {
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+    
+    /* 添加動畫效果吸引注意 */
+    @keyframes pulse-glow {
+        0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+        50% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+    }
+    
+    .music-toggle-button {
+        animation: pulse-glow 2s infinite ease-in-out;
     }
     
     .album-cover {
@@ -481,10 +515,19 @@
         margin: -10px; /* 使用負邊距保持視覺大小不變 */
     }
     
+    /* Medium視窗大小以下的收起樣式 - 完全縮到底部 */
     .music-player.collapsed {
-        transform: translateX(calc(-100% + 45px)); /* 增加更多可見部分，使展開按鈕更容易點擊 */
-        border-radius: 0 16px 16px 0;
+        transform: translateY(100%) !important; /* 完全向下縮起，完全隱藏 */
+        border-radius: 16px 16px 0 0 !important;
+        bottom: 0 !important;
     }
+    
+    /* 移除Medium視窗大小以下的收起狀態下的按鈕，因為控制框已完全隱藏 */
+    .music-player.collapsed .player-header {
+        display: none;
+    }
+    
+
     
     .track-title {
         font-size: 12px;
@@ -515,10 +558,19 @@
         border-radius: 16px;
     }
     
+    /* Medium視窗大小以下的收起樣式 - 完全縮到底部 */
     .music-player.collapsed {
-        transform: translateX(calc(-100% + 45px)); /* 增加更多可見部分，使展開按鈕更容易點擊 */
-        border-radius: 0 16px 16px 0;
+        transform: translateY(100%) !important; /* 完全向下縮起，完全隱藏 */
+        border-radius: 16px 16px 0 0 !important;
+        bottom: 0 !important;
     }
+    
+    /* 移除Medium視窗大小以下的收起狀態下的按鈕，因為控制框已完全隱藏 */
+    .music-player.collapsed .player-header {
+        display: none;
+    }
+    
+
     
     .album-cover {
         width: 48px;

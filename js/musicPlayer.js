@@ -297,6 +297,16 @@ class MusicPlayer {
     togglePlayerVisibility() {
         this.playerElement.classList.toggle('collapsed');
         localStorage.setItem('playerCollapsed', this.playerElement.classList.contains('collapsed'));
+        
+        // 在手機版本上，如果播放器已收起，顯示底部展開按鈕
+        const musicToggleButton = document.getElementById('musicToggleButton');
+        if (musicToggleButton) {
+            if (this.playerElement.classList.contains('collapsed')) {
+                musicToggleButton.style.display = 'block';
+            } else {
+                musicToggleButton.style.display = 'none';
+            }
+        }
     }
     
     loadState() {
@@ -317,6 +327,12 @@ class MusicPlayer {
         const collapsed = localStorage.getItem('playerCollapsed');
         if (collapsed === 'true') {
             this.playerElement.classList.add('collapsed');
+            
+            // 確保底部展開按鈕顯示
+            const musicToggleButton = document.getElementById('musicToggleButton');
+            if (musicToggleButton) {
+                musicToggleButton.style.display = 'block';
+            }
         }
         
         // Check if playback should resume automatically
@@ -361,6 +377,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const player = new MusicPlayer();
         window.musicPlayer = player; // 將播放器實例添加到全局變量
         player.loadTrack(0);
+        
+        // 添加底部展開按鈕的點擊事件
+        const musicToggleButton = document.getElementById('musicToggleButton');
+        if (musicToggleButton) {
+            musicToggleButton.addEventListener('click', function() {
+                const musicPlayer = document.querySelector('.music-player');
+                if (musicPlayer && musicPlayer.classList.contains('collapsed')) {
+                    musicPlayer.classList.remove('collapsed');
+                    musicToggleButton.style.display = 'none';
+                }
+            });
+            
+            // 檢查播放器的初始狀態
+            const musicPlayer = document.querySelector('.music-player');
+            if (musicPlayer && musicPlayer.classList.contains('collapsed')) {
+                musicToggleButton.style.display = 'block';
+            }
+        }
+        
         // 不再自動播放，等待用戶點擊 tune in 按鈕或調整音量
         // player.attemptAutoplay(); // 已移除自動播放
     } catch (e) {
