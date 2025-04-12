@@ -96,9 +96,21 @@
     height: 16px;
 }
 
-/* 大屏幕上的向右箭頭 */
+/* 大屏幕上的箭頭 - 展開時指向左側（隱藏方向） */
 @media (min-width: 769px) {
-    .toggle-icon span {
+    .music-player:not(.collapsed) .toggle-icon span {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-right: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color);
+        transform: rotate(135deg); /* 向左箭頭 */
+        top: 2px;
+        left: 4px;
+    }
+    
+    /* 收起時指向右側（展開方向） */
+    .music-player.collapsed .toggle-icon span {
         position: absolute;
         width: 10px;
         height: 10px;
@@ -110,9 +122,9 @@
     }
 }
 
-/* 小屏幕上的向下箭頭 */
+/* 小屏幕上的箭頭 - 展開時指向下方（隱藏方向），收起時指向上方（展開方向） */
 @media (max-width: 768px) {
-    .toggle-icon span {
+    .music-player:not(.collapsed) .toggle-icon span {
         position: absolute;
         width: 10px;
         height: 10px;
@@ -122,6 +134,8 @@
         top: 0;
         left: 2px;
     }
+    
+    /* 收起時的箭頭不需要設置，因為收起時按鈕會被隱藏 */
 }
 
 
@@ -477,6 +491,7 @@
     .music-player.collapsed {
         transform: translate(-50%, 100%) !important; /* 使用!important確保覆蓋其他可能的樣式 */
         border-radius: 16px 16px 0 0 !important;
+        bottom: 0 !important;
     }
 }
 
@@ -485,7 +500,7 @@
     .music-toggle-button {
         position: fixed;
         bottom: 0;
-        left: 32%;
+        left: 50%; /* 置中 */
         transform: translateX(-50%);
         width: 80px;
         height: 6px;
@@ -533,12 +548,7 @@
         margin: -10px; /* 使用負邊距保持視覺大小不變 */
     }
     
-    /* Medium視窗大小以下的收起樣式 - 完全縮到底部 */
-    .music-player.collapsed {
-        transform: translate(-50%, 100%) !important; /* 純直向下隱藏，保持水平居中 */
-        border-radius: 16px 16px 0 0 !important;
-        bottom: 0 !important;
-    }
+    /* 這個樣式已在上面的媒體查詢中定義，這裡移除重複定義 */
     
     /* 移除Medium視窗大小以下的收起狀態下的按鈕，因為控制框已完全隱藏 */
     .music-player.collapsed .player-header {
@@ -576,12 +586,7 @@
         border-radius: 16px;
     }
     
-    /* Medium視窗大小以下的收起樣式 - 完全縮到底部 */
-    .music-player.collapsed {
-        transform: translate(-50%, 100%) !important; /* 純直向下隱藏，保持水平居中 */
-        border-radius: 16px 16px 0 0 !important;
-        bottom: 0 !important;
-    }
+    /* 這個樣式已在上面的媒體查詢中定義，這裡移除重複定義 */
     
     /* 移除Medium視窗大小以下的收起狀態下的按鈕，因為控制框已完全隱藏 */
     .music-player.collapsed .player-header {
