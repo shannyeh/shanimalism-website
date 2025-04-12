@@ -4,7 +4,7 @@ const musicLibrary = [
         title: "Romanticism 2.0",
         artist: "Yun",
         file: "assets/sounds/music/y2mate.com - 姜云升  浪漫主义 伴奏.mp3",
-        cover: "assets/images/favicon/barebreathe%20favicon_white.png"
+        cover: "assets/sounds/image/barebreathe_favicon_white.png"
     }
 ];
 
