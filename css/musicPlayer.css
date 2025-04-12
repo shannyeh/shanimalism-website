@@ -1,20 +1,26 @@
 /* 音樂播放器樣式 */
 .music-player {
     position: fixed;
-    bottom: 40px;
-    left: 40px;
-    width: 280px;
     background-color: rgba(245, 245, 245, 0.15); 
     backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
     padding: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
     z-index: 100;
     font-family: var(--font-main);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    transform-origin: bottom left;
     letter-spacing: 0.02em;
+}
+
+/* 大屏幕設備上的基本樣式 */
+@media (min-width: 769px) {
+    .music-player {
+        bottom: 40px;
+        left: 40px;
+        width: 280px;
+        border-radius: 20px;
+        transform-origin: bottom left;
+    }
 }
 
 .dark-mode .music-player {
@@ -24,9 +30,11 @@
 }
 
 /* 大尺寸視窗的收起樣式 - 向左縮起 */
-.music-player.collapsed {
-    transform: translateX(calc(-100% + 25px)); /* 向左縮起，保留右部一部分可見 */
-    border-radius: 0 16px 16px 0;
+@media (min-width: 769px) {
+    .music-player.collapsed {
+        transform: translateX(calc(-100% + 25px)); /* 向左縮起，保留右部一部分可見 */
+        border-radius: 0 16px 16px 0;
+    }
 }
 
 /* 手機和小屏幕設備上的收起樣式 - 向下縮起 */
@@ -465,6 +473,14 @@
         transform-origin: bottom center; /* 變更變形原點為底部中心 */
     }
     
+    /* 確保在任何比medium尺寸小的視窗下，音樂控制框都是在視窗正中央純直向下隱藏 */
+    .music-player.collapsed {
+        transform: translate(-50%, 100%) !important; /* 使用!important確保覆蓋其他可能的樣式 */
+        border-radius: 16px 16px 0 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
     /* 添加一個固定在底部的按鈕，用來展開音樂控制框 */
     .music-toggle-button {
         position: fixed;
@@ -519,7 +535,7 @@
     
     /* Medium視窗大小以下的收起樣式 - 完全縮到底部 */
     .music-player.collapsed {
-        transform: translateY(100%) !important; /* 完全向下縮起，完全隱藏 */
+        transform: translate(-50%, 100%) !important; /* 純直向下隱藏，保持水平居中 */
         border-radius: 16px 16px 0 0 !important;
         bottom: 0 !important;
     }
@@ -553,7 +569,7 @@
     .music-player {
         bottom: 10px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, 0);
         width: 90%;
         max-width: 300px;
         padding: 14px;
@@ -562,7 +578,7 @@
     
     /* Medium視窗大小以下的收起樣式 - 完全縮到底部 */
     .music-player.collapsed {
-        transform: translateY(100%) !important; /* 完全向下縮起，完全隱藏 */
+        transform: translate(-50%, 100%) !important; /* 純直向下隱藏，保持水平居中 */
         border-radius: 16px 16px 0 0 !important;
         bottom: 0 !important;
     }
