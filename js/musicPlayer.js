@@ -19,6 +19,9 @@ class MusicPlayer {
         this.audio = new Audio();
         this.audio.addEventListener('ended', () => this.playNext());
         
+        // 設置默認音量為0.7
+        this.audio.volume = 0.7;
+        
         // 設置自動播放
         this.audio.autoplay = false; // 禁用自動播放，等待用戶互動
         
@@ -67,6 +70,13 @@ class MusicPlayer {
         // 從本地存儲加載狀態
         this.loadState();
         
+        // 確保初始狀態正確
+        if (this.audio.volume === 0) {
+            this.muteToggleBtn.classList.add('muted');
+        } else {
+            this.muteToggleBtn.classList.remove('muted');
+        }
+        
         // 加載當前曲目
         this.loadTrack(this.currentTrackIndex);
         
@@ -107,31 +117,23 @@ class MusicPlayer {
         // 靜音切換按鈕事件 - 增強觸摸事件支持
         if (this.muteToggleBtn) {
             // 點擊事件
-            this.muteToggleBtn.addEventListener('click', () => this.toggleMute());
+            this.muteToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.toggleMute();
+            });
             
             // 觸摸事件支持 - 使用 touchend 而非 touchstart 以避免滾動干擾
             this.muteToggleBtn.addEventListener('touchend', (e) => {
-                // 防止觸摸事件的默認行為（如滾動）
                 e.preventDefault();
-                e.stopPropagation();
                 this.toggleMute();
-                // 添加視覺反饋
-                this.muteToggleBtn.classList.add('touch-active');
-                setTimeout(() => {
-                    this.muteToggleBtn.classList.remove('touch-active');
-                }, 300);
             }, { passive: false });
             
-            // 防止 touchstart 的默認行為
-            this.muteToggleBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                // 添加按下效果
+            // 添加觸摸區域增大的樣式
+            this.muteToggleBtn.addEventListener('touchstart', () => {
                 this.muteToggleBtn.classList.add('touch-active');
-            }, { passive: false });
+            });
             
-            // 如果用戶滑開，取消按下效果
-            this.muteToggleBtn.addEventListener('touchcancel', () => {
+            this.muteToggleBtn.addEventListener('touchend', () => {
                 this.muteToggleBtn.classList.remove('touch-active');
             });
         }
