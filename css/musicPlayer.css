@@ -29,6 +29,14 @@
     border-radius: 0 16px 16px 0;
 }
 
+/* 手機和小屏幕設備上的收起樣式 - 向下縮起 */
+@media (max-width: 768px) {
+    .music-player.collapsed {
+        transform: translate(-50%, 100%); /* 使用translate而非translateX/Y，確保精確的垂直下移 */
+        border-radius: 16px 16px 0 0;
+    }
+}
+
 .player-header {
     display: flex;
     justify-content: flex-end;
@@ -58,46 +66,54 @@
 
 .toggle-player:hover {
     opacity: 1;
-    transform: scale(1.1);
+}
+
+/* 大屏幕上懸停效果 - 向右移動 */
+@media (min-width: 769px) {
+    .toggle-player:hover {
+        transform: translateX(2px);
+    }
+}
+
+/* 小屏幕上懸停效果 - 向下移動 */
+@media (max-width: 768px) {
+    .toggle-player:hover {
+        transform: translateY(2px);
+    }
 }
 
 .toggle-icon {
     position: relative;
     width: 16px;
     height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 極簡幾何設計 */
-.toggle-icon::before {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-left: 1px solid var(--text-color);
-    border-bottom: 1px solid var(--text-color);
-    transform: rotate(45deg);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* 大屏幕上的向右箭頭 */
+@media (min-width: 769px) {
+    .toggle-icon span {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-right: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color);
+        transform: rotate(-45deg); /* 向右箭頭 */
+        top: 2px;
+        left: 0;
+    }
 }
 
-/* 折疊狀態 - 向右箭頭 */
-.collapsed .toggle-icon::before {
-    border-left: 1px solid var(--text-color);
-    border-bottom: 1px solid var(--text-color);
-    transform: rotate(-135deg); /* 旋轉為向右箭頭 */
-    width: 8px;
-    height: 8px;
-}
-
-.toggle-icon::after {
-    display: none;
-}
-
-.toggle-icon span {
-    display: none;
+/* 小屏幕上的向下箭頭 */
+@media (max-width: 768px) {
+    .toggle-icon span {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-right: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color);
+        transform: rotate(45deg); /* 向下箭頭 */
+        top: 0;
+        left: 2px;
+    }
 }
 
 
@@ -442,10 +458,11 @@
     .music-player {
         bottom: 0;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, 0); /* 使用translate而非translateX，確保精確定位 */
         width: 260px;
         padding: 16px;
         border-radius: 16px 16px 0 0;
+        transform-origin: bottom center; /* 變更變形原點為底部中心 */
     }
     
     /* 添加一個固定在底部的按鈕，用來展開音樂控制框 */
