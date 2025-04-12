@@ -53,7 +53,7 @@
     position: absolute;
     z-index: 10;
     top: 15px;
-    right: 10px;
+    right: 15px;
 }
 
 .toggle-player {
@@ -456,7 +456,7 @@
     margin-bottom: 0;
     position: absolute;
     top: 15px;
-    right: 10px;
+    right: 15px;
     transform: none;
 }
 
@@ -485,7 +485,7 @@
     .music-toggle-button {
         position: fixed;
         bottom: 0;
-        left: 50%;
+        left: 32%;
         transform: translateX(-50%);
         width: 80px;
         height: 6px;
