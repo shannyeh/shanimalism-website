@@ -378,6 +378,8 @@
 .volume-control {
     position: relative;
     width: 80px;
+    padding: 10px 0; /* 增加上下內邊距，擴大觸摸區域 */
+    margin: -10px 0; /* 使用負邊距保持視覺大小不變 */
 }
 
 .volume-slider {
@@ -390,6 +392,9 @@
     border-radius: 4px;
     outline: none;
     transition: all 0.3s ease;
+    padding: 12px 0; /* 增加上下內邊距，擴大觸摸區域 */
+    margin: -12px 0; /* 使用負邊距保持視覺大小不變 */
+    cursor: pointer;
 }
 
 .dark-mode .volume-slider {
@@ -399,22 +404,24 @@
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
-    height: 10px;
+    width: 16px; /* 增加滑塊大小 */
+    height: 16px; /* 增加滑塊大小 */
     border-radius: 50%;
     background: var(--text-color);
     cursor: var(--cursor-pointer);
     transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* 添加陰影增強視覺效果 */
 }
 
 .volume-slider::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
+    width: 16px; /* 增加滑塊大小 */
+    height: 16px; /* 增加滑塊大小 */
     border-radius: 50%;
     background: var(--text-color);
     cursor: var(--cursor-pointer);
     transition: all 0.3s ease;
     border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* 添加陰影增強視覺效果 */
 }
 
 .volume-slider:hover {
@@ -422,13 +429,13 @@
 }
 
 .volume-slider:hover::-webkit-slider-thumb {
-    width: 12px;
-    height: 12px;
+    width: 18px; /* 增加懸停時的滑塊大小 */
+    height: 18px; /* 增加懸停時的滑塊大小 */
 }
 
 .volume-slider:hover::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
+    width: 18px; /* 增加懸停時的滑塊大小 */
+    height: 18px; /* 增加懸停時的滑塊大小 */
 }
 
 /* 折疊時的樣式 */
@@ -540,5 +547,14 @@
     
     .volume-slider {
         width: 70px;
+        height: 4px; /* 在手機上增加滑塊軌道高度 */
+        padding: 15px 0; /* 在手機上增加更大的觸摸區域 */
+        margin: -15px 0;
+    }
+    
+    .volume-slider::-webkit-slider-thumb,
+    .volume-slider::-moz-range-thumb {
+        width: 20px; /* 在手機上使用更大的滑塊 */
+        height: 20px; /* 在手機上使用更大的滑塊 */
     }
 }
