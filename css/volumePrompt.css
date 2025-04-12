@@ -203,3 +203,52 @@
     background-color: rgba(255, 255, 255, 0.03);
     opacity: 0.9;
 }
+
+/* 響應式設計 - 手機模式 */
+@media (max-width: 768px) {
+    .volume-prompt {
+        bottom: 220px; /* 調整位置，使其在音樂播放器上方 */
+        left: 50%;
+        transform: translateX(-50%) scale(0.95);
+        max-width: 160px;
+        padding: 15px;
+    }
+    
+    .volume-prompt.show {
+        transform: translateX(-50%) scale(1);
+    }
+    
+    .volume-prompt-text {
+        font-size: 11px;
+        max-width: 140px;
+    }
+    
+    .volume-prompt-icon {
+        margin-bottom: 10px;
+    }
+    
+    .volume-prompt-action {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .volume-prompt {
+        bottom: 180px; /* 更靠近音樂播放器 */
+        max-width: 150px;
+        padding: 12px;
+        border-radius: 16px;
+    }
+    
+    .volume-prompt-text {
+        font-size: 10px;
+        max-width: 130px;
+        margin-bottom: 10px;
+    }
+    
+    .cosmic-star {
+        width: 1px;
+        height: 1px;
+    }
+}
