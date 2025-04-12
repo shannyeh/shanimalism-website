@@ -456,7 +456,8 @@
 @media (max-width: 768px) {
     .music-player {
         bottom: 20px;
-        left: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         width: 260px;
         padding: 16px;
     }
@@ -465,17 +466,79 @@
         width: 56px;
         height: 56px;
     }
+    
+    .music-player.collapsed {
+        transform: translateX(-150%);
+    }
+    
+    .track-title {
+        font-size: 12px;
+    }
+    
+    .track-artist {
+        font-size: 11px;
+    }
+    
+    .play-pause-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .control-btn {
+        width: 24px;
+    }
 }
 
 @media (max-width: 480px) {
     .music-player {
         bottom: 10px;
-        left: 10px;
-        width: calc(100% - 20px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 300px;
+        padding: 14px;
         border-radius: 16px;
     }
     
     .music-player.collapsed {
-        transform: translateX(calc(-100% + 15px));
+        transform: translateX(-150%);
+    }
+    
+    .album-cover {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        margin-right: 12px;
+    }
+    
+    .track-title {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+    
+    .track-artist {
+        font-size: 10px;
+    }
+    
+    .progress-container {
+        margin-bottom: 8px;
+    }
+    
+    .time-info {
+        font-size: 10px;
+        margin-bottom: 16px;
+    }
+    
+    .play-pause-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .control-btn {
+        width: 20px;
+    }
+    
+    .volume-slider {
+        width: 70px;
     }
 }
