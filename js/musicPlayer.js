@@ -1,9 +1,9 @@
 // 音樂資料庫
 const musicLibrary = [
     {
-        title: "Romanticism 2.0",
-        artist: "Yun",
-        file: "assets/sounds/music/y2mate.com - 姜云升  浪漫主义 伴奏.mp3",
+        title: "Amnesia",
+        artist: "Noria",
+        file: "assets/sounds/music/[SOLD] Sad Juice Wrld x XXXTentacion Guitar Type Beat 'Amnesia'.mp3",
         cover: "assets/sounds/image/barebreathe_favicon_white.png"
     }
 ];
