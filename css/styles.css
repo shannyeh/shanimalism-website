@@ -815,10 +815,33 @@ button:hover,
 .copyright {
     font-size: 10px;
     opacity: 0.6;
-    margin-top: 40px;
-    margin-bottom: 0;
-    align-self: flex-end;
     letter-spacing: 0.08em;
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0 12px;
+    z-index: 2000;
+    background: none;
+    pointer-events: none;
+    text-align: center;
+    writing-mode: horizontal-tb;
+}
+
+@media (max-width: 600px) {
+  .copyright {
+    font-size: 8px;
+    right: 4px;
+    left: auto;
+    bottom: 50%;
+    top: auto;
+    transform: translateY(50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    text-align: right;
+    padding: 0 2px;
+    background: none;
+  }
 }
 
 /* Tech-infused Elements */
