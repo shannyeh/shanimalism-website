@@ -766,8 +766,8 @@ button:hover,
     padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 5);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(var(--primary-color-rgb), 0.1);
+    align-items: flex-end;
+    border-top: 1px solid transparent;
     margin-top: calc(var(--spacing-unit) * 10);
 }
 
