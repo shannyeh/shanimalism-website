@@ -660,6 +660,49 @@ button:hover,
     background-color: transparent !important;
 }
 
+.planet-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  box-shadow: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.planet-play-btn svg {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+.planet-ring {
+  transition: transform 0.6s cubic-bezier(.42,1.7,.6,.98);
+  transform-origin: 50% 50%;
+}
+.planet-play-btn:hover .planet-ring {
+  transform: rotate(-12deg) scale(1.18);
+}
+
+@media (max-width: 600px) {
+  .planet-play-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .planet-play-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 /* 第一個非Hero區塊需要額外的上邊距 */
 .services {
     margin-top: calc(var(--section-spacing) * 1.5);
