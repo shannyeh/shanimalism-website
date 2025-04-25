@@ -660,6 +660,78 @@ button:hover,
     background-color: transparent !important;
 }
 
+.hero-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 128px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.symbol-img {
+  width: 128px;
+  height: 128px;
+  display: block;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  pointer-events: none;
+  user-select: none;
+}
+.symbol-night { display: none; }
+.symbol-day { display: block; }
+
+/* dark mode 顯示白色symbol，隱藏黑色symbol */
+.dark-theme .symbol-night,
+.dark-mode .symbol-night { display: block; }
+.dark-theme .symbol-day,
+.dark-mode .symbol-day { display: none; }
+
+@media (max-width: 600px) {
+  .hero-symbol {
+    width: 80px;
+    height: 80px;
+  }
+  .symbol-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 128px;
+  height: 128px;
+.planet-play-btn svg {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+.planet-ring {
+  transition: transform 0.6s cubic-bezier(.42,1.7,.6,.98);
+  transform-origin: 50% 50%;
+}
+.planet-play-btn:hover .planet-ring {
+  transform: rotate(-12deg) scale(1.18);
+}
+
+@media (max-width: 600px) {
+  .planet-play-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .planet-play-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 /* 第一個非Hero區塊需要額外的上邊距 */
 .services {
     margin-top: calc(var(--section-spacing) * 1.5);
