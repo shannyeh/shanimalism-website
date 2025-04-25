@@ -692,6 +692,7 @@ button:hover,
   pointer-events: none;
   user-select: none;
 }
+
 .dark-theme .click-hint, .dark-mode .click-hint {
   background: #fff;
   color: #111;
