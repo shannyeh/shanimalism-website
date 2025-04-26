@@ -208,7 +208,7 @@ button:hover,
 }
 
 /* 移除舊的 logo 動畫樣式 */
-.logo-animation, .logo-circle, .circle-1, .circle-2, .circle-3, .click-hint {
+.logo-animation, .logo-circle, .circle-1, .circle-2, .circle-3 {
     display: none;
 }
 
@@ -660,24 +660,61 @@ button:hover,
     background-color: transparent !important;
 }
 
-.hero-symbol {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 128px;
-  height: 128px;
+.hero-hint-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  min-height: 240px;
+}
+
+.hero-symbol-btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 128px;
+  height: 128px;
+  background: none;
+  border: none;
+  border-radius: 50%;
   z-index: 10;
-  flex-direction: column;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.hero-symbol-btn:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 600px) {
+  .hero-symbol-btn {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.symbol-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  pointer-events: none;
+}
+
+/* 保留舊 .hero-symbol 以兼容其他頁面 */
+.hero-symbol {
+  display: none;
 }
 .click-hint {
-  position: absolute;
-  left: 50%;
-  top: -16px;
-  transform: translateX(-50%);
+  position: static;
+  margin-top: 18px;
   background: #111;
   color: #fff;
   padding: 5px 16px;
@@ -686,11 +723,12 @@ button:hover,
   font-weight: 700;
   letter-spacing: 0.13em;
   box-shadow: 0 4px 24px rgba(0,0,0,0.13);
-  opacity: 0;
-  animation: click-hint-fade 1.3s cubic-bezier(.6,.1,.4,1) 0.2s 2 alternate both;
+  opacity: 1;
   z-index: 20;
   pointer-events: none;
   user-select: none;
+  display: block;
+  transition: opacity 0.4s;
 }
 
 .dark-theme .click-hint, .dark-mode .click-hint {
