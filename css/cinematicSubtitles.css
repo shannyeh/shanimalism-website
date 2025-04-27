@@ -26,11 +26,27 @@
   padding: 0.18em 2.2em;
   min-width: 21vw;
   text-align: center;
-  opacity: 0.98;
-  transition: background 0.3s, color 0.3s;
+  opacity: 0;
+  transform: translateY(32px) scale(0.98);
+  transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1), background 0.3s, color 0.3s;
   white-space: pre-line;
   pointer-events: auto;
   user-select: text;
+}
+.cinematic-line.line-finished {
+  background: rgba(255,255,255,0.99);
+  color: #111;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.cinematic-line[style*='opacity: 0'] {
+  opacity: 0 !important;
+  transform: translateY(32px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+#cinematic-subtitles.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
 }
 .cinematic-line.line-finished {
   background: rgba(255,255,255,0.99);
