@@ -11,5 +11,6 @@ window.addEventListener('DOMContentLoaded', function() {
     // 如果點擊在 menu 內（含 menu 本身或漢堡按鈕），不關閉
     if (nav.contains(e.target) || hamburger.contains(e.target)) return;
     nav.classList.remove('active');
+    hamburger.classList.remove('active');
   });
 });
