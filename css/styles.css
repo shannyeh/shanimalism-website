@@ -143,6 +143,12 @@ button {
     width: 130px;
     height: 130px;
   }
+  .copyright {
+    z-index: 10;
+  }
+  .navigation {
+    z-index: 120;
+  }
 }
 
 /* 統一的按鈕 hover 效果 */
