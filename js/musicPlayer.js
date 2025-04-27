@@ -4,7 +4,7 @@ const musicLibrary = [
         title: "Amnesia",
         artist: "Noria",
         file: "assets/sounds/music/[SOLD] Sad Juice Wrld x XXXTentacion Guitar Type Beat 'Amnesia'.mp3",
-        cover: "assets/sounds/image/barebreathe_favicon_white.png"
+        cover: "assets/images/symbol/barebreathe_favicon_white.png"
     }
 ];
 
