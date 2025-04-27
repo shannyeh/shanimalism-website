@@ -25,17 +25,35 @@ function showCinematicSubtitles() {
   subtitleContainer.innerHTML = '';
   subtitleContainer.style.display = 'flex';
 
-  // 電影字幕：淡入淡出逐行顯示
+  // 建立按鈕區域
+  let btnGroup = document.createElement('div');
+  btnGroup.className = 'cinematic-btn-group';
+  subtitleContainer.appendChild(btnGroup);
+  // 下一條按鈕
+  let nextBtn = document.createElement('button');
+  nextBtn.className = 'cinematic-btn next-btn';
+  nextBtn.textContent = 'Next';
+  btnGroup.appendChild(nextBtn);
+  // Skip 按鈕
+  let skipBtn = document.createElement('button');
+  skipBtn.className = 'cinematic-btn skip-btn';
+  skipBtn.textContent = 'Skip';
+  btnGroup.appendChild(skipBtn);
+
   let lineIdx = 0;
-  function showLine() {
+  let isSkipping = false;
+
+  function endSubtitles() {
+    subtitleContainer.classList.add('fade-out');
+    setTimeout(() => {
+      subtitleContainer.style.display = 'none';
+    }, 800);
+  }
+
+  function appendLine() {
+    if (isSkipping) return;
     if (lineIdx >= cinematicLines.length) {
-      // 全部結束後自動淡出字幕容器
-      setTimeout(() => {
-        subtitleContainer.classList.add('fade-out');
-      }, 1400);
-      setTimeout(() => {
-        subtitleContainer.style.display = 'none';
-      }, 2200);
+      endSubtitles();
       return;
     }
     const line = cinematicLines[lineIdx];
@@ -43,24 +61,52 @@ function showCinematicSubtitles() {
     lineElem.className = 'cinematic-line';
     lineElem.textContent = line;
     lineElem.style.opacity = '0';
-    subtitleContainer.appendChild(lineElem);
-    // 淡入
+    subtitleContainer.insertBefore(lineElem, btnGroup);
     setTimeout(() => {
       lineElem.style.opacity = '1';
       lineElem.classList.add('line-finished');
-    }, 80);
-    // 停留一段時間後淡出
-    setTimeout(() => {
-      lineElem.style.opacity = '0';
-      setTimeout(() => {
-        lineElem.remove();
-        lineIdx++;
-        showLine();
-      }, 700);
-    }, 2200);
+    }, 40);
+    lineIdx++;
+    // 控制 Next 按鈕狀態
+    if (lineIdx >= cinematicLines.length) {
+      nextBtn.style.display = 'none';
+    }
   }
-  showLine();
+
+  // 下一條按鈕事件
+  nextBtn.onclick = function(e) {
+    e.preventDefault();
+    appendLine();
+  };
+  // Skip 按鈕事件
+  skipBtn.onclick = function(e) {
+    e.preventDefault();
+    isSkipping = true;
+    endSubtitles();
+  };
+
+  // 支援 ESC 跳過字幕
+  window._cinematicSubtitleEscHandler = function(e) {
+    if (e.key === 'Escape') {
+      isSkipping = true;
+      endSubtitles();
+    }
+  };
+  window.addEventListener('keydown', window._cinematicSubtitleEscHandler);
+
+  // 清理事件（字幕結束時）
+  subtitleContainer.addEventListener('transitionend', function cleanup() {
+    if (subtitleContainer.style.display === 'none') {
+      window.removeEventListener('keydown', window._cinematicSubtitleEscHandler);
+      subtitleContainer.removeEventListener('transitionend', cleanup);
+    }
+  });
+
+  // 初始第一句
+  appendLine();
+
 }
+
 
 // 事件綁定
 window.addEventListener('DOMContentLoaded', function () {
