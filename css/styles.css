@@ -698,13 +698,18 @@ button:hover,
   }
 }
 
+.hero-section .hero-symbol-btn {
+  position: relative;
+}
 .hero-section .hero-symbol-btn .symbol-img {
-  width: 80%;
+  width: 128px;
   height: auto;
   display: block;
-  position: static;
-  margin: 0 auto;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  margin: auto;
   pointer-events: none;
+  user-select: none;
 }
 
 /* 保留舊 .hero-symbol 以兼容其他頁面 */
@@ -792,14 +797,15 @@ button:hover,
   pointer-events: none;
   user-select: none;
 }
-.symbol-night { display: none; }
+.hero-symbol-btn .symbol-night { display: none !important; }
+.dark-mode .hero-symbol-btn .symbol-night,
+.dark-theme .hero-symbol-btn .symbol-night { display: block !important; }
 .symbol-day { display: block; }
 
-/* dark mode 顯示白色symbol，隱藏黑色symbol */
-.dark-theme .symbol-night,
-.dark-mode .symbol-night { display: block; }
-.dark-theme .symbol-day,
-.dark-mode .symbol-day { display: none; }
+.dark-mode .symbol-day,
+.dark-theme .symbol-day { display: none; }
+.dark-mode .symbol-night,
+.dark-theme .symbol-night { display: block; }
 
 @media (max-width: 600px) {
   .hero-symbol {
