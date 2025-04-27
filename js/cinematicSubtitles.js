@@ -7,7 +7,12 @@ const cinematicLines = [
   "Come find yours."
 ];
 
+let cinematicSubtitleActive = false;
+
 function showCinematicSubtitles() {
+  if (cinematicSubtitleActive) return; // 防止重複初始化
+  cinematicSubtitleActive = true;
+
   // 隱藏 hero 區域
   const heroSection = document.querySelector('.hero-section');
   if (heroSection) {
@@ -24,6 +29,7 @@ function showCinematicSubtitles() {
   }
   subtitleContainer.innerHTML = '';
   subtitleContainer.style.display = 'flex';
+  subtitleContainer.classList.remove('fade-out');
 
   // 建立按鈕區域
   let btnGroup = document.createElement('div');
@@ -31,14 +37,27 @@ function showCinematicSubtitles() {
   subtitleContainer.appendChild(btnGroup);
   // 下一條按鈕
   let nextBtn = document.createElement('button');
+  nextBtn.type = 'button';
   nextBtn.className = 'cinematic-btn next-btn';
   nextBtn.textContent = 'Next';
   btnGroup.appendChild(nextBtn);
   // Skip 按鈕
   let skipBtn = document.createElement('button');
+  skipBtn.type = 'button';
   skipBtn.className = 'cinematic-btn skip-btn';
   skipBtn.textContent = 'Skip';
   btnGroup.appendChild(skipBtn);
+
+  // 重新綁定確保事件生效
+  nextBtn.onclick = function(e) {
+    e.preventDefault();
+    appendLine();
+  };
+  skipBtn.onclick = function(e) {
+    e.preventDefault();
+    isSkipping = true;
+    endSubtitles();
+  };
 
   let lineIdx = 0;
   let isSkipping = false;
@@ -47,6 +66,7 @@ function showCinematicSubtitles() {
     subtitleContainer.classList.add('fade-out');
     setTimeout(() => {
       subtitleContainer.style.display = 'none';
+      cinematicSubtitleActive = false;
     }, 800);
   }
 
@@ -104,9 +124,7 @@ function showCinematicSubtitles() {
 
   // 初始第一句
   appendLine();
-
 }
-
 
 // 事件綁定
 window.addEventListener('DOMContentLoaded', function () {
