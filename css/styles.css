@@ -89,7 +89,7 @@ a {
 
 a:after {
     content: '';
-    position: absolute;
+    position: static;
     width: 0;
     height: 1px;
     bottom: -2px;
@@ -196,15 +196,15 @@ button:hover,
 /* 月亮效果 */
 .theme-toggle-inner > .moon {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 16px;
-    height: 16px;
+    top: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background-color: transparent;
     transform: scale(0);
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    z-index: 3; 
+    z-index: 3;
 }
 
 /* 移除舊的 logo 動畫樣式 */
@@ -271,7 +271,7 @@ button:hover,
 }
 
 .hamburger.active span {
-    position: absolute;
+    position: static;
     top: 50%;
     left: 0;
     margin-top: -0.5px;
@@ -369,7 +369,7 @@ button:hover,
 
 .navigation a::after {
     content: '';
-    position: absolute;
+    position: static;
     bottom: -2px;
     left: 50%;
     width: 0;
@@ -410,7 +410,7 @@ button:hover,
 .featured-image {
     width: 60vmin; 
     height: 60vmin; 
-    position: absolute; 
+    position: static; 
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
@@ -433,7 +433,7 @@ button:hover,
 
 .hero::after {
     content: '';
-    position: absolute;
+    position: static;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -483,7 +483,7 @@ button:hover,
 
 .section-header h2::after {
     content: '';
-    position: absolute;
+    position: static;
     bottom: -8px;
     left: 0;
     width: 40px;
@@ -516,7 +516,7 @@ button:hover,
 
 .service-item::before {
     content: '';
-    position: absolute;
+    position: static;
     top: 0;
     left: 0;
     width: 4px;
@@ -678,7 +678,7 @@ button:hover,
   justify-content: center;
   gap: 16px;
   width: 128px;
-  height: 128px;
+
   background: none;
   border: none;
   border-radius: 50%;
@@ -694,11 +694,11 @@ button:hover,
 @media (max-width: 600px) {
   .hero-symbol-btn {
     width: 80px;
-    height: 80px;
+
   }
 }
 
-.symbol-img {
+.hero-section .hero-symbol-btn .symbol-img {
   width: 80%;
   height: auto;
   display: block;
@@ -711,7 +711,7 @@ button:hover,
 .hero-symbol {
   display: none;
 }
-.click-hint {
+.hero-section .hero-symbol-btn .click-hint {
   position: static;
   margin-bottom: 0;
   margin-top: 0;
@@ -784,9 +784,9 @@ button:hover,
 
 .symbol-img {
   width: 128px;
-  height: 128px;
+
   display: block;
-  position: absolute;
+  position: static;
   top: 0; left: 0; right: 0; bottom: 0;
   margin: auto;
   pointer-events: none;
@@ -804,11 +804,11 @@ button:hover,
 @media (max-width: 600px) {
   .hero-symbol {
     width: 80px;
-    height: 80px;
+
   }
   .symbol-img {
     width: 80px;
-    height: 80px;
+
   }
 }
 
@@ -1080,18 +1080,15 @@ body::before {
 /* 主題切換按鈕 */
 .theme-toggle {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border: none;
     background: transparent;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: visible;
     box-shadow: none;
     outline: none;
@@ -1104,13 +1101,16 @@ body::before {
 .theme-toggle:before {
     content: '';
     position: absolute;
-    width: 32px;
-    height: 32px;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0) 80%);
-    filter: blur(6px);
+    filter: blur(8px);
     z-index: 1;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate(-50%, -50%);
 }
 
 /* 懸停時背景效果 */
@@ -1149,11 +1149,11 @@ body::before {
 
 /* SVG 圖標樣式 */
 .theme-toggle-icon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     position: relative;
     z-index: 2;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     background: transparent;
     box-shadow: none;
     border: none;
@@ -1164,6 +1164,7 @@ body::before {
 /* 路徑樣式 */
 .theme-toggle-icon path {
     stroke: var(--text-color);
+    stroke-width: 1.2;
     transition: stroke 0.3s ease;
     fill: none;
 }
@@ -1273,7 +1274,7 @@ body::before {
     
     /* 手機版本導航菜單向下展開 - 位於漢堡菜單和主題切換按鈕下方 */
     .navigation {
-        position: absolute;
+        position: static;
         top: 100%;
         right: 0;
         height: auto;
@@ -1371,12 +1372,12 @@ body::before {
     }
     
     .logo {
-        height: 80px;
+    
         width: 80px;
     }
     
     .logo-img {
-        height: 80px;
+    
         width: 80px;
         transform: scale(1.2);
     }
