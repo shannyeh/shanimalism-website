@@ -122,6 +122,35 @@ button {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.click-hint {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--primary-color);
+  opacity: 0.7;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+  pointer-events: none;
+  user-select: none;
+  transition: font-size 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 600px) {
+  .click-hint {
+    font-size: 0.45rem;
+  }
+  .symbol-img {
+    width: 130px;
+    height: 130px;
+  }
+  .copyright {
+    z-index: 10;
+  }
+  .navigation {
+    z-index: 120;
+  }
+}
+
 /* 統一的按鈕 hover 效果 */
 button:hover,
 .button:hover,
