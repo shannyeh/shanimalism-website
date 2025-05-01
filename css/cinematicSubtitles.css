@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Albertus Nova', serif;
   background: none;
 }
 .cinematic-line {
@@ -61,7 +61,7 @@
   margin-top: 2.1em;
 }
 .cinematic-btn {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Albertus Nova', serif;
   font-size: 1.08rem;
   background: rgba(255,255,255,0.45);
   color: #181818;
